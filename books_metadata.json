@@ -1,0 +1,27 @@
+[
+    {
+    "id": 1,
+    "title": "مختصر الوقایه",
+    "description": "  در فقه حنفی...",
+    "version": "1.0.0",
+    "sql_download_url": "",
+    "is_default": true
+  },
+  {
+    "id": 3,
+    "title": "الهدایة",
+    "description": "کتاب معتبر در فقه حنفی...",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/al_hedaya_content.sql",
+    "is_default": false
+  },
+  {
+    "id": 6,
+    "title": "التيسير في الفقه الحنفي",
+    "description": "شرحی روان بر مسائل فقهی مذهب حنفی...",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/taisir_fiqh_hanafi_content.sql",
+    "is_default": false
+  }
+
+]
