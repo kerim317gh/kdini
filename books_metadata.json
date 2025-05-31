@@ -4,8 +4,9 @@
     "title": "مختصر الوقایه",
     "description": "  در فقه حنفی...",
     "version": "1.0.0",
-    "sql_download_url": "",
-    "is_default": true
+    "sql_download_url": null,
+    "is_default": 1,
+    "is_downloaded_on_device": 0 // این فیلد را برنامه فلاتر پس از دانلود موفقیت آمیز، در یک لیست محلی یا SharedPreferences برای این id کتاب، به 1 تغییر می‌دهد
   },
   {
     "id": 3,
@@ -13,7 +14,8 @@
     "description": "کتاب معتبر در فقه حنفی...",
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/al_hedaya_content.sql",
-    "is_default": false
+    "is_default": 0,
+    "is_downloaded_on_device": 0 // این فیلد را برنامه فلاتر پس از دانلود موفقیت آمیز، در یک لیست محلی یا SharedPreferences برای این id کتاب، به 1 تغییر می‌دهد
   },
   {
     "id": 6,
@@ -21,7 +23,8 @@
     "description": "شرحی روان بر مسائل فقهی مذهب حنفی...",
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/taisir_fiqh_hanafi_content.sql",
-    "is_default": false
+    "is_default": 0,
+    "is_downloaded_on_device": 0 // این فیلد را برنامه فلاتر پس از دانلود موفقیت آمیز، در یک لیست محلی یا SharedPreferences برای این id کتاب، به 1 تغییر می‌دهد
   }
 
 ]
