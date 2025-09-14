@@ -34,9 +34,20 @@
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/output_snapshot.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
+  },
+     {
+    "id": 8,
+    "title": "نورالایضاح و تجاة الأرواح فی الفقه الحنفی",
+    "description": "مسائل فقهی مذهب حنفی...",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/nooralizah_nijatarvah.sql",
+    "is_default": 0,
+    "is_downloaded_on_device": 0 
   }
+    
 
 ]
+
 
 
 
