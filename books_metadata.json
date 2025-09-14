@@ -26,5 +26,15 @@
     "is_default": 0,
     "is_downloaded_on_device": 0 
   }
+     {
+    "id": 7,
+    "title": "الدرالمحتار",
+    "description": "مسائل فقهی مذهب حنفی...",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/taisir_fiqh_hanafi_content.sql",
+    "is_default": 0,
+    "is_downloaded_on_device": 0 
+  }
 
 ]
+
