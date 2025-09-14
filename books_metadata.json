@@ -43,10 +43,21 @@
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/nooralizah_nijatarvah.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
+  },
+     {
+    "id": 9,
+    "title": "تحفة الملوك",
+    "description": "تحفة الملوك",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/tohfatolmoluk.sql",
+    "is_default": 0,
+    "is_downloaded_on_device": 0 
   }
+    
     
 
 ]
+
 
 
 
