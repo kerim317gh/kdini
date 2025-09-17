@@ -52,11 +52,21 @@
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/tohfatolmoluk.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
+  },
+     {
+    "id": 11,
+    "title": "تحفة الفقها",
+    "description": "تحفة الفقها",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/tohfatfokaha.sql",
+    "is_default": 0,
+    "is_downloaded_on_device": 0 
   }
     
     
 
 ]
+
 
 
 
