@@ -61,11 +61,21 @@
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/tohfatfokaha.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
+  },
+     {
+    "id": 13,
+    "title": "درر الحكام شرح غرر الأحكام",
+    "description": "درر الحكام شرح غرر الأحكام ",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/dorarolahkam.sql",
+    "is_default": 0,
+    "is_downloaded_on_device": 0 
   }
     
     
 
 ]
+
 
 
 
