@@ -70,11 +70,21 @@
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/dorarolahkam.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
+  },
+     {
+    "id": 14,
+    "title": "حاشية الطحطاوي على مراقي الفلاح شرح نور الإيضاح",
+    "description": "الكتاب: حاشية الطحطاوي على مراقي الفلاح شرح نور الإيضاح المؤلف: أحمد بن محمد بن إسماعيل الطحطاوي الحنفي - توفي 1231 هـ المحقق: محمد عبد العزيز الخالدي الناشر: دار الكتب العلمية بيروت - لبنان الطبعة: الطبعة الأولى 1418هـ - 1997 عدد الأجزاء:1ترقيم الكتاب موافق للمطبوع وهو مذيل بالحواشي",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/sharh_nooralizah.sql",
+    "is_default": 0,
+    "is_downloaded_on_device": 0 
   }
     
     
 
 ]
+
 
 
 
