@@ -31,7 +31,7 @@
     "title": "الدرالمحتار",
     "description": "مسائل فقهی مذهب حنفی...",
     "version": "1.0.0",
-    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/radolmohtar.sql",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/output_snapshot.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
   },
@@ -84,6 +84,7 @@
     
 
 ]
+
 
 
 
