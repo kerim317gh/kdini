@@ -10,8 +10,8 @@
   },
   {
     "id": 3,
-    "title": "الهدایة",
-    "description": "کتاب معتبر در فقه حنفی...",
+    "title": "الهداية في شرح بداية المبتدي",
+    "description": "الكتاب: الهداية في شرح بداية المبتدي\nالمؤلف: علي بن أبي بكر بن عبد الجليل الفرغاني المرغيناني، أبو الحسن برهان الدين (المتوفى: 593هـ)\nالمحقق: طلال يوسف\nالناشر: دار احياء التراث العربي - بيروت - لبنان\nعدد الأجزاء: 4\n[ترقيم الكتاب موافق للمطبوع]",,
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/alhedaye_processed2.sql",
     "is_default": 0,
@@ -20,25 +20,17 @@
   {
     "id": 6,
     "title": "التيسير في الفقه الحنفي",
-    "description": "شرحی روان بر مسائل فقهی مذهب حنفی...",
+    "description": "شرحی روان بر مسائل فقهی مذهب حنفی...\nاسعد محمد سعید الصاغرجی",
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/taisir_fiqh_hanafi_content.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
   },
-     {
-    "id": 15,
-    "title": "الدرالمحتار",
-    "description": "مسائل فقهی مذهب حنفی...",
-    "version": "1.0.0",
-    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/adorolmohtar_hibniabedin.sql.gz",
-    "is_default": 0,
-    "is_downloaded_on_device": 0 
-  },
+     
      {
     "id": 8,
-    "title": "نورالایضاح و تجاة الأرواح فی الفقه الحنفی",
-    "description": "مسائل فقهی مذهب حنفی...",
+    "title": "مراقي الفلاح شرح نور الإيضاح",
+    "description": "الكتاب: مراقي الفلاح شرح متن نور الإيضاح\nالمؤلف: حسن بن عمار بن علي الشرنبلالي المصري الحنفي (المتوفى: 1069هـ)\nاعتنى به وراجعه: نعيم زرزور\nالناشر: المكتبة العصرية\nالطبعة: الأولى، 1425 هـ - 2005 م\nعدد الأجزاء: 1\n[ترقيم الكتاب موافق للمطبوع وهو مذيل بالحواشي]",
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/nooralizah_nijatarvah.sql",
     "is_default": 0,
@@ -47,16 +39,25 @@
      {
     "id": 9,
     "title": "تحفة الملوك",
-    "description": "تحفة الملوك",
+    "description": "الكتاب: تحفة الملوك (في فقه مذهب الإمام أبي حنيفة النعمان)\nالمؤلف: زين الدين أبو عبد الله محمد بن أبي بكر بن عبد القادر الحنفي الرازي (المتوفى: 666هـ)\nالمحقق: د. عبد الله نذير أحمد\nالناشر: دار البشائر الإسلامية - بيروت\nالطبعة: الأولى، 1417\nعدد الأجزاء: 1\n[ترقيم الكتاب موافق للمطبوع]",
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/tohfatolmoluk.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
   },
+    {
+    "id": 10,
+    "title": "الجوهرة النيرة على مختصر القدوري",
+    "description": "الكتاب: الجوهرة النيرة\nالمؤلف: أبو بكر بن علي بن محمد الحدادي العبادي الزَّبِيدِيّ اليمني الحنفي (المتوفى: 800هـ)\nالناشر: المطبعة الخيرية\nالطبعة: الأولى، 1322هـ\nعدد الأجزاء: 2\n[ترقيم الكتاب موافق للمطبوع]",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/joharnire_mokhtasarqdoori.sql",
+    "is_default": 0,
+    "is_downloaded_on_device": 0 
+  },
      {
     "id": 11,
-    "title": "تحفة الفقها",
-    "description": "تحفة الفقها",
+    "title": "تحفة الفقهاء",
+    "description": "الكتاب: تحفة الفقهاء\nالمؤلف: محمد بن أحمد بن أبي أحمد، أبو بكر علاء الدين السمرقندي (المتوفى: نحو 540هـ)\nالناشر: دار الكتب العلمية، بيروت - لبنان\nالطبعة: الثانية، 1414 هـ - 1994 م.\n[ترقيم الكتاب موافق للمطبوع]",
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/tohfatfokaha.sql",
     "is_default": 0,
@@ -64,8 +65,8 @@
   },
      {
     "id": 13,
-    "title": "درر الحكام شرح غرر الأحكام",
-    "description": "درر الحكام شرح غرر الأحكام ",
+    "title": "درر الحكام شرح غرر الأحكام",
+    "description": "الكتاب: درر الحكام شرح غرر الأحكام\nالمؤلف: محمد بن فرامرز بن علي الشهير بملا - أو منلا أو المولى - خسرو (المتوفى: 885هـ)\nالناشر: دار إحياء الكتب العربية\nالطبعة: بدون طبعة وبدون تاريخ\nعدد الأجزاء: 2\n[ترقيم الكتاب موافق للمطبوع، ومعه حاشية الشرنبلالي]",
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/dorarolahkam.sql",
     "is_default": 0,
@@ -74,16 +75,53 @@
      {
     "id": 14,
     "title": "حاشية الطحطاوي على مراقي الفلاح شرح نور الإيضاح",
-    "description": "الكتاب: حاشية الطحطاوي على مراقي الفلاح شرح نور الإيضاح المؤلف: أحمد بن محمد بن إسماعيل الطحطاوي الحنفي - توفي 1231 هـ المحقق: محمد عبد العزيز الخالدي الناشر: دار الكتب العلمية بيروت - لبنان الطبعة: الطبعة الأولى 1418هـ - 1997 عدد الأجزاء:1ترقيم الكتاب موافق للمطبوع وهو مذيل بالحواشي",
+    "description": "الكتاب: حاشية الطحطاوي على مراقي الفلاح شرح نور الإيضاح\nالمؤلف: أحمد بن محمد بن إسماعيل الطحطاوي الحنفي - توفي 1231 هـ\nالمحقق: محمد عبد العزيز الخالدي\nالناشر: دار الكتب العلمية بيروت - لبنان\nالطبعة: الطبعة الأولى 1418هـ - 1997م\nعدد الأجزاء: 1\n[ترقيم الكتاب موافق للمطبوع وهو مذيل بالحواشي]",
     "version": "1.0.0",
-    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/sharh_nooralizah.sql",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/hashie_tahavi_sharh_nooralizah.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
   }
-    
+    {
+    "id": 15,
+    "title": "الدر المختار وحاشية ابن عابدين (رد المحتار)",
+    "description": "الكتاب: رد المحتار على الدر المختار\nالمؤلف: ابن عابدين، محمد أمين بن عمر بن عبد العزيز عابدين الدمشقي الحنفي (المتوفى: 1252هـ)\nالناشر: دار الفكر-بيروت\nالطبعة: الثانية، 1412هـ - 1992م\nعدد الأجزاء: 6\n[ترقيم الكتاب موافق للمطبوع]\n«الدر المختار للحصفكي شرح تنوير الأبصار للتمرتاشي» بأعلى الصفحة يليه - مفصولا بفاصل - «حاشية ابن عابدين» عليه، المسماه «رد المحتار»",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/adorolmohtar_hibniabedin.sql.gz",
+    "is_default": 0,
+    "is_downloaded_on_device": 0 
+  },
+    {
+    "id": 16,
+    "title": "ملتقى الأبحر",
+    "description": "الكتاب: مجمع الأنهر في شرح ملتقى الأبحر\nالمؤلف: إبراهيم بن محمد بن إبراهيم الحَلَبي الحنفي (المتوفى: 956هـ)\nالمحقق: خرح آياته وأحاديثه خليل عمران المنصور\nالناشر: دار الكتب العلمية - لبنان/ بيروت\nالطبعة: الأولى، 1419هـ - 1998م\nعدد الأجزاء: 4\n[ترقيم الكتاب موافق للمطبوع]",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/moltaqialabhor.sql",
+    "is_default": 0,
+    "is_downloaded_on_device": 0 
+  },
+    {
+    "id": 17,
+    "title": "بدائع الصنائع في ترتيب الشرائع",
+    "description": "الكتاب: بدائع الصنائع في ترتيب الشرائع\nالمؤلف: علاء الدين، أبو بكر بن مسعود بن أحمد الكاساني الحنفي (المتوفى: 587هـ)\nالناشر: دار الكتب العلمية\nالطبعة: الثانية، 1406هـ - 1986م\nعدد الأجزاء: 7\n[ترقيم الكتاب موافق للمطبوع]",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/badaialsanaye.sql",
+    "is_default": 0,
+    "is_downloaded_on_device": 0 
+  },
+    {
+    "id": 18,
+    "title": "مجمع الأنهر في شرح ملتقى الأبحر",
+    "description": "الكتاب: مجمع الأنهر في شرح ملتقى الأبحر\nالمؤلف: عبد الرحمن بن محمد بن سليمان المدعو بشيخي زاده, يعرف بداماد أفندي (المتوفى: 1078هـ)\nالناشر: دار إحياء التراث العربي\nالطبعة: بدون طبعة وبدون تاريخ\nعدد الأجزاء: 2\n[ترقيم الكتاب موافق للمطبوع]",
+    "version": "1.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/majmaolanhor.sql",
+    "is_default": 0,
+    "is_downloaded_on_device": 0 
+  },
+ 
     
 
 ]
+
 
 
 
