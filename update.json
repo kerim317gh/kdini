@@ -1,7 +1,7 @@
 {
   "app": "kdini",
   "platform": "android",
-  "version": "1.0.4",
+  "version": "1.0.3",
   "build": 42,
   "released_at": "2025-11-10T12:00:00Z",
   "mandatory": false,
