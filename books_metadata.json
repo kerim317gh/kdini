@@ -40,7 +40,7 @@
     "id": 9,
     "title": "تحفة الملوك",
     "description": "الكتاب: تحفة الملوك (في فقه مذهب الإمام أبي حنيفة النعمان)\nالمؤلف: زين الدين أبو عبد الله محمد بن أبي بكر بن عبد القادر الحنفي الرازي (المتوفى: 666هـ)\nالمحقق: د. عبد الله نذير أحمد\nالناشر: دار البشائر الإسلامية - بيروت\nالطبعة: الأولى، 1417\nعدد الأجزاء: 1\n[ترقيم الكتاب موافق للمطبوع]",
-    "version": "1.0.2",
+    "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/tohfatolmoluk.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
@@ -118,6 +118,7 @@
     "is_downloaded_on_device": 0 
   }
  ]
+
 
 
 
