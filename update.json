@@ -1,0 +1,14 @@
+{
+  "app": "kdini",
+  "platform": "android",
+  "version": "1.3.0",
+  "build": 42,
+  "released_at": "2025-11-10T12:00:00Z",
+  "mandatory": false,
+  "download_url": "https://cafebazaar.ir/app/your.package.id?l=fa",
+  "changes": [
+    "افزودن نمایش عنوان کتاب با بریدن ... در AppBar",
+    "بهبود جستجو و عملکرد لیست فصل‌ها",
+    "رفع چند باگ گزارش‌شده و بهینه‌سازی سرعت"
+  ]
+}
