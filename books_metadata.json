@@ -13,7 +13,7 @@
     "title": "الهداية في شرح بداية المبتدي",
     "description": "الكتاب: الهداية في شرح بداية المبتدي\nالمؤلف: علي بن أبي بكر بن عبد الجليل الفرغاني المرغيناني، أبو الحسن برهان الدين (المتوفى: 593هـ)\nالمحقق: طلال يوسف\nالناشر: دار احياء التراث العربي - بيروت - لبنان\nعدد الأجزاء: 4\n[ترقيم الكتاب موافق للمطبوع]",
     "version": "1.0.1",
-    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/alhedaye_processed2.optimized_v14.sql",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/alhedaye_processed2.optimized_v15.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
   },
@@ -118,6 +118,7 @@
     "is_downloaded_on_device": 0 
   }
  ]
+
 
 
 
