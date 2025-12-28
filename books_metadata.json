@@ -50,7 +50,7 @@
     "title": "الجوهرة النيرة على مختصر القدوري",
     "description": "الكتاب: الجوهرة النيرة\nالمؤلف: أبو بكر بن علي بن محمد الحدادي العبادي الزَّبِيدِيّ اليمني الحنفي (المتوفى: 800هـ)\nالناشر: المطبعة الخيرية\nالطبعة: الأولى، 1322هـ\nعدد الأجزاء: 2\n[ترقيم الكتاب موافق للمطبوع]",
     "version": "1.0.0",
-    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/joharnire_mokhtasarqdoori.sql",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/joharnire_mokhtasarqdoori.beautified_v1.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
   },
@@ -118,6 +118,7 @@
     "is_downloaded_on_device": 0 
   }
  ]
+
 
 
 
