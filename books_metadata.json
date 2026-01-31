@@ -21,8 +21,8 @@
     "id": 6,
     "title": "التيسير في الفقه الحنفي",
     "description": "شرحی روان بر مسائل فقهی مذهب حنفی...\nاسعد محمد سعید الصاغرجی",
-    "version": "1.0.0",
-    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/taisir_fiqh_hanafi_content.optimized_v3.sql",
+    "version": "2.0.0",
+    "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/Taysir_vs_fa.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 
   },
@@ -118,6 +118,7 @@
     "is_downloaded_on_device": 0 
   }
  ]
+
 
 
 
