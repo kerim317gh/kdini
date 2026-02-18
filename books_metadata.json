@@ -6,7 +6,8 @@
     "version": "1.0.0",
     "sql_download_url": null,
     "is_default": 1,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی/ ترجمه غارسی"
   },
   {
     "id": 3,
@@ -15,7 +16,8 @@
     "version": "2.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/hedaye_vs_fa.sql",
     "is_default": 0,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی/ ترجمه غارس"
   },
   {
     "id": 6,
@@ -24,7 +26,8 @@
     "version": "2.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/Taysir_vs_fa.sql",
     "is_default": 0,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی/ ترجمه غارس"
   },
      
      {
@@ -34,7 +37,8 @@
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/nooralizah_nijatarvah.sql",
     "is_default": 0,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی"
   },
      {
     "id": 9,
@@ -43,7 +47,8 @@
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/tohfatolmoluk.sql",
     "is_default": 0,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی"
   },
     {
     "id": 10,
@@ -52,7 +57,8 @@
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/joharnire_mokhtasarqdoori.beautified_v1.sql",
     "is_default": 0,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی"
   },
      {
     "id": 11,
@@ -61,7 +67,8 @@
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/tohfatfokaha.sql",
     "is_default": 0,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی"
   },
      {
     "id": 13,
@@ -70,7 +77,8 @@
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/dorarolahkam.sql",
     "is_default": 0,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی"
   },
      {
     "id": 14,
@@ -79,7 +87,8 @@
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/hashie_tahavi_sharh_nooralizah.sql",
     "is_default": 0,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی"
   },
     {
     "id": 15,
@@ -88,7 +97,8 @@
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/adorolmohtar_hibniabedin.sql.gz",
     "is_default": 0,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی"
   },
     {
     "id": 16,
@@ -97,7 +107,8 @@
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/moltaqialabhor.sql",
     "is_default": 0,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی"
   },
     {
     "id": 17,
@@ -106,7 +117,8 @@
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/badaialsanaye.sql",
     "is_default": 0,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی"
   },
     {
     "id": 18,
@@ -115,9 +127,11 @@
     "version": "1.0.0",
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/majmaolanhor.sql",
     "is_default": 0,
-    "is_downloaded_on_device": 0 
+    "is_downloaded_on_device": 0 ,
+    "status": "عربی"
   }
  ]
+
 
 
 
