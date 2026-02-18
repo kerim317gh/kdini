@@ -7,7 +7,7 @@
     "sql_download_url": null,
     "is_default": 1,
     "is_downloaded_on_device": 0 ,
-    "status": "عربی/ ترجمه غارسی"
+    "status": "عربی/ ترجمه فارسی"
   },
   {
     "id": 3,
@@ -17,7 +17,7 @@
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/hedaye_vs_fa.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 ,
-    "status": "عربی/ ترجمه غارس"
+    "status": "عربی/ ترجمه فارسی"
   },
   {
     "id": 6,
@@ -27,7 +27,7 @@
     "sql_download_url": "https://raw.githubusercontent.com/kerim317gh/kdini/refs/heads/main/Taysir_vs_fa.sql",
     "is_default": 0,
     "is_downloaded_on_device": 0 ,
-    "status": "عربی/ ترجمه غارس"
+    "status": "عربی/ ترجمه فارسی"
   },
      
      {
@@ -131,6 +131,7 @@
     "status": "عربی"
   }
  ]
+
 
 
 
