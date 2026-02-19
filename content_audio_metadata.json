@@ -1,0 +1,26 @@
+[
+  {
+    "kotob_id": 1,
+    "chapters_id": 10,
+    "lang": "ar",
+    "narrator": "استاد ۱",
+    "title": "درس ۱۰ - روایت ۱",
+    "url": "https://example.com/audio/1-10-ar-ustad1.mp3"
+  },
+  {
+    "kotob_id": 1,
+    "chapters_id": 10,
+    "lang": "ar",
+    "narrator": "استاد ۲",
+    "title": "درس ۱۰ - روایت ۲",
+    "url": "https://example.com/audio/1-10-ar-ustad2.mp3"
+  },
+  {
+    "kotob_id": 1,
+    "chapters_id": 10,
+    "lang": "fa",
+    "narrator": "گوینده فارسی",
+    "title": "ترجمه فارسی درس ۱۰",
+    "url": "https://example.com/audio/1-10-fa.mp3"
+  }
+]
