@@ -43,3 +43,27 @@ From the panel you can:
 - Run Pull (rebase).
 - Run Reorganize Assets.
 - Run Commit & Push with one button.
+
+### 4) One command toolkit (`kdini`)
+
+Install shortcut once:
+
+```bash
+cd /Users/kerim/Documents/kdini_manage_clone
+./tools/install_shortcuts.sh
+source ~/.zshrc
+```
+
+Then use:
+
+```bash
+kdini status
+kdini pull
+kdini reorganize
+kdini push "your message"
+kdini panel
+kdini menu
+```
+
+Also, a desktop launcher is created:
+- `~/Desktop/Kdini-Panel.command`

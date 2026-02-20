@@ -1,0 +1,78 @@
+#!/bin/zsh
+set -euo pipefail
+
+script_path="${0:A}"
+repo_dir="$(cd "$(dirname "$script_path")/.." && pwd)"
+cd "$repo_dir"
+
+usage() {
+  cat <<'EOF'
+kdini command toolkit
+
+Usage:
+  kdini status
+  kdini pull
+  kdini push "commit message"
+  kdini reorganize
+  kdini panel [port]
+  kdini menu
+  kdini open <path>
+  kdini help
+EOF
+}
+
+cmd="${1:-help}"
+if [[ $# -gt 0 ]]; then
+  shift
+fi
+
+case "$cmd" in
+  status)
+    git status --short -b
+    echo
+    git log --oneline -n 5
+    ;;
+
+  pull)
+    branch="$(git branch --show-current)"
+    git pull --rebase origin "$branch"
+    ;;
+
+  push)
+    message="${*:-}"
+    ./tools/git_quick_push.sh "$message"
+    ;;
+
+  reorganize)
+    ./tools/reorganize_assets.sh
+    ;;
+
+  panel)
+    port="${1:-8787}"
+    ./tools/start_panel.sh "$port"
+    ;;
+
+  menu)
+    ./tools/manage_menu.sh
+    ;;
+
+  open)
+    file_path="${1:-}"
+    if [[ -z "$file_path" ]]; then
+      echo "Missing file path."
+      usage
+      exit 1
+    fi
+    open "$repo_dir/$file_path"
+    ;;
+
+  help|-h|--help)
+    usage
+    ;;
+
+  *)
+    echo "Unknown command: $cmd"
+    usage
+    exit 1
+    ;;
+esac
