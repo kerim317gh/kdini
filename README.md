@@ -44,6 +44,12 @@ From the panel you can:
 - Run Reorganize Assets.
 - Run Commit & Push with one button.
 
+New UI updates:
+- Persian interface (RTL).
+- Filament-style dashboard look (clean cards/tables).
+- Books metadata management in table view (instead of raw JSON only).
+- Edit each book row with a dedicated form.
+
 ### 4) One command toolkit (`kdini`)
 
 Install shortcut once:
