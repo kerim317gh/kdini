@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "data_version": "2026-02-20-01",
+  "categories": [
+    { "id": 4, "title": "قرآن /تفسیر", "sort_order": 1, "icon": "assets/icons/knowledge.png" },
+    { "id": 6, "title": "حدیث", "sort_order": 2, "icon": "assets/icons/knowledge.png" }
+  ],
+  "chapters": [
+    { "id": 1001, "category_id": 4, "parent_id": 0, "title": "تفسیر سوره فاتحه", "icon": "assets/icons/knowledge.png" },
+    { "id": 1002, "category_id": 4, "parent_id": 1001, "title": "آیات ۱ تا ۳", "icon": "assets/icons/knowledge.png" },
+
+    { "id": 2001, "category_id": 6, "parent_id": 0, "title": "مقدمه حدیث", "icon": "assets/icons/knowledge.png" }
+  ]
+}
