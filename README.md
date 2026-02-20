@@ -47,8 +47,12 @@ From the panel you can:
 New UI updates:
 - Persian interface (RTL).
 - Filament-style dashboard look (clean cards/tables).
-- Books metadata management in table view (instead of raw JSON only).
-- Edit each book row with a dedicated form.
+- Table-based management for all metadata:
+  - `json/books_metadata.json`
+  - `json/content_audio_metadata.json`
+  - `json/structure_metadata.json` (categories + chapters)
+  - `update/update.json`
+- Edit each row with a dedicated form (plus raw editor if needed).
 
 ### 4) One command toolkit (`kdini`)
 
