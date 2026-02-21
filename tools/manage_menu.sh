@@ -11,9 +11,10 @@ show_menu() {
   echo "2) Pull (rebase)"
   echo "3) Reorganize assets"
   echo "4) Commit and push"
-  echo "5) Open web panel"
-  echo "6) Quit"
-  echo -n "Choose [1-6]: "
+  echo "5) Open Filament panel (recommended)"
+  echo "6) Open legacy Python panel"
+  echo "7) Quit"
+  echo -n "Choose [1-7]: "
 }
 
 while true; do
@@ -36,12 +37,18 @@ while true; do
       ./tools/git_quick_push.sh "$msg"
       ;;
     5)
+      echo -n "Port (default 8890): "
+      read -r port
+      port="${port:-8890}"
+      ./tools/start_filament_panel.sh "$port"
+      ;;
+    6)
       echo -n "Port (default 8787): "
       read -r port
       port="${port:-8787}"
       ./tools/start_panel.sh "$port"
       ;;
-    6)
+    7)
       echo "Bye."
       exit 0
       ;;

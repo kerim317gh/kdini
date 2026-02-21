@@ -1,19 +1,15 @@
 # kdini
 
-## Local Git Workflow (Mac)
+## Daily workflow (Mac)
 
-This repo now includes local tools so you can manage everything from your Mac without GitHub web editing.
-
-### 1) One-command commit + push
+### 1) Quick Git push
 
 ```bash
 cd /Users/kerim/Documents/kdini_manage_clone
 ./tools/git_quick_push.sh "your commit message"
 ```
 
-If you do not pass a message, the script creates a timestamp message automatically.
-
-### 2) Reorganize assets automatically
+### 2) Reorganize assets + fix SQL links
 
 ```bash
 cd /Users/kerim/Documents/kdini_manage_clone
@@ -22,41 +18,47 @@ cd /Users/kerim/Documents/kdini_manage_clone
 
 This script:
 - Ensures `json/`, `kotob/`, `update/` exist.
-- Moves root JSON metadata files into `json/` and `update/`.
-- Moves `*.sql`, `*.sql.gz`, `*.db` from root into `kotob/`.
-- Updates SQL URLs in `json/books_metadata.json` from:
-  - `.../main/file.sql`
-  - to `.../main/kotob/file.sql`
+- Moves root metadata files into `json/` and `update/`.
+- Moves root `*.sql`, `*.sql.gz`, `*.db` into `kotob/`.
+- Updates SQL URLs in `json/books_metadata.json` to `.../main/kotob/...`.
 
-### 3) Offline web control panel
+## Real Filament Panel (recommended)
+
+### Start panel
+
+```bash
+cd /Users/kerim/Documents/kdini_manage_clone
+./tools/start_filament_panel.sh
+```
+
+Default URL:
+- `http://127.0.0.1:8890/admin/login`
+
+Default login (created automatically if missing):
+- Email: `www.kerim317gh@gmail.com`
+- Password: `Kerim@2026!`
+
+### What you can manage in Filament
+
+- Books table: `json/books_metadata.json`
+- Audio table: `json/content_audio_metadata.json`
+- Structure tables (categories + chapters): `json/structure_metadata.json`
+- App update form: `update/update.json`
+- Git operations (pull, reorganize, commit & push)
+
+## Legacy Python panel (optional)
 
 ```bash
 cd /Users/kerim/Documents/kdini_manage_clone
 ./tools/start_panel.sh
 ```
 
-Panel URL:
+URL:
 - `http://127.0.0.1:8787`
 
-From the panel you can:
-- Edit key files directly.
-- Run Pull (rebase).
-- Run Reorganize Assets.
-- Run Commit & Push with one button.
+## `kdini` command toolkit
 
-New UI updates:
-- Persian interface (RTL).
-- Filament-style dashboard look (clean cards/tables).
-- Table-based management for all metadata:
-  - `json/books_metadata.json`
-  - `json/content_audio_metadata.json`
-  - `json/structure_metadata.json` (categories + chapters)
-  - `update/update.json`
-- Edit each row with a dedicated form (plus raw editor if needed).
-
-### 4) One command toolkit (`kdini`)
-
-Install shortcut once:
+Install once:
 
 ```bash
 cd /Users/kerim/Documents/kdini_manage_clone
@@ -72,8 +74,9 @@ kdini pull
 kdini reorganize
 kdini push "your message"
 kdini panel
+kdini panel-legacy
 kdini menu
 ```
 
-Also, a desktop launcher is created:
+Desktop launcher:
 - `~/Desktop/Kdini-Panel.command`

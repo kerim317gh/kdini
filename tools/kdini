@@ -15,6 +15,7 @@ Usage:
   kdini push "commit message"
   kdini reorganize
   kdini panel [port]
+  kdini panel-legacy [port]
   kdini menu
   kdini open <path>
   kdini help
@@ -48,6 +49,11 @@ case "$cmd" in
     ;;
 
   panel)
+    port="${1:-8890}"
+    ./tools/start_filament_panel.sh "$port"
+    ;;
+
+  panel-legacy)
     port="${1:-8787}"
     ./tools/start_panel.sh "$port"
     ;;

@@ -8,6 +8,7 @@ zshrc="$HOME/.zshrc"
 mkdir -p "$bin_dir"
 chmod +x "$repo_dir/tools/kdini"
 chmod +x "$repo_dir/tools/manage_menu.sh"
+chmod +x "$repo_dir/tools/start_filament_panel.sh"
 ln -sf "$repo_dir/tools/kdini" "$bin_dir/kdini"
 
 path_line='export PATH="$HOME/bin:$PATH"'
@@ -24,7 +25,7 @@ if [[ -d "$HOME/Desktop" ]]; then
   cat > "$panel_cmd" <<EOF
 #!/bin/zsh
 cd "$repo_dir"
-./tools/start_panel.sh
+./tools/start_filament_panel.sh
 EOF
   chmod +x "$panel_cmd"
 fi
@@ -40,5 +41,6 @@ Next:
    kdini push "your message"
    kdini reorganize
    kdini panel
+   kdini panel-legacy
    kdini menu
 EOF
