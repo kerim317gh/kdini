@@ -8,7 +8,6 @@
                         <x-filament::input wire:model.live.debounce.300ms="search" type="text" placeholder="جستجو در عنوان، نسخه، لینک..." />
                     </x-filament::input.wrapper>
                     <x-filament::button color="gray" wire:click="loadBooks">بارگذاری مجدد</x-filament::button>
-                    <x-filament::button color="success" wire:click="normalizeSqlUrls">اصلاح لینک‌های kotob</x-filament::button>
                     <x-filament::button color="primary" wire:click="startCreate">افزودن کتاب جدید</x-filament::button>
                 </div>
             </div>

@@ -199,55 +199,6 @@ class BooksManager extends Page
         }
     }
 
-    public function normalizeSqlUrls(): void
-    {
-        $pattern = '/(https:\/\/raw\.githubusercontent\.com\/kerim317gh\/kdini\/refs\/heads\/main\/)(?!kotob\/)([^"\s]+\.(?:sql|sql\.gz|db))/i';
-        $changes = 0;
-
-        foreach ($this->books as $index => $row) {
-            foreach (['sql_download_url', 'download_url', 'url'] as $key) {
-                $value = $row[$key] ?? null;
-                if (! is_string($value) || $value === '') {
-                    continue;
-                }
-
-                $newValue = preg_replace($pattern, '$1kotob/$2', $value);
-                if (is_string($newValue) && $newValue !== $value) {
-                    $this->books[$index][$key] = $newValue;
-                    $changes++;
-                }
-            }
-        }
-
-        if ($changes === 0) {
-            Notification::make()
-                ->title('نیازی به اصلاح نبود')
-                ->body('همه لینک‌ها از قبل درست بودند.')
-                ->success()
-                ->send();
-
-            return;
-        }
-
-        try {
-            KdiniMetadataRepository::writeBooks($this->books);
-
-            Notification::make()
-                ->title('اصلاح لینک‌ها انجام شد')
-                ->body("تعداد لینک اصلاح‌شده: {$changes}")
-                ->success()
-                ->send();
-
-            $this->loadBooks();
-        } catch (\Throwable $exception) {
-            Notification::make()
-                ->title('ذخیره اصلاح لینک‌ها ناموفق بود')
-                ->body($exception->getMessage())
-                ->danger()
-                ->send();
-        }
-    }
-
     protected function toIntOrOriginal(string $value): int | string
     {
         $trimmed = trim($value);

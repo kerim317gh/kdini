@@ -38,10 +38,12 @@
         <section class="grid gap-4 lg:grid-cols-3">
             <div class="kd-card">
                 <h3 class="text-sm font-bold">عملیات سریع Git</h3>
+                <p class="mt-1 text-xs kd-muted">دریافت، مرتب‌سازی و ارسال تغییرات انجام‌شده روی همین مخزن.</p>
+                <p class="mt-1 text-xs kd-muted">ارسال سریع تغییرات، همه فایل‌های تغییرکرده را یکجا کامیت و پوش می‌کند.</p>
                 <div class="mt-4 flex flex-wrap gap-2">
-                    <button type="button" wire:click="quickPull" class="kd-chip-button">Pull</button>
-                    <button type="button" wire:click="quickReorganize" class="kd-chip-button kd-chip-button--success">Reorganize</button>
-                    <button type="button" wire:click="quickPush" class="kd-chip-button kd-chip-button--primary">Quick Push</button>
+                    <button type="button" wire:click="quickPull" class="kd-chip-button">دریافت تغییرات (Pull)</button>
+                    <button type="button" wire:click="quickReorganize" class="kd-chip-button kd-chip-button--success">مرتب‌سازی فایل‌ها</button>
+                    <button type="button" wire:click="quickPush" class="kd-chip-button kd-chip-button--primary">ارسال سریع تغییرات</button>
                 </div>
             </div>
             <div class="kd-card lg:col-span-2">

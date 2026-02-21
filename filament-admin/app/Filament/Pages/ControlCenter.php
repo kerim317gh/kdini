@@ -81,7 +81,7 @@ class ControlCenter extends Page
         $result = KdiniGitService::pullRebase();
         $this->lastActionOutput = $result['output'];
 
-        $notification = Notification::make()->title($result['ok'] ? 'Pull انجام شد' : 'Pull ناموفق بود');
+        $notification = Notification::make()->title($result['ok'] ? 'دریافت تغییرات انجام شد' : 'دریافت تغییرات ناموفق بود');
         $result['ok'] ? $notification->success() : $notification->danger();
         $notification->send();
 
@@ -105,7 +105,7 @@ class ControlCenter extends Page
         $result = KdiniGitService::quickPush('بروزرسانی سریع از مرکز کنترل Filament');
         $this->lastActionOutput = $result['output'];
 
-        $notification = Notification::make()->title($result['ok'] ? 'Push انجام شد' : 'Push ناموفق بود');
+        $notification = Notification::make()->title($result['ok'] ? 'ارسال سریع تغییرات انجام شد' : 'ارسال سریع تغییرات ناموفق بود');
         $result['ok'] ? $notification->success() : $notification->danger();
         $notification->send();
 

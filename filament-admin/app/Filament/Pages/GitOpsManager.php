@@ -49,7 +49,7 @@ class GitOpsManager extends Page
         $result = KdiniGitService::pullRebase();
         $this->output = $result['output'];
 
-        $notification = Notification::make()->title($result['ok'] ? 'Pull انجام شد' : 'Pull ناموفق بود');
+        $notification = Notification::make()->title($result['ok'] ? 'دریافت تغییرات انجام شد' : 'دریافت تغییرات ناموفق بود');
         $result['ok'] ? $notification->success() : $notification->danger();
         $notification->send();
 
@@ -73,7 +73,7 @@ class GitOpsManager extends Page
         $result = KdiniGitService::quickPush($this->commitMessage);
         $this->output = $result['output'];
 
-        $notification = Notification::make()->title($result['ok'] ? 'Commit و Push انجام شد' : 'Commit یا Push ناموفق بود');
+        $notification = Notification::make()->title($result['ok'] ? 'ثبت و ارسال تغییرات انجام شد' : 'ثبت یا ارسال تغییرات ناموفق بود');
         $result['ok'] ? $notification->success() : $notification->danger();
         $notification->send();
 
