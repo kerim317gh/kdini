@@ -29,6 +29,8 @@ class AudioManager extends Page
 
     public ?int $editingIndex = null;
 
+    public bool $isCreating = false;
+
     /**
      * @var array<string, mixed>
      */
@@ -93,6 +95,7 @@ class AudioManager extends Page
 
         $row = $this->rows[$index];
 
+        $this->isCreating = false;
         $this->editingIndex = $index;
         $this->edit = [
             'kotob_id' => (string) ($row['kotob_id'] ?? ''),
@@ -104,20 +107,36 @@ class AudioManager extends Page
         ];
     }
 
+    public function startCreate(): void
+    {
+        $this->isCreating = true;
+        $this->editingIndex = null;
+        $this->edit = [
+            'kotob_id' => '',
+            'chapters_id' => '',
+            'lang' => 'fa',
+            'narrator' => '',
+            'title' => '',
+            'url' => '',
+        ];
+    }
+
     public function cancelEdit(): void
     {
+        $this->isCreating = false;
         $this->editingIndex = null;
         $this->edit = [];
     }
 
     public function saveEdit(): void
     {
-        if ($this->editingIndex === null || ! isset($this->rows[$this->editingIndex])) {
+        $isCreating = $this->isCreating;
+
+        if (! $isCreating && ($this->editingIndex === null || ! isset($this->rows[$this->editingIndex]))) {
             return;
         }
 
-        $index = $this->editingIndex;
-        $row = $this->rows[$index];
+        $row = $isCreating ? [] : $this->rows[$this->editingIndex];
 
         $row['kotob_id'] = $this->toIntOrNull((string) ($this->edit['kotob_id'] ?? ''));
         $row['chapters_id'] = $this->toIntOrOriginal((string) ($this->edit['chapters_id'] ?? ''));
@@ -126,13 +145,17 @@ class AudioManager extends Page
         $row['title'] = trim((string) ($this->edit['title'] ?? ''));
         $row['url'] = trim((string) ($this->edit['url'] ?? ''));
 
-        $this->rows[$index] = $row;
+        if ($isCreating) {
+            $this->rows[] = $row;
+        } else {
+            $this->rows[$this->editingIndex] = $row;
+        }
 
         try {
             KdiniMetadataRepository::writeAudio($this->rows);
 
             Notification::make()
-                ->title('ردیف صوت ذخیره شد')
+                ->title($isCreating ? 'رکورد صوتی جدید اضافه شد' : 'ردیف صوت ذخیره شد')
                 ->success()
                 ->send();
 

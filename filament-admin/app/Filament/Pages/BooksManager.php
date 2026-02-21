@@ -29,6 +29,8 @@ class BooksManager extends Page
 
     public ?int $editingIndex = null;
 
+    public bool $isCreating = false;
+
     /**
      * @var array<string, mixed>
      */
@@ -108,6 +110,7 @@ class BooksManager extends Page
 
         $row = $this->books[$index];
 
+        $this->isCreating = false;
         $this->editingIndex = $index;
         $this->edit = [
             'id' => (string) ($row['id'] ?? ''),
@@ -123,20 +126,40 @@ class BooksManager extends Page
         ];
     }
 
+    public function startCreate(): void
+    {
+        $this->isCreating = true;
+        $this->editingIndex = null;
+        $this->edit = [
+            'id' => '',
+            'title' => '',
+            'description' => '',
+            'version' => '',
+            'sql_download_url' => '',
+            'download_url' => '',
+            'url' => '',
+            'is_default' => '0',
+            'is_downloaded_on_device' => '0',
+            'status' => 'active',
+        ];
+    }
+
     public function cancelEdit(): void
     {
+        $this->isCreating = false;
         $this->editingIndex = null;
         $this->edit = [];
     }
 
     public function saveEdit(): void
     {
-        if ($this->editingIndex === null || ! isset($this->books[$this->editingIndex])) {
+        $isCreating = $this->isCreating;
+
+        if (! $isCreating && ($this->editingIndex === null || ! isset($this->books[$this->editingIndex]))) {
             return;
         }
 
-        $index = $this->editingIndex;
-        $row = $this->books[$index];
+        $row = $isCreating ? [] : $this->books[$this->editingIndex];
 
         $row['id'] = $this->toIntOrOriginal((string) ($this->edit['id'] ?? ''));
         $row['title'] = trim((string) ($this->edit['title'] ?? ''));
@@ -151,13 +174,17 @@ class BooksManager extends Page
             $row[$key] = $value === '' ? null : $value;
         }
 
-        $this->books[$index] = $row;
+        if ($isCreating) {
+            $this->books[] = $row;
+        } else {
+            $this->books[$this->editingIndex] = $row;
+        }
 
         try {
             KdiniMetadataRepository::writeBooks($this->books);
 
             Notification::make()
-                ->title('ردیف کتاب ذخیره شد')
+                ->title($isCreating ? 'کتاب جدید اضافه شد' : 'ردیف کتاب ذخیره شد')
                 ->success()
                 ->send();
 

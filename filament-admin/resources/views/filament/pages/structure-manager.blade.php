@@ -1,11 +1,12 @@
 <x-filament-panels::page>
     <div class="space-y-6" dir="rtl">
-        <section class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+        <section class="kd-card">
             <div class="flex flex-wrap items-center justify-between gap-3">
                 <h3 class="text-sm font-bold">مدیریت ساختار</h3>
                 <div class="flex flex-wrap gap-2">
                     <x-filament::button color="gray" wire:click="switchSection('categories')" :outlined="$section !== 'categories'">دسته‌بندی‌ها</x-filament::button>
                     <x-filament::button color="gray" wire:click="switchSection('chapters')" :outlined="$section !== 'chapters'">فصل‌ها</x-filament::button>
+                    <x-filament::button color="primary" wire:click="startCreate">افزودن {{ $section === 'categories' ? 'دسته‌بندی' : 'فصل' }}</x-filament::button>
                     <x-filament::button color="gray" wire:click="loadStructure">بارگذاری مجدد</x-filament::button>
                 </div>
             </div>
@@ -14,12 +15,12 @@
                 <x-filament::input.wrapper class="min-w-72">
                     <x-filament::input wire:model.live.debounce.300ms="search" type="text" placeholder="جستجو در ردیف‌ها..." />
                 </x-filament::input.wrapper>
-                <span class="text-xs text-gray-500">مجموع بخش فعلی: {{ count($this->filteredRows) }}</span>
+                <span class="text-xs kd-muted">مجموع بخش فعلی: {{ count($this->filteredRows) }}</span>
             </div>
 
-            <div class="mt-4 overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
-                <table class="min-w-full divide-y divide-gray-200 text-right text-xs dark:divide-gray-700">
-                    <thead class="bg-gray-50 dark:bg-gray-800">
+            <div class="kd-table-wrap mt-4 overflow-x-auto">
+                <table class="kd-table min-w-full text-right text-xs">
+                    <thead class="kd-table-head">
                         @if($section === 'categories')
                             <tr>
                                 <th class="px-3 py-3 font-bold">#</th>
@@ -41,9 +42,9 @@
                             </tr>
                         @endif
                     </thead>
-                    <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                    <tbody class="kd-table-body">
                         @forelse($this->filteredRows as $row)
-                            <tr class="hover:bg-primary-50/40 dark:hover:bg-gray-800/70">
+                            <tr class="kd-row-hover">
                                 <td class="px-3 py-3">{{ $loop->iteration }}</td>
                                 <td class="px-3 py-3">{{ $row['id'] ?? '' }}</td>
 
@@ -64,7 +65,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="px-3 py-8 text-center text-sm text-gray-500">داده‌ای پیدا نشد.</td>
+                                <td colspan="7" class="px-3 py-8 text-center text-sm kd-muted">داده‌ای پیدا نشد.</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -72,39 +73,60 @@
             </div>
         </section>
 
-        @if($editingIndex !== null)
-            <section class="rounded-2xl border border-primary-200 bg-primary-50/40 p-5 shadow-sm dark:border-primary-500/30 dark:bg-gray-900">
-                <h3 class="text-sm font-bold">ویرایش {{ $section === 'categories' ? 'دسته‌بندی' : 'فصل' }} ردیف {{ $editingIndex + 1 }}</h3>
+        @if($editingIndex !== null || $isCreating)
+            <section class="kd-card kd-edit-card">
+                <h3 class="text-sm font-bold">
+                    {{ $isCreating ? 'افزودن '.($section === 'categories' ? 'دسته‌بندی جدید' : 'فصل جدید') : 'ویرایش '.($section === 'categories' ? 'دسته‌بندی' : 'فصل').' ردیف '.($editingIndex + 1) }}
+                </h3>
+                <p class="mt-1 text-xs kd-muted">قبل از ذخیره، شناسه‌ها و ارتباط‌ها را بررسی کن تا ساختار برنامه درست بماند.</p>
 
                 <div class="mt-4 grid gap-4 lg:grid-cols-2">
-                    <x-filament::input.wrapper>
-                        <x-filament::input wire:model="edit.id" type="text" placeholder="id" />
-                    </x-filament::input.wrapper>
+                    <div class="space-y-1">
+                        <label class="kd-field-label">شناسه (id)</label>
+                        <x-filament::input.wrapper>
+                            <x-filament::input wire:model="edit.id" type="text" placeholder="مثال: 10" />
+                        </x-filament::input.wrapper>
+                    </div>
 
                     @if($section === 'categories')
-                        <x-filament::input.wrapper>
-                            <x-filament::input wire:model="edit.sort_order" type="text" placeholder="sort_order" />
-                        </x-filament::input.wrapper>
+                        <div class="space-y-1">
+                            <label class="kd-field-label">ترتیب نمایش (sort_order)</label>
+                            <x-filament::input.wrapper>
+                                <x-filament::input wire:model="edit.sort_order" type="text" placeholder="مثال: 1" />
+                            </x-filament::input.wrapper>
+                        </div>
                     @else
-                        <x-filament::input.wrapper>
-                            <x-filament::input wire:model="edit.category_id" type="text" placeholder="category_id" />
-                        </x-filament::input.wrapper>
-                        <x-filament::input.wrapper>
-                            <x-filament::input wire:model="edit.parent_id" type="text" placeholder="parent_id" />
-                        </x-filament::input.wrapper>
+                        <div class="space-y-1">
+                            <label class="kd-field-label">شناسه دسته‌بندی (category_id)</label>
+                            <x-filament::input.wrapper>
+                                <x-filament::input wire:model="edit.category_id" type="text" placeholder="مثال: 3" />
+                            </x-filament::input.wrapper>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="kd-field-label">شناسه والد (parent_id)</label>
+                            <x-filament::input.wrapper>
+                                <x-filament::input wire:model="edit.parent_id" type="text" placeholder="در صورت نیاز" />
+                            </x-filament::input.wrapper>
+                        </div>
                     @endif
 
-                    <x-filament::input.wrapper class="lg:col-span-2">
-                        <x-filament::input wire:model="edit.title" type="text" placeholder="title" />
-                    </x-filament::input.wrapper>
+                    <div class="space-y-1 lg:col-span-2">
+                        <label class="kd-field-label">عنوان (title)</label>
+                        <x-filament::input.wrapper>
+                            <x-filament::input wire:model="edit.title" type="text" placeholder="عنوان این ردیف" />
+                        </x-filament::input.wrapper>
+                    </div>
 
-                    <x-filament::input.wrapper class="lg:col-span-2">
-                        <x-filament::input wire:model="edit.icon" type="text" placeholder="icon" />
-                    </x-filament::input.wrapper>
+                    <div class="space-y-1 lg:col-span-2">
+                        <label class="kd-field-label">آیکون (icon)</label>
+                        <x-filament::input.wrapper>
+                            <x-filament::input wire:model="edit.icon" type="text" placeholder="نام آیکون یا مسیر آن" />
+                        </x-filament::input.wrapper>
+                    </div>
                 </div>
 
                 <div class="mt-4 flex flex-wrap gap-2">
-                    <x-filament::button color="primary" wire:click="saveEdit">ذخیره تغییرات</x-filament::button>
+                    <x-filament::button color="primary" wire:click="saveEdit">{{ $isCreating ? 'ثبت ردیف جدید' : 'ذخیره تغییرات' }}</x-filament::button>
                     <x-filament::button color="gray" wire:click="cancelEdit">انصراف</x-filament::button>
                 </div>
             </section>

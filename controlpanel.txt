@@ -1,0 +1,6 @@
+cd /Users/kerim/Documents/kdini_manage_clone
+./tools/start_panel.sh
+
+
+
+http://127.0.0.1:8787

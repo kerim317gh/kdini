@@ -1,6 +1,6 @@
 <x-filament-panels::page>
     <div class="space-y-6" dir="rtl">
-        <section class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+        <section class="kd-card">
             <div class="flex flex-wrap items-center justify-between gap-3">
                 <h3 class="text-sm font-bold">فایل‌های صوتی ({{ count($rows) }})</h3>
                 <div class="flex flex-wrap items-center gap-2">
@@ -8,12 +8,13 @@
                         <x-filament::input wire:model.live.debounce.300ms="search" type="text" placeholder="جستجو در narrator، title، url..." />
                     </x-filament::input.wrapper>
                     <x-filament::button color="gray" wire:click="loadRows">بارگذاری مجدد</x-filament::button>
+                    <x-filament::button color="primary" wire:click="startCreate">افزودن فایل صوتی</x-filament::button>
                 </div>
             </div>
 
-            <div class="mt-4 overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
-                <table class="min-w-full divide-y divide-gray-200 text-right text-xs dark:divide-gray-700">
-                    <thead class="bg-gray-50 dark:bg-gray-800">
+            <div class="kd-table-wrap mt-4 overflow-x-auto">
+                <table class="kd-table min-w-full text-right text-xs">
+                    <thead class="kd-table-head">
                         <tr>
                             <th class="px-3 py-3 font-bold">#</th>
                             <th class="px-3 py-3 font-bold">kotob_id</th>
@@ -25,9 +26,9 @@
                             <th class="px-3 py-3 font-bold">عملیات</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                    <tbody class="kd-table-body">
                         @forelse($this->filteredRows as $row)
-                            <tr class="hover:bg-primary-50/40 dark:hover:bg-gray-800/70">
+                            <tr class="kd-row-hover">
                                 <td class="px-3 py-3">{{ $loop->iteration }}</td>
                                 <td class="px-3 py-3">{{ $row['kotob_id'] ?? '' }}</td>
                                 <td class="px-3 py-3">{{ $row['chapters_id'] ?? '' }}</td>
@@ -36,11 +37,11 @@
                                 <td class="px-3 py-3">{{ $row['title'] ?? '' }}</td>
                                 <td class="px-3 py-3" dir="ltr">
                                     @if(! empty($row['url']))
-                                        <a class="text-primary-600 hover:underline" href="{{ $row['url'] }}" target="_blank" rel="noreferrer">
+                                        <a class="kd-link" href="{{ $row['url'] }}" target="_blank" rel="noreferrer">
                                             {{ \Illuminate\Support\Str::limit($row['url'], 48) }}
                                         </a>
                                     @else
-                                        <span class="text-gray-400">—</span>
+                                        <span class="kd-muted">—</span>
                                     @endif
                                 </td>
                                 <td class="px-3 py-3">
@@ -49,7 +50,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="px-3 py-8 text-center text-sm text-gray-500">داده‌ای پیدا نشد.</td>
+                                <td colspan="8" class="px-3 py-8 text-center text-sm kd-muted">داده‌ای پیدا نشد.</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -57,38 +58,57 @@
             </div>
         </section>
 
-        @if($editingIndex !== null)
-            <section class="rounded-2xl border border-primary-200 bg-primary-50/40 p-5 shadow-sm dark:border-primary-500/30 dark:bg-gray-900">
-                <h3 class="text-sm font-bold">ویرایش ردیف {{ $editingIndex + 1 }}</h3>
+        @if($editingIndex !== null || $isCreating)
+            <section class="kd-card kd-edit-card">
+                <h3 class="text-sm font-bold">{{ $isCreating ? 'افزودن فایل صوتی جدید' : 'ویرایش ردیف '.($editingIndex + 1) }}</h3>
+                <p class="mt-1 text-xs kd-muted">برای هر ستون، عنوان فارسی و کلید فنی قرار داده شده تا خطای ویرایش کم شود.</p>
 
                 <div class="mt-4 grid gap-4 lg:grid-cols-2">
-                    <x-filament::input.wrapper>
-                        <x-filament::input wire:model="edit.kotob_id" type="text" placeholder="kotob_id" />
-                    </x-filament::input.wrapper>
+                    <div class="space-y-1">
+                        <label class="kd-field-label">شناسه کتاب (kotob_id)</label>
+                        <x-filament::input.wrapper>
+                            <x-filament::input wire:model="edit.kotob_id" type="text" placeholder="مثال: 1201" />
+                        </x-filament::input.wrapper>
+                    </div>
 
-                    <x-filament::input.wrapper>
-                        <x-filament::input wire:model="edit.chapters_id" type="text" placeholder="chapters_id" />
-                    </x-filament::input.wrapper>
+                    <div class="space-y-1">
+                        <label class="kd-field-label">شناسه فصل (chapters_id)</label>
+                        <x-filament::input.wrapper>
+                            <x-filament::input wire:model="edit.chapters_id" type="text" placeholder="مثال: 7" />
+                        </x-filament::input.wrapper>
+                    </div>
 
-                    <x-filament::input.wrapper>
-                        <x-filament::input wire:model="edit.lang" type="text" placeholder="lang" />
-                    </x-filament::input.wrapper>
+                    <div class="space-y-1">
+                        <label class="kd-field-label">زبان (lang)</label>
+                        <x-filament::input.wrapper>
+                            <x-filament::input wire:model="edit.lang" type="text" placeholder="fa" />
+                        </x-filament::input.wrapper>
+                    </div>
 
-                    <x-filament::input.wrapper>
-                        <x-filament::input wire:model="edit.narrator" type="text" placeholder="narrator" />
-                    </x-filament::input.wrapper>
+                    <div class="space-y-1">
+                        <label class="kd-field-label">گوینده (narrator)</label>
+                        <x-filament::input.wrapper>
+                            <x-filament::input wire:model="edit.narrator" type="text" placeholder="نام گوینده" />
+                        </x-filament::input.wrapper>
+                    </div>
 
-                    <x-filament::input.wrapper class="lg:col-span-2">
-                        <x-filament::input wire:model="edit.title" type="text" placeholder="title" />
-                    </x-filament::input.wrapper>
+                    <div class="space-y-1 lg:col-span-2">
+                        <label class="kd-field-label">عنوان صوت (title)</label>
+                        <x-filament::input.wrapper>
+                            <x-filament::input wire:model="edit.title" type="text" placeholder="عنوان فایل صوتی" />
+                        </x-filament::input.wrapper>
+                    </div>
 
-                    <x-filament::input.wrapper class="lg:col-span-2">
-                        <x-filament::input wire:model="edit.url" type="text" placeholder="url" dir="ltr" />
-                    </x-filament::input.wrapper>
+                    <div class="space-y-1 lg:col-span-2">
+                        <label class="kd-field-label">لینک فایل (url)</label>
+                        <x-filament::input.wrapper>
+                            <x-filament::input wire:model="edit.url" type="text" placeholder="https://..." dir="ltr" />
+                        </x-filament::input.wrapper>
+                    </div>
                 </div>
 
                 <div class="mt-4 flex flex-wrap gap-2">
-                    <x-filament::button color="primary" wire:click="saveEdit">ذخیره تغییرات</x-filament::button>
+                    <x-filament::button color="primary" wire:click="saveEdit">{{ $isCreating ? 'ثبت فایل صوتی جدید' : 'ذخیره تغییرات' }}</x-filament::button>
                     <x-filament::button color="gray" wire:click="cancelEdit">انصراف</x-filament::button>
                 </div>
             </section>

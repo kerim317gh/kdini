@@ -33,9 +33,18 @@
 
 @layer base {
     :root {
-        --kdini-bg-a: 255 247 237;
-        --kdini-bg-b: 236 253 245;
-        --kdini-bg-c: 248 250 252;
+        --kdini-bg-main: 22 32 45;
+        --kdini-bg-soft: 28 41 57;
+        --kdini-surface: 33 50 71;
+        --kdini-surface-strong: 37 58 82;
+        --kdini-border: 86 121 159;
+        --kdini-text: 226 236 250;
+        --kdini-muted: 161 186 218;
+        --kdini-accent: 92 166 255;
+        --kdini-accent-strong: 56 128 214;
+        --kdini-success: 34 197 157;
+        --kdini-console-bg: 19 30 43;
+        --kdini-console-text: 190 230 255;
     }
 
     html,
@@ -47,14 +56,22 @@
     .fi-main {
         font-family: var(--font-family);
         direction: rtl;
+        color: rgb(var(--kdini-text));
     }
 
     body {
+        min-height: 100vh;
+        background-color: rgb(var(--kdini-bg-main));
         background-image:
-            radial-gradient(circle at 95% 2%, rgb(var(--kdini-bg-a) / 0.9), transparent 34%),
-            radial-gradient(circle at 8% 98%, rgb(var(--kdini-bg-b) / 0.75), transparent 28%),
-            linear-gradient(to bottom, rgb(var(--kdini-bg-c)), rgb(255 255 255));
+            radial-gradient(circle at 100% 0%, rgb(44 82 128 / 0.42), transparent 30%),
+            radial-gradient(circle at 0% 100%, rgb(26 56 94 / 0.38), transparent 34%),
+            linear-gradient(165deg, rgb(var(--kdini-bg-main)), rgb(16 26 38));
         background-attachment: fixed;
+    }
+
+    ::selection {
+        background: rgb(var(--kdini-accent) / 0.32);
+        color: rgb(246 250 255);
     }
 
     [dir='ltr'] {
@@ -64,26 +81,35 @@
 }
 
 @layer components {
-    .fi-sidebar,
-    .fi-topbar,
+    .fi-layout,
+    .fi-main {
+        background: transparent !important;
+    }
+
+    .fi-sidebar {
+        background:
+            linear-gradient(180deg, rgb(var(--kdini-surface-strong) / 0.95), rgb(var(--kdini-bg-soft) / 0.95)) !important;
+        border-left: 1px solid rgb(var(--kdini-border) / 0.55) !important;
+    }
+
+    .fi-topbar {
+        background: rgb(var(--kdini-bg-soft) / 0.86) !important;
+        border-bottom: 1px solid rgb(var(--kdini-border) / 0.45) !important;
+        backdrop-filter: blur(8px);
+    }
+
     .fi-main-ctn,
-    .fi-wi,
     .fi-section,
+    .fi-wi,
     .fi-ta,
-    .fi-in {
+    .fi-in,
+    .fi-modal-window,
+    .fi-dropdown-panel {
+        background-color: rgb(var(--kdini-surface) / 0.92) !important;
+        border: 1px solid rgb(var(--kdini-border) / 0.5) !important;
+        color: rgb(var(--kdini-text));
         border-radius: 1rem;
-    }
-
-    .fi-btn {
-        border-radius: 0.75rem;
-        font-weight: 800;
-    }
-
-    .fi-input,
-    .fi-select-input,
-    .fi-textarea,
-    .fi-input-wrp {
-        border-radius: 0.75rem;
+        box-shadow: 0 12px 30px -24px rgb(10 15 24 / 0.95);
     }
 
     .fi-section-header-heading,
@@ -91,15 +117,240 @@
     .fi-ta-header-heading {
         letter-spacing: -0.01em;
         font-weight: 900;
+        color: rgb(var(--kdini-text));
     }
 
-    .fi-ta-table thead tr th,
-    table thead tr th {
-        font-weight: 900;
+    .fi-section-header-description,
+    .fi-page-header-description,
+    .fi-fo-field-wrp-hint,
+    .fi-fo-field-wrp-helper-text {
+        color: rgb(var(--kdini-muted));
     }
 
     .fi-sidebar-item-button,
-    .fi-sidebar-group-label {
+    .fi-sidebar-group-label,
+    .fi-topbar-item-btn {
+        color: rgb(var(--kdini-muted));
         font-weight: 700;
+    }
+
+    .fi-sidebar-item-button:hover,
+    .fi-sidebar-item-button.fi-active,
+    .fi-sidebar-item-button[aria-current='page'] {
+        color: rgb(var(--kdini-text));
+        background: rgb(var(--kdini-accent-strong) / 0.28);
+    }
+
+    .fi-btn {
+        border-radius: 0.75rem;
+        font-weight: 800;
+        border: 1px solid rgb(var(--kdini-border) / 0.55);
+    }
+
+    .fi-btn-color-gray {
+        background: rgb(var(--kdini-bg-soft) / 0.95) !important;
+        color: rgb(var(--kdini-text)) !important;
+    }
+
+    .fi-btn-color-primary {
+        background: linear-gradient(135deg, rgb(var(--kdini-accent)), rgb(var(--kdini-accent-strong))) !important;
+        color: rgb(247 251 255) !important;
+        border-color: rgb(var(--kdini-accent-strong) / 0.75) !important;
+    }
+
+    .fi-btn-color-success {
+        background: linear-gradient(135deg, rgb(var(--kdini-success)), rgb(18 139 111)) !important;
+        border-color: rgb(21 146 115 / 0.75) !important;
+    }
+
+    .fi-btn-color-danger {
+        border-color: rgb(251 113 133 / 0.75) !important;
+    }
+
+    .fi-input,
+    .fi-select-input,
+    .fi-textarea {
+        color: rgb(var(--kdini-text)) !important;
+    }
+
+    .fi-input-wrp {
+        border-radius: 0.75rem;
+        background: rgb(var(--kdini-bg-soft) / 0.75) !important;
+        box-shadow: inset 0 0 0 1px rgb(var(--kdini-border) / 0.55) !important;
+    }
+
+    .fi-input::placeholder,
+    .fi-select-input::placeholder,
+    .fi-textarea::placeholder,
+    textarea::placeholder,
+    input::placeholder {
+        color: rgb(var(--kdini-muted) / 0.85) !important;
+    }
+
+    .fi-page table,
+    .kd-table {
+        color: rgb(var(--kdini-text));
+    }
+
+    .kd-table-wrap {
+        border-radius: 0.95rem;
+        border: 1px solid rgb(var(--kdini-border) / 0.52);
+        background: rgb(var(--kdini-bg-soft) / 0.54);
+        overflow: hidden;
+    }
+
+    .fi-page table thead,
+    .kd-table-head {
+        background: rgb(var(--kdini-surface-strong) / 0.72);
+    }
+
+    .fi-page table thead tr th,
+    .kd-table-head th {
+        color: rgb(var(--kdini-text));
+        font-weight: 900;
+        border-bottom: 1px solid rgb(var(--kdini-border) / 0.48);
+    }
+
+    .fi-page table tbody,
+    .kd-table-body {
+        background: rgb(var(--kdini-bg-soft) / 0.45);
+    }
+
+    .fi-page table tbody tr,
+    .kd-table-body tr {
+        border-bottom: 1px solid rgb(var(--kdini-border) / 0.35);
+        background: rgb(var(--kdini-bg-soft) / 0.35);
+        transition: background-color 0.18s ease;
+    }
+
+    .fi-page table tbody tr:nth-child(2n),
+    .kd-table-body tr:nth-child(2n) {
+        background: rgb(var(--kdini-surface) / 0.44);
+    }
+
+    .fi-page table tbody tr:hover,
+    .kd-row-hover:hover {
+        background: rgb(var(--kdini-accent-strong) / 0.23) !important;
+    }
+
+    .kd-card {
+        border-radius: 1rem;
+        border: 1px solid rgb(var(--kdini-border) / 0.5);
+        background: linear-gradient(160deg, rgb(var(--kdini-surface) / 0.93), rgb(var(--kdini-bg-soft) / 0.92));
+        box-shadow: 0 14px 34px -24px rgb(8 14 24 / 0.96);
+        color: rgb(var(--kdini-text));
+    }
+
+    .kd-edit-card {
+        background:
+            radial-gradient(circle at 90% 0%, rgb(var(--kdini-accent) / 0.16), transparent 32%),
+            linear-gradient(160deg, rgb(var(--kdini-surface-strong) / 0.88), rgb(var(--kdini-bg-soft) / 0.94));
+        border-color: rgb(var(--kdini-accent) / 0.45);
+    }
+
+    .kd-stat-card {
+        border-radius: 1rem;
+        border: 1px solid rgb(var(--kdini-border) / 0.5);
+        background: linear-gradient(145deg, rgb(var(--kdini-surface) / 0.9), rgb(var(--kdini-bg-soft) / 0.9));
+        padding: 1rem;
+        box-shadow: 0 14px 26px -24px rgb(0 0 0 / 0.9);
+    }
+
+    .kd-quick-link,
+    .kd-quick-button {
+        border-radius: 0.8rem;
+        border: 1px solid rgb(var(--kdini-border) / 0.54);
+        background: rgb(var(--kdini-bg-soft) / 0.62);
+        color: rgb(var(--kdini-text));
+        font-size: 0.85rem;
+        font-weight: 800;
+        padding: 0.75rem 1rem;
+        transition: all 0.16s ease;
+        text-align: right;
+    }
+
+    .kd-quick-link:hover,
+    .kd-quick-button:hover {
+        border-color: rgb(var(--kdini-accent) / 0.75);
+        background: rgb(var(--kdini-accent-strong) / 0.32);
+    }
+
+    .kd-quick-button {
+        background: linear-gradient(135deg, rgb(var(--kdini-accent)), rgb(var(--kdini-accent-strong)));
+        color: rgb(247 251 255);
+    }
+
+    .kd-chip-button {
+        border-radius: 0.7rem;
+        border: 1px solid rgb(var(--kdini-border) / 0.5);
+        background: rgb(var(--kdini-bg-soft) / 0.92);
+        color: rgb(var(--kdini-text));
+        font-size: 0.75rem;
+        font-weight: 800;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .kd-chip-button--primary {
+        background: linear-gradient(135deg, rgb(var(--kdini-accent)), rgb(var(--kdini-accent-strong)));
+        color: rgb(247 251 255);
+    }
+
+    .kd-chip-button--success {
+        background: linear-gradient(135deg, rgb(var(--kdini-success)), rgb(19 143 109));
+        color: rgb(247 251 255);
+    }
+
+    .kd-field-label {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 800;
+        color: rgb(var(--kdini-muted));
+        line-height: 1.4;
+    }
+
+    .kd-muted {
+        color: rgb(var(--kdini-muted));
+    }
+
+    .kd-link {
+        color: rgb(132 196 255);
+        text-decoration: none;
+    }
+
+    .kd-link:hover {
+        color: rgb(180 219 255);
+        text-decoration: underline;
+    }
+
+    .kd-textarea {
+        width: 100%;
+        border-radius: 0.75rem;
+        border: 1px solid rgb(var(--kdini-border) / 0.55);
+        background: rgb(var(--kdini-bg-soft) / 0.72);
+        color: rgb(var(--kdini-text));
+        font-size: 0.88rem;
+        padding: 0.6rem 0.8rem;
+        line-height: 1.65;
+        resize: vertical;
+    }
+
+    .kd-textarea:focus {
+        outline: none;
+        border-color: rgb(var(--kdini-accent) / 0.82);
+        box-shadow: 0 0 0 3px rgb(var(--kdini-accent) / 0.2);
+    }
+
+    .kd-checkbox {
+        border-radius: 0.75rem;
+        border: 1px solid rgb(var(--kdini-border) / 0.5);
+        background: rgb(var(--kdini-bg-soft) / 0.62);
+    }
+
+    .kd-console,
+    .fi-page pre {
+        border-radius: 0.85rem;
+        border: 1px solid rgb(var(--kdini-border) / 0.48);
+        background: linear-gradient(180deg, rgb(var(--kdini-console-bg) / 0.96), rgb(15 24 35 / 0.98)) !important;
+        color: rgb(var(--kdini-console-text)) !important;
     }
 }

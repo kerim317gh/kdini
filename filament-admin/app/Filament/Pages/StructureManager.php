@@ -36,6 +36,8 @@ class StructureManager extends Page
 
     public ?int $editingIndex = null;
 
+    public bool $isCreating = false;
+
     /**
      * @var array<string, mixed>
      */
@@ -117,6 +119,7 @@ class StructureManager extends Page
 
         $row = $rows[$index];
 
+        $this->isCreating = false;
         $this->editingIndex = $index;
 
         if ($this->section === 'categories') {
@@ -139,26 +142,53 @@ class StructureManager extends Page
         ];
     }
 
+    public function startCreate(): void
+    {
+        $this->isCreating = true;
+        $this->editingIndex = null;
+
+        if ($this->section === 'categories') {
+            $this->edit = [
+                'id' => '',
+                'title' => '',
+                'sort_order' => (string) (count($this->currentRows()) + 1),
+                'icon' => '',
+            ];
+
+            return;
+        }
+
+        $this->edit = [
+            'id' => '',
+            'category_id' => '',
+            'parent_id' => '',
+            'title' => '',
+            'icon' => '',
+        ];
+    }
+
     public function cancelEdit(): void
     {
+        $this->isCreating = false;
         $this->editingIndex = null;
         $this->edit = [];
     }
 
     public function saveEdit(): void
     {
-        if ($this->editingIndex === null) {
+        $isCreating = $this->isCreating;
+
+        if (! $isCreating && $this->editingIndex === null) {
             return;
         }
 
         $rows = $this->currentRows();
 
-        if (! isset($rows[$this->editingIndex])) {
+        if (! $isCreating && ! isset($rows[$this->editingIndex])) {
             return;
         }
 
-        $index = $this->editingIndex;
-        $row = $rows[$index];
+        $row = $isCreating ? [] : $rows[$this->editingIndex];
 
         if ($this->section === 'categories') {
             $row['id'] = $this->toIntOrOriginal((string) ($this->edit['id'] ?? ''));
@@ -173,14 +203,18 @@ class StructureManager extends Page
             $row['icon'] = trim((string) ($this->edit['icon'] ?? ''));
         }
 
-        $rows[$index] = $row;
+        if ($isCreating) {
+            $rows[] = $row;
+        } else {
+            $rows[$this->editingIndex] = $row;
+        }
         $this->structure[$this->section] = $rows;
 
         try {
             KdiniMetadataRepository::writeStructure($this->structure);
 
             Notification::make()
-                ->title('ردیف ساختار ذخیره شد')
+                ->title($isCreating ? 'رکورد جدید ساختار اضافه شد' : 'ردیف ساختار ذخیره شد')
                 ->success()
                 ->send();
 
