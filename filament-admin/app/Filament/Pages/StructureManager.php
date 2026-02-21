@@ -96,13 +96,17 @@ class StructureManager extends Page
         $query = mb_strtolower(trim($this->search));
         $result = [];
 
-        foreach ($this->currentRows() as $index => $row) {
+        $rows = $this->section === 'chapters'
+            ? $this->prepareChapterRows($this->currentRows())
+            : $this->currentRows();
+
+        foreach ($rows as $index => $row) {
             $haystack = mb_strtolower(implode(' ', array_map(static fn ($value): string => (string) $value, $row)));
             if ($query !== '' && ! str_contains($haystack, $query)) {
                 continue;
             }
 
-            $row['__index'] = $index;
+            $row['__index'] = $row['__index'] ?? $index;
             $result[] = $row;
         }
 
@@ -161,7 +165,21 @@ class StructureManager extends Page
         $this->edit = [
             'id' => '',
             'category_id' => '',
-            'parent_id' => '',
+            'parent_id' => '0',
+            'title' => '',
+            'icon' => '',
+        ];
+    }
+
+    public function startCreateChild(int $parentId, int $categoryId): void
+    {
+        $this->section = 'chapters';
+        $this->isCreating = true;
+        $this->editingIndex = null;
+        $this->edit = [
+            'id' => '',
+            'category_id' => (string) $categoryId,
+            'parent_id' => (string) $parentId,
             'title' => '',
             'icon' => '',
         ];
@@ -238,5 +256,119 @@ class StructureManager extends Page
         }
 
         return is_numeric($trimmed) ? (int) $trimmed : $trimmed;
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $rows
+     * @return array<int, array<string, mixed>>
+     */
+    protected function prepareChapterRows(array $rows): array
+    {
+        $nodes = [];
+        $children = [];
+        $idToIndex = [];
+
+        foreach ($rows as $index => $row) {
+            $id = $this->toIntOrNull($row['id'] ?? null);
+            $parentId = $this->toIntOrNull($row['parent_id'] ?? null) ?? 0;
+            $categoryId = $this->toIntOrNull($row['category_id'] ?? null) ?? 0;
+
+            $nodes[$index] = [
+                'id' => $id,
+                'parent_id' => $parentId,
+                'category_id' => $categoryId,
+            ];
+
+            if ($id !== null) {
+                $idToIndex[$id] = $index;
+            }
+        }
+
+        foreach ($nodes as $index => $meta) {
+            $parent = $meta['parent_id'] ?? 0;
+            $children[$parent][] = $index;
+        }
+
+        foreach ($children as &$indices) {
+            usort($indices, function (int $a, int $b) use ($nodes): int {
+                $aCat = $nodes[$a]['category_id'] ?? 0;
+                $bCat = $nodes[$b]['category_id'] ?? 0;
+                if ($aCat !== $bCat) {
+                    return $aCat <=> $bCat;
+                }
+
+                $aId = $nodes[$a]['id'] ?? 0;
+                $bId = $nodes[$b]['id'] ?? 0;
+
+                return $aId <=> $bId;
+            });
+        }
+        unset($indices);
+
+        $rootIndices = [];
+        foreach ($nodes as $index => $meta) {
+            $parent = $meta['parent_id'] ?? 0;
+            if ($parent <= 0 || ! isset($idToIndex[$parent])) {
+                $rootIndices[] = $index;
+            }
+        }
+
+        usort($rootIndices, function (int $a, int $b) use ($nodes): int {
+            $aCat = $nodes[$a]['category_id'] ?? 0;
+            $bCat = $nodes[$b]['category_id'] ?? 0;
+            if ($aCat !== $bCat) {
+                return $aCat <=> $bCat;
+            }
+
+            $aId = $nodes[$a]['id'] ?? 0;
+            $bId = $nodes[$b]['id'] ?? 0;
+
+            return $aId <=> $bId;
+        });
+
+        $visited = [];
+        $ordered = [];
+
+        $walk = function (int $index, int $depth) use (&$walk, &$ordered, &$visited, $rows, $nodes, $children): void {
+            if (isset($visited[$index])) {
+                return;
+            }
+
+            $visited[$index] = true;
+            $row = $rows[$index];
+            $title = (string) ($row['title'] ?? '');
+            $prefix = str_repeat('— ', max(0, min($depth, 8)));
+
+            $row['__index'] = $index;
+            $row['__depth'] = $depth;
+            $row['__title_display'] = $prefix . $title;
+            $ordered[] = $row;
+
+            $id = $nodes[$index]['id'] ?? null;
+            if ($id !== null && isset($children[$id])) {
+                foreach ($children[$id] as $childIndex) {
+                    $walk($childIndex, $depth + 1);
+                }
+            }
+        };
+
+        foreach ($rootIndices as $rootIndex) {
+            $walk($rootIndex, 0);
+        }
+
+        foreach (array_keys($rows) as $index) {
+            $walk((int) $index, 0);
+        }
+
+        return $ordered;
+    }
+
+    protected function toIntOrNull(mixed $value): ?int
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        return is_numeric((string) $value) ? (int) $value : null;
     }
 }

@@ -340,6 +340,27 @@
         box-shadow: 0 0 0 3px rgb(var(--kdini-accent) / 0.2);
     }
 
+    .kd-file-input {
+        width: 100%;
+        border-radius: 0.75rem;
+        border: 1px dashed rgb(var(--kdini-border) / 0.72);
+        background: rgb(var(--kdini-bg-soft) / 0.72);
+        color: rgb(var(--kdini-text));
+        padding: 0.65rem 0.8rem;
+        font-size: 0.84rem;
+        line-height: 1.35;
+    }
+
+    .kd-file-input::file-selector-button {
+        border: 1px solid rgb(var(--kdini-border) / 0.7);
+        background: rgb(var(--kdini-surface-strong) / 0.75);
+        color: rgb(var(--kdini-text));
+        border-radius: 0.55rem;
+        padding: 0.35rem 0.75rem;
+        margin-inline-end: 0.7rem;
+        cursor: pointer;
+    }
+
     .kd-checkbox {
         border-radius: 0.75rem;
         border: 1px solid rgb(var(--kdini-border) / 0.5);

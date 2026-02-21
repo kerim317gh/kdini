@@ -27,6 +27,7 @@
             <h3 class="text-sm font-bold">دسترسی سریع</h3>
             <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 <a href="{{ \App\Filament\Pages\BooksManager::getUrl() }}" class="kd-quick-link">مدیریت کتاب‌ها</a>
+                <a href="{{ \App\Filament\Pages\SqlFilesManager::getUrl() }}" class="kd-quick-link">مدیریت فایل‌های SQL</a>
                 <a href="{{ \App\Filament\Pages\AudioManager::getUrl() }}" class="kd-quick-link">مدیریت صوت‌ها</a>
                 <a href="{{ \App\Filament\Pages\StructureManager::getUrl() }}" class="kd-quick-link">مدیریت ساختار</a>
                 <a href="{{ \App\Filament\Pages\AppUpdateManager::getUrl() }}" class="kd-quick-link">مدیریت آپدیت برنامه</a>

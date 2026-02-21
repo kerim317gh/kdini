@@ -70,4 +70,51 @@ class KdiniGitService
 
         return self::run(['zsh', 'tools/git_quick_push.sh', $message], 300);
     }
+
+    public static function currentBranch(): string
+    {
+        $branch = trim(self::run(['git', 'branch', '--show-current'])['output']);
+
+        return $branch !== '' ? $branch : 'main';
+    }
+
+    public static function originRemoteUrl(): ?string
+    {
+        $result = self::run(['git', 'remote', 'get-url', 'origin']);
+        if (! $result['ok']) {
+            return null;
+        }
+
+        $remote = trim($result['output']);
+
+        return $remote !== '' ? $remote : null;
+    }
+
+    public static function githubRawUrlForRelativePath(string $relativePath): ?string
+    {
+        $remote = self::originRemoteUrl();
+        if ($remote === null) {
+            return null;
+        }
+
+        if (! preg_match('/github\.com[:\/]([^\/]+)\/([^\/]+?)(?:\.git)?$/i', $remote, $matches)) {
+            return null;
+        }
+
+        $owner = trim($matches[1]);
+        $repo = trim($matches[2]);
+
+        if ($owner === '' || $repo === '') {
+            return null;
+        }
+
+        $branch = self::currentBranch();
+        $normalizedPath = ltrim(str_replace('\\', '/', $relativePath), '/');
+
+        if ($normalizedPath === '') {
+            return null;
+        }
+
+        return "https://raw.githubusercontent.com/{$owner}/{$repo}/{$branch}/{$normalizedPath}";
+    }
 }

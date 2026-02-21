@@ -130,6 +130,27 @@
                         </x-filament::input.wrapper>
                     </div>
 
+                    <div class="space-y-2 lg:col-span-2">
+                        <label class="kd-field-label">آپلود مستقیم فایل SQL از مک (به پوشه kotob)</label>
+                        <input
+                            type="file"
+                            wire:model="uploadedSqlFile"
+                            class="kd-file-input"
+                            accept=".sql,.sql.gz,.db,.gz"
+                        />
+                        <div class="flex flex-wrap items-center gap-2">
+                            <x-filament::button color="info" wire:click="uploadSqlFileAndFillUrl">
+                                آپلود فایل و جایگذاری خودکار لینک
+                            </x-filament::button>
+                            <span wire:loading wire:target="uploadedSqlFile,uploadSqlFileAndFillUrl" class="text-xs kd-muted">
+                                در حال بارگذاری فایل...
+                            </span>
+                        </div>
+                        <p class="text-xs kd-muted">
+                            بعد از آپلود، لینک فایل به‌صورت خودکار در فیلد `sql_download_url` قرار می‌گیرد.
+                        </p>
+                    </div>
+
                     <div class="space-y-1 lg:col-span-2">
                         <label class="kd-field-label">لینک دانلود جایگزین (download_url)</label>
                         <x-filament::input.wrapper>

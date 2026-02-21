@@ -2,14 +2,20 @@
 
 namespace App\Filament\Pages;
 
+use App\Support\KdiniGitService;
 use App\Support\KdiniMetadataRepository;
 use BackedEnum;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\File;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Livewire\WithFileUploads;
 use UnitEnum;
 
 class BooksManager extends Page
 {
+    use WithFileUploads;
+
     protected static ?string $title = 'مدیریت کتاب‌ها';
 
     protected string $view = 'filament.pages.books-manager';
@@ -30,6 +36,11 @@ class BooksManager extends Page
     public ?int $editingIndex = null;
 
     public bool $isCreating = false;
+
+    /**
+     * @var TemporaryUploadedFile|string|null
+     */
+    public $uploadedSqlFile = null;
 
     /**
      * @var array<string, mixed>
@@ -149,6 +160,7 @@ class BooksManager extends Page
         $this->isCreating = false;
         $this->editingIndex = null;
         $this->edit = [];
+        $this->uploadedSqlFile = null;
     }
 
     public function saveEdit(): void
@@ -208,5 +220,128 @@ class BooksManager extends Page
         }
 
         return is_numeric($trimmed) ? (int) $trimmed : $trimmed;
+    }
+
+    public function uploadSqlFileAndFillUrl(): void
+    {
+        if (! $this->isCreating && $this->editingIndex === null) {
+            Notification::make()
+                ->title('اول یک ردیف را برای ویرایش/افزودن باز کن')
+                ->warning()
+                ->send();
+
+            return;
+        }
+
+        if (! $this->uploadedSqlFile instanceof TemporaryUploadedFile) {
+            Notification::make()
+                ->title('هیچ فایلی انتخاب نشده است')
+                ->warning()
+                ->send();
+
+            return;
+        }
+
+        $originalName = $this->uploadedSqlFile->getClientOriginalName();
+        if (! $this->isAllowedSqlFileName($originalName)) {
+            Notification::make()
+                ->title('فرمت فایل مجاز نیست')
+                ->body('فقط sql / sql.gz / db / gz مجاز است.')
+                ->danger()
+                ->send();
+
+            return;
+        }
+
+        $safeName = $this->sanitizeUploadFileName($originalName);
+        $relativePath = 'kotob/' . $safeName;
+        $targetPath = KdiniMetadataRepository::safePath($relativePath);
+        File::ensureDirectoryExists(dirname($targetPath));
+
+        if (File::exists($targetPath)) {
+            $safeName = $this->appendTimestampToFileName($safeName);
+            $relativePath = 'kotob/' . $safeName;
+            $targetPath = KdiniMetadataRepository::safePath($relativePath);
+        }
+
+        File::put($targetPath, File::get($this->uploadedSqlFile->getRealPath()));
+
+        $rawUrl = KdiniGitService::githubRawUrlForRelativePath($relativePath);
+        $linkValue = $rawUrl ?? $relativePath;
+
+        $this->edit['sql_download_url'] = $linkValue;
+
+        if (trim((string) ($this->edit['download_url'] ?? '')) === '') {
+            $this->edit['download_url'] = $linkValue;
+        }
+
+        if (trim((string) ($this->edit['url'] ?? '')) === '') {
+            $this->edit['url'] = $linkValue;
+        }
+
+        $this->uploadedSqlFile = null;
+
+        Notification::make()
+            ->title('فایل SQL آپلود شد و لینک پر شد')
+            ->body("مسیر فایل: {$relativePath}")
+            ->success()
+            ->send();
+    }
+
+    protected function isAllowedSqlFileName(string $name): bool
+    {
+        $lower = mb_strtolower(trim($name));
+
+        return str_ends_with($lower, '.sql')
+            || str_ends_with($lower, '.sql.gz')
+            || str_ends_with($lower, '.db')
+            || str_ends_with($lower, '.gz');
+    }
+
+    protected function sanitizeUploadFileName(string $originalName): string
+    {
+        $trimmed = trim($originalName);
+        $lower = mb_strtolower($trimmed);
+
+        $ext = '';
+        $stem = $trimmed;
+
+        if (str_ends_with($lower, '.sql.gz')) {
+            $ext = '.sql.gz';
+            $stem = substr($trimmed, 0, -7);
+        } else {
+            $ext = '.' . pathinfo($trimmed, PATHINFO_EXTENSION);
+            $stem = pathinfo($trimmed, PATHINFO_FILENAME);
+        }
+
+        $stem = preg_replace('/[^A-Za-z0-9._-]+/', '_', (string) $stem) ?: '';
+        $stem = trim($stem, '._-');
+
+        if ($stem === '') {
+            $stem = 'book_' . date('Ymd_His');
+        }
+
+        return $stem . $ext;
+    }
+
+    protected function appendTimestampToFileName(string $fileName): string
+    {
+        $lower = mb_strtolower($fileName);
+        $stamp = date('Ymd_His');
+
+        if (str_ends_with($lower, '.sql.gz')) {
+            $stem = substr($fileName, 0, -7);
+
+            return "{$stem}_{$stamp}.sql.gz";
+        }
+
+        $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+        $stem = pathinfo($fileName, PATHINFO_FILENAME);
+
+        if ($ext === '') {
+            return "{$stem}_{$stamp}";
+        }
+
+        return "{$stem}_{$stamp}.{$ext}";
     }
 }

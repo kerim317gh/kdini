@@ -13,8 +13,11 @@ show_menu() {
   echo "4) Commit and push"
   echo "5) Open Filament panel (recommended)"
   echo "6) Open legacy Python panel"
-  echo "7) Quit"
-  echo -n "Choose [1-7]: "
+  echo "7) Doctor check (DB + JSON)"
+  echo "8) Inspect SQL patch file"
+  echo "9) Export one book from DB to SQL"
+  echo "10) Quit"
+  echo -n "Choose [1-10]: "
 }
 
 while true; do
@@ -49,6 +52,36 @@ while true; do
       ./tools/start_panel.sh "$port"
       ;;
     7)
+      echo -n "DB path (default: /Users/kerim/Documents/kdini/kdini/assets/books.db): "
+      read -r db_path
+      db_path="${db_path:-/Users/kerim/Documents/kdini/kdini/assets/books.db}"
+      ./tools/kdini doctor "$db_path"
+      ;;
+    8)
+      echo -n "SQL file path: "
+      read -r sql_path
+      if [[ -z "${sql_path:-}" ]]; then
+        echo "SQL path is required."
+        continue
+      fi
+      ./tools/kdini inspect-sql "$sql_path"
+      ;;
+    9)
+      echo -n "Book ID: "
+      read -r book_id
+      if [[ -z "${book_id:-}" ]]; then
+        echo "Book ID is required."
+        continue
+      fi
+      echo -n "DB path (default: /Users/kerim/Documents/kdini/kdini/assets/books.db): "
+      read -r db_path
+      db_path="${db_path:-/Users/kerim/Documents/kdini/kdini/assets/books.db}"
+      echo -n "Output SQL path (default: kotob/book_<id>.sql): "
+      read -r out_sql
+      out_sql="${out_sql:-$repo_dir/kotob/book_${book_id}.sql}"
+      ./tools/kdini export-sql "$book_id" "$db_path" "$out_sql"
+      ;;
+    10)
       echo "Bye."
       exit 0
       ;;

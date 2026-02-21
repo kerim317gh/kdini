@@ -14,6 +14,9 @@ Usage:
   kdini pull
   kdini push "commit message"
   kdini reorganize
+  kdini doctor [db_path]
+  kdini inspect-sql <sql_path>
+  kdini export-sql <book_id> [db_path] [out_sql]
   kdini panel [port]
   kdini panel-legacy [port]
   kdini menu
@@ -46,6 +49,40 @@ case "$cmd" in
 
   reorganize)
     ./tools/reorganize_assets.sh
+    ;;
+
+  doctor)
+    db_path="${1:-/Users/kerim/Documents/kdini/kdini/assets/books.db}"
+    python3 ./tools/data_ops.py --repo-root "$repo_dir" doctor --db "$db_path"
+    ;;
+
+  export-sql)
+    book_id="${1:-}"
+    db_path="${2:-/Users/kerim/Documents/kdini/kdini/assets/books.db}"
+    out_sql="${3:-$repo_dir/kotob/book_${book_id}.sql}"
+    meta_out="${out_sql%.sql}.book.json"
+
+    if [[ -z "$book_id" ]]; then
+      echo "Missing <book_id>."
+      usage
+      exit 1
+    fi
+
+    python3 ./tools/data_ops.py --repo-root "$repo_dir" export-sql \
+      --db "$db_path" \
+      --book-id "$book_id" \
+      --out "$out_sql" \
+      --meta-out "$meta_out"
+    ;;
+
+  inspect-sql)
+    sql_path="${1:-}"
+    if [[ -z "$sql_path" ]]; then
+      echo "Missing <sql_path>."
+      usage
+      exit 1
+    fi
+    python3 ./tools/data_ops.py --repo-root "$repo_dir" inspect-sql --sql "$sql_path"
     ;;
 
   panel)

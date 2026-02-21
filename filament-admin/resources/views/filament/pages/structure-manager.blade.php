@@ -55,12 +55,21 @@
                                 @else
                                     <td class="px-3 py-3">{{ $row['category_id'] ?? '' }}</td>
                                     <td class="px-3 py-3">{{ $row['parent_id'] ?? '' }}</td>
-                                    <td class="px-3 py-3">{{ $row['title'] ?? '' }}</td>
+                                    <td class="px-3 py-3">{{ $row['__title_display'] ?? ($row['title'] ?? '') }}</td>
                                     <td class="px-3 py-3">{{ $row['icon'] ?? '' }}</td>
                                 @endif
 
                                 <td class="px-3 py-3">
                                     <x-filament::button size="xs" color="gray" wire:click="startEdit({{ $row['__index'] }})">ویرایش</x-filament::button>
+                                    @if($section === 'chapters' && is_numeric($row['id'] ?? null) && is_numeric($row['category_id'] ?? null))
+                                        <x-filament::button
+                                            size="xs"
+                                            color="info"
+                                            wire:click="startCreateChild({{ (int) $row['id'] }}, {{ (int) $row['category_id'] }})"
+                                        >
+                                            افزودن زیر‌فصل
+                                        </x-filament::button>
+                                    @endif
                                 </td>
                             </tr>
                         @empty
