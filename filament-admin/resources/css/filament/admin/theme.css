@@ -340,6 +340,36 @@
         box-shadow: 0 0 0 3px rgb(var(--kdini-accent) / 0.2);
     }
 
+    .kd-textarea-rtl {
+        text-align: right;
+        direction: rtl;
+        unicode-bidi: plaintext;
+    }
+
+    .kd-select {
+        width: 100%;
+        border-radius: 0.75rem;
+        border: 1px solid rgb(var(--kdini-border) / 0.55);
+        background: rgb(var(--kdini-bg-soft) / 0.72);
+        color: rgb(var(--kdini-text));
+        padding: 0.58rem 0.75rem;
+        font-size: 0.84rem;
+        line-height: 1.4;
+    }
+
+    .kd-select:focus {
+        outline: none;
+        border-color: rgb(var(--kdini-accent) / 0.82);
+        box-shadow: 0 0 0 3px rgb(var(--kdini-accent) / 0.2);
+    }
+
+    .kd-line-preview {
+        max-width: 24rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
     .kd-file-input {
         width: 100%;
         border-radius: 0.75rem;

@@ -9,6 +9,8 @@ use Filament\Pages\Page;
 use Illuminate\Support\Facades\File;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
+use PDO;
+use Throwable;
 use UnitEnum;
 
 class SqlFilesManager extends Page
@@ -45,7 +47,36 @@ class SqlFilesManager extends Page
     /**
      * @var array<int, array<string, string>>
      */
-    public array $previewRows = [];
+    public array $contentRows = [];
+
+    public ?int $selectedRowIndex = null;
+
+    public string $selectedRowField = 'text_fa';
+
+    public string $selectedRowText = '';
+
+    public string $sqlRowsError = '';
+
+    public bool $showRawSqlEditor = false;
+
+    public bool $rowsDirty = false;
+
+    public string $detectedDeleteStatement = '';
+
+    /**
+     * @var array<int, string>
+     */
+    public array $contentColumns = [];
+
+    /**
+     * @var array<string, string>
+     */
+    public array $contentColumnTypes = [];
+
+    /**
+     * @var array<int, string>
+     */
+    public array $contentTextFields = ['text', 'text_fa', 'text_turkmen'];
 
     /**
      * @var TemporaryUploadedFile|string|null
@@ -148,10 +179,13 @@ class SqlFilesManager extends Page
 
         $this->editingRelativePath = $relativePath;
         $this->editFileName = $name;
-        $this->sqlContent = $sql;
+        // Keep large SQL text out of Livewire payload unless raw editor is explicitly opened.
+        $this->sqlContent = '';
         $this->editBookId = $this->detectDeleteBookId($sql);
         $this->detectedInsertCount = $this->detectInsertCount($sql);
-        $this->previewRows = $this->extractPreviewRows($sql);
+        $this->rowsDirty = false;
+        $this->detectedDeleteStatement = $this->detectDeleteStatementForContent($sql);
+        $this->loadContentRowsFromSql($sql);
     }
 
     public function cancelEditFile(): void
@@ -161,7 +195,17 @@ class SqlFilesManager extends Page
         $this->editBookId = '';
         $this->sqlContent = '';
         $this->detectedInsertCount = 0;
-        $this->previewRows = [];
+        $this->contentRows = [];
+        $this->selectedRowIndex = null;
+        $this->selectedRowField = 'text_fa';
+        $this->selectedRowText = '';
+        $this->sqlRowsError = '';
+        $this->showRawSqlEditor = false;
+        $this->rowsDirty = false;
+        $this->detectedDeleteStatement = '';
+        $this->contentColumns = [];
+        $this->contentColumnTypes = [];
+        $this->contentTextFields = ['text', 'text_fa', 'text_turkmen'];
     }
 
     public function saveSqlFile(): void
@@ -170,7 +214,7 @@ class SqlFilesManager extends Page
             return;
         }
 
-        $content = trim($this->sqlContent);
+        $content = $this->resolveSqlContentForSave();
         if ($content === '') {
             Notification::make()
                 ->title('محتوای SQL خالی است')
@@ -222,10 +266,12 @@ class SqlFilesManager extends Page
 
         $this->editingRelativePath = $newRelative;
         $this->editFileName = $safeName;
-        $this->sqlContent = $content;
+        $this->sqlContent = $this->showRawSqlEditor ? $content : '';
         $this->editBookId = $this->detectDeleteBookId($content);
         $this->detectedInsertCount = $this->detectInsertCount($content);
-        $this->previewRows = $this->extractPreviewRows($content);
+        $this->rowsDirty = false;
+        $this->detectedDeleteStatement = $this->detectDeleteStatementForContent($content);
+        $this->loadContentRowsFromSql($content);
 
         $this->loadFiles();
 
@@ -280,6 +326,126 @@ class SqlFilesManager extends Page
             ->send();
     }
 
+    public function selectContentRow(int $rowIndex, string $field = ''): void
+    {
+        if (! isset($this->contentRows[$rowIndex])) {
+            return;
+        }
+
+        $resolvedField = $field !== ''
+            ? $this->normalizeTextField($field)
+            : $this->getPreferredTextField($this->contentRows[$rowIndex]);
+
+        $this->selectedRowIndex = $rowIndex;
+        $this->selectedRowField = $resolvedField;
+        $this->selectedRowText = (string) ($this->contentRows[$rowIndex][$resolvedField] ?? '');
+    }
+
+    public function changeSelectedRowField(string $field): void
+    {
+        if ($this->selectedRowIndex === null) {
+            return;
+        }
+
+        $this->selectContentRow($this->selectedRowIndex, $field);
+    }
+
+    public function saveSelectedRowText(): void
+    {
+        if ($this->selectedRowIndex === null || ! isset($this->contentRows[$this->selectedRowIndex])) {
+            Notification::make()
+                ->title('ابتدا یک ردیف را انتخاب کن')
+                ->warning()
+                ->send();
+
+            return;
+        }
+
+        $field = $this->normalizeTextField($this->selectedRowField);
+
+        $this->contentRows[$this->selectedRowIndex][$field] = $this->selectedRowText;
+
+        $bookId = $this->resolveBookIdFromRows($this->contentRows);
+        if ($bookId !== 0 && in_array('kotob_id', $this->contentColumns, true)) {
+            foreach ($this->contentRows as &$row) {
+                $row['kotob_id'] = (string) $bookId;
+            }
+            unset($row);
+
+            $this->editBookId = (string) $bookId;
+        }
+
+        if ($this->showRawSqlEditor) {
+            $this->sqlContent = $this->buildSqlContentFromRows($this->contentRows, $bookId, $this->detectedDeleteStatement);
+        }
+
+        $this->rowsDirty = true;
+        $this->detectedInsertCount = count($this->contentRows);
+
+        Notification::make()
+            ->title('متن ردیف به‌روز شد')
+            ->body('برای ثبت نهایی روی دیسک، دکمه «ذخیره فایل SQL» را بزن.')
+            ->success()
+            ->send();
+    }
+
+    public function reloadTableFromSqlContent(): void
+    {
+        if (trim($this->sqlContent) === '') {
+            Notification::make()
+                ->title('ابتدا SQL خام را وارد کن')
+                ->warning()
+                ->send();
+
+            return;
+        }
+
+        $lastRowIndex = $this->selectedRowIndex;
+        $lastField = $this->selectedRowField;
+        $this->detectedDeleteStatement = $this->detectDeleteStatementForContent($this->sqlContent);
+
+        $this->loadContentRowsFromSql($this->sqlContent);
+        $this->rowsDirty = true;
+
+        if ($lastRowIndex !== null && isset($this->contentRows[$lastRowIndex])) {
+            $this->selectContentRow($lastRowIndex, $lastField);
+        }
+
+        if ($this->sqlRowsError !== '') {
+            Notification::make()
+                ->title('بازخوانی جدول با خطا انجام شد')
+                ->body($this->sqlRowsError)
+                ->warning()
+                ->send();
+
+            return;
+        }
+
+        Notification::make()
+            ->title('جدول از SQL دوباره ساخته شد')
+            ->success()
+            ->send();
+    }
+
+    public function toggleRawSqlEditor(): void
+    {
+        $nextState = ! $this->showRawSqlEditor;
+
+        if ($nextState && trim($this->sqlContent) === '') {
+            $this->sqlContent = $this->resolveSqlContentForRawEditor();
+            $this->detectedDeleteStatement = $this->detectDeleteStatementForContent($this->sqlContent);
+        }
+
+        $this->showRawSqlEditor = $nextState;
+    }
+
+    public function hydrateContentRows(mixed $value = null): void
+    {
+        if (! is_array($value)) {
+            $this->contentRows = [];
+        }
+    }
+
     /**
      * @return array{type:string, book_id:string, insert_count:int, editable:bool}
      */
@@ -308,7 +474,7 @@ class SqlFilesManager extends Page
 
     protected function detectDeleteBookId(string $sql): string
     {
-        if (preg_match('/DELETE\s+FROM\s+content\s+WHERE\s+kotob_id\s*=\s*(-?\d+)/i', $sql, $matches) === 1) {
+        if (preg_match('/DELETE\s+FROM\s+(?:"content"|`content`|\[content\]|content)\s+WHERE\s+kotob_id\s*=\s*(-?\d+)/i', $sql, $matches) === 1) {
             return (string) $matches[1];
         }
 
@@ -317,62 +483,453 @@ class SqlFilesManager extends Page
 
     protected function detectInsertCount(string $sql): int
     {
-        return preg_match_all('/\bINSERT\s+INTO\s+content\b/i', $sql) ?: 0;
+        return preg_match_all('/\bINSERT\s+INTO\s+(?:"content"|`content`|\[content\]|content)\b/i', $sql) ?: 0;
+    }
+
+    protected function detectDeleteStatementForContent(string $sql): string
+    {
+        $statements = $this->splitSqlStatements($sql);
+
+        foreach ($statements as $statement) {
+            $trimmed = trim($statement);
+
+            if (preg_match('/^DELETE\s+FROM\s+(?:"content"|`content`|\[content\]|content)\b/i', $trimmed) !== 1) {
+                continue;
+            }
+
+            if (! str_ends_with($trimmed, ';')) {
+                $trimmed .= ';';
+            }
+
+            return $trimmed;
+        }
+
+        return '';
     }
 
     /**
-     * @return array<int, array{chapter_id:string, preview:string}>
+     * @return array<int, array<string, string>>
      */
-    protected function extractPreviewRows(string $sql): array
+    protected function parseContentRows(string $sql): array
     {
-        $lines = preg_split('/\r\n|\r|\n/', $sql) ?: [];
-        $rows = [];
+        $this->sqlRowsError = '';
+        $this->contentColumns = [];
+        $this->contentColumnTypes = [];
+        $this->contentTextFields = ['text', 'text_fa', 'text_turkmen'];
 
-        $collecting = false;
-        $statement = '';
+        $statements = $this->extractContentSqlStatements($sql);
+        if ($statements === []) {
+            return [];
+        }
 
-        foreach ($lines as $line) {
-            if (! $collecting && preg_match('/^\s*INSERT\s+INTO\s+content\b/i', $line) === 1) {
-                $collecting = true;
-                $statement = $line;
-            } elseif ($collecting) {
-                $statement .= "\n" . $line;
+        [$columnTypes, $columns] = $this->resolveColumnTypesForStatements($statements);
+        if ($columns === []) {
+            return [];
+        }
+
+        try {
+            $pdo = new PDO('sqlite::memory:');
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $columnDefinitions = [];
+            foreach ($columns as $column) {
+                $columnDefinitions[] = sprintf(
+                    '%s %s',
+                    $this->quoteIdentifier($column),
+                    $this->normalizeSQLiteType($columnTypes[$column] ?? 'TEXT')
+                );
             }
 
-            if ($collecting && str_contains($line, ';')) {
-                $chapterId = '';
-                if (preg_match('/VALUES\s*\(\s*(-?\d+)/i', $statement, $m) === 1) {
-                    $chapterId = (string) $m[1];
+            $pdo->exec(sprintf('CREATE TABLE content (%s)', implode(', ', $columnDefinitions)));
+
+            foreach ($statements as $statement) {
+                $pdo->exec($statement);
+            }
+
+            $selectColumns = implode(', ', array_map(fn (string $column): string => $this->quoteIdentifier($column), $columns));
+            $query = $pdo->query("SELECT rowid AS row_index, {$selectColumns} FROM content ORDER BY rowid ASC");
+            $records = $query !== false ? $query->fetchAll(PDO::FETCH_ASSOC) : [];
+        } catch (Throwable $e) {
+            $message = trim((string) $e->getMessage());
+            if (mb_strlen($message) > 160) {
+                $message = mb_substr($message, 0, 160) . '...';
+            }
+
+            $this->sqlRowsError = $message !== ''
+                ? "ساختار فایل برای حالت جدولی قابل‌خواندن نبود: {$message}"
+                : 'ساختار فایل برای حالت جدولی قابل‌خواندن نبود. از حالت کد خام استفاده کن یا فایل SQL را بررسی کن.';
+
+            return [];
+        }
+
+        $rows = [];
+
+        foreach ($records as $record) {
+            $row = [
+                'row_index' => (string) ($record['row_index'] ?? ''),
+            ];
+
+            foreach ($columns as $column) {
+                $value = $record[$column] ?? null;
+                $row[$column] = $value === null ? '' : (string) $value;
+            }
+
+            $rows[] = $row;
+        }
+
+        $this->contentColumns = $columns;
+        $this->contentColumnTypes = $columnTypes;
+        $this->contentTextFields = $this->detectTextFieldsFromColumns($columns, $columnTypes);
+
+        return $rows;
+    }
+
+    protected function loadContentRowsFromSql(string $sql): void
+    {
+        $this->contentRows = $this->parseContentRows($sql);
+
+        if ($this->contentRows === []) {
+            $this->selectedRowIndex = null;
+            $this->selectedRowField = $this->contentTextFields[0] ?? 'text_fa';
+            $this->selectedRowText = '';
+
+            return;
+        }
+
+        $this->detectedInsertCount = count($this->contentRows);
+        $this->selectContentRow(0);
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    protected function extractContentSqlStatements(string $sql): array
+    {
+        $statements = $this->splitSqlStatements($sql);
+        $contentStatements = [];
+
+        foreach ($statements as $statement) {
+            $trimmed = trim($statement);
+            if ($trimmed === '') {
+                continue;
+            }
+
+            if (
+                preg_match('/^DELETE\s+FROM\s+(?:"content"|`content`|\[content\]|content)\b/i', $trimmed) !== 1
+                && preg_match('/^INSERT\s+INTO\s+(?:"content"|`content`|\[content\]|content)\b/i', $trimmed) !== 1
+            ) {
+                continue;
+            }
+
+            if (! str_ends_with($trimmed, ';')) {
+                $trimmed .= ';';
+            }
+
+            $contentStatements[] = $trimmed;
+        }
+
+        return $contentStatements;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    protected function splitSqlStatements(string $sql): array
+    {
+        $len = strlen($sql);
+        $buffer = '';
+        $statements = [];
+        $inSingleQuote = false;
+
+        for ($i = 0; $i < $len; $i++) {
+            $char = $sql[$i];
+            $buffer .= $char;
+
+            if ($char === "'") {
+                if ($inSingleQuote && $i + 1 < $len && $sql[$i + 1] === "'") {
+                    $buffer .= "'";
+                    $i++;
+                    continue;
                 }
 
-                $preview = preg_replace('/\s+/u', ' ', trim($statement)) ?: '';
-                if (mb_strlen($preview) > 140) {
-                    $preview = mb_substr($preview, 0, 140) . '...';
-                }
+                $inSingleQuote = ! $inSingleQuote;
+                continue;
+            }
 
-                $rows[] = [
-                    'chapter_id' => $chapterId,
-                    'preview' => $preview,
-                ];
-
-                if (count($rows) >= 20) {
-                    break;
-                }
-
-                $collecting = false;
-                $statement = '';
+            if (! $inSingleQuote && $char === ';') {
+                $statements[] = $buffer;
+                $buffer = '';
             }
         }
 
-        return $rows;
+        if (trim($buffer) !== '') {
+            $statements[] = $buffer;
+        }
+
+        return $statements;
+    }
+
+    /**
+     * @param array<int, string> $statements
+     * @return array{0: array<string, string>, 1: array<int, string>}
+     */
+    protected function resolveColumnTypesForStatements(array $statements): array
+    {
+        $columnTypes = $this->getReferenceContentColumnTypes();
+
+        foreach ($statements as $statement) {
+            if (preg_match('/^INSERT\s+INTO\s+(?:"content"|`content`|\[content\]|content)\b/i', trim($statement)) !== 1) {
+                continue;
+            }
+
+            foreach ($this->parseInsertColumnNames($statement) as $column) {
+                if ($column === '') {
+                    continue;
+                }
+
+                if (! array_key_exists($column, $columnTypes)) {
+                    $columnTypes[$column] = str_ends_with($column, '_id') ? 'INTEGER' : 'TEXT';
+                }
+            }
+        }
+
+        if ($columnTypes === []) {
+            $columnTypes = [
+                'chapters_id' => 'INTEGER',
+                'kotob_id' => 'INTEGER',
+                'text' => 'TEXT',
+                'text_fa' => 'TEXT',
+                'text_turkmen' => 'TEXT',
+            ];
+        }
+
+        $columns = array_keys($columnTypes);
+        $priority = [
+            'chapters_id' => 1,
+            'kotob_id' => 2,
+            'text' => 10,
+            'text_fa' => 11,
+            'text_turkmen' => 12,
+            'text_en' => 13,
+            'text_tr' => 14,
+            'text_ru' => 15,
+        ];
+
+        usort($columns, static function (string $a, string $b) use ($priority): int {
+            $orderA = $priority[$a] ?? 1000;
+            $orderB = $priority[$b] ?? 1000;
+
+            if ($orderA !== $orderB) {
+                return $orderA <=> $orderB;
+            }
+
+            return strcmp($a, $b);
+        });
+
+        return [$columnTypes, $columns];
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    protected function getReferenceContentColumnTypes(): array
+    {
+        $fallback = [
+            'chapters_id' => 'INTEGER',
+            'kotob_id' => 'INTEGER',
+            'text' => 'TEXT',
+            'text_fa' => 'TEXT',
+            'text_turkmen' => 'TEXT',
+            'text_en' => 'TEXT',
+            'text_tr' => 'TEXT',
+            'text_ru' => 'TEXT',
+        ];
+
+        foreach ($this->resolveReferenceDatabasePaths() as $path) {
+            if (! File::exists($path)) {
+                continue;
+            }
+
+            try {
+                $pdo = new PDO('sqlite:' . $path);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $query = $pdo->query('PRAGMA table_info(content)');
+
+                if ($query === false) {
+                    continue;
+                }
+
+                $rows = $query->fetchAll(PDO::FETCH_ASSOC);
+                if ($rows === []) {
+                    continue;
+                }
+
+                $resolved = [];
+                foreach ($rows as $row) {
+                    $name = trim((string) ($row['name'] ?? ''));
+                    if ($name === '') {
+                        continue;
+                    }
+
+                    $resolved[$name] = $this->normalizeSQLiteType((string) ($row['type'] ?? 'TEXT'));
+                }
+
+                if ($resolved !== []) {
+                    return $resolved;
+                }
+            } catch (Throwable) {
+                continue;
+            }
+        }
+
+        return $fallback;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    protected function resolveReferenceDatabasePaths(): array
+    {
+        $repoRoot = KdiniMetadataRepository::repoRoot();
+        $repoParent = dirname($repoRoot);
+
+        $candidates = [
+            trim((string) env('KDINI_REFERENCE_DB_PATH', '')),
+            $repoRoot . '/assets/books.db',
+            $repoRoot . '/kdini/assets/books.db',
+            $repoParent . '/kdini/assets/books.db',
+            $repoParent . '/kdini/kdini/assets/books.db',
+        ];
+
+        $paths = [];
+        foreach ($candidates as $candidate) {
+            $trimmed = trim((string) $candidate);
+            if ($trimmed === '') {
+                continue;
+            }
+
+            if (! in_array($trimmed, $paths, true)) {
+                $paths[] = $trimmed;
+            }
+        }
+
+        return $paths;
+    }
+
+    protected function normalizeSQLiteType(string $type): string
+    {
+        $upper = strtoupper(trim($type));
+
+        if ($upper === '') {
+            return 'TEXT';
+        }
+
+        if (str_contains($upper, 'INT')) {
+            return 'INTEGER';
+        }
+
+        if (str_contains($upper, 'REAL') || str_contains($upper, 'FLOA') || str_contains($upper, 'DOUB')) {
+            return 'REAL';
+        }
+
+        return 'TEXT';
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    protected function parseInsertColumnNames(string $statement): array
+    {
+        if (
+            preg_match(
+                '/^INSERT\s+INTO\s+(?:"content"|`content`|\[content\]|content)\s*\((.*?)\)\s*VALUES/isu',
+                trim($statement),
+                $matches
+            ) !== 1
+        ) {
+            return [];
+        }
+
+        $rawColumns = (string) ($matches[1] ?? '');
+        if ($rawColumns === '') {
+            return [];
+        }
+
+        $parts = preg_split('/\s*,\s*/u', $rawColumns) ?: [];
+        $columns = [];
+
+        foreach ($parts as $part) {
+            $name = trim($part);
+            $name = trim($name, " \t\n\r\0\x0B`\"[]");
+
+            if ($name === '') {
+                continue;
+            }
+
+            $columns[] = $name;
+        }
+
+        return array_values(array_unique($columns));
+    }
+
+    protected function quoteIdentifier(string $column): string
+    {
+        return '"' . str_replace('"', '""', $column) . '"';
+    }
+
+    protected function isNumericColumn(string $column): bool
+    {
+        $type = strtoupper((string) ($this->contentColumnTypes[$column] ?? ''));
+
+        if ($type !== '' && (str_contains($type, 'INT') || str_contains($type, 'REAL'))) {
+            return true;
+        }
+
+        return str_ends_with($column, '_id') || $column === 'id';
+    }
+
+    /**
+     * @param array<int, string> $columns
+     * @param array<string, string> $columnTypes
+     * @return array<int, string>
+     */
+    protected function detectTextFieldsFromColumns(array $columns, array $columnTypes): array
+    {
+        $textFields = [];
+        $preferred = ['text', 'text_fa', 'text_turkmen', 'text_en', 'text_tr', 'text_ru'];
+
+        foreach ($preferred as $field) {
+            if (in_array($field, $columns, true)) {
+                $textFields[] = $field;
+            }
+        }
+
+        foreach ($columns as $column) {
+            $type = strtoupper((string) ($columnTypes[$column] ?? 'TEXT'));
+            $isTextLike = str_starts_with($column, 'text') || $type === 'TEXT';
+
+            if (! $isTextLike) {
+                continue;
+            }
+
+            if (in_array($column, ['row_index'], true)) {
+                continue;
+            }
+
+            if (! in_array($column, $textFields, true)) {
+                $textFields[] = $column;
+            }
+        }
+
+        return $textFields !== [] ? $textFields : ['text_fa'];
     }
 
     protected function applyBookIdToDeleteStatement(string $sql, int $bookId): string
     {
         $targetLine = "DELETE FROM content WHERE kotob_id = {$bookId};";
 
-        if (preg_match('/DELETE\s+FROM\s+content\s+WHERE\s+kotob_id\s*=\s*-?\d+\s*;/i', $sql) === 1) {
-            return preg_replace('/DELETE\s+FROM\s+content\s+WHERE\s+kotob_id\s*=\s*-?\d+\s*;/i', $targetLine, $sql, 1) ?: $sql;
+        if (preg_match('/DELETE\s+FROM\s+(?:"content"|`content`|\[content\]|content)\s+WHERE\s+kotob_id\s*=\s*-?\d+\s*;/i', $sql) === 1) {
+            return preg_replace('/DELETE\s+FROM\s+(?:"content"|`content`|\[content\]|content)\s+WHERE\s+kotob_id\s*=\s*-?\d+\s*;/i', $targetLine, $sql, 1) ?: $sql;
         }
 
         $lines = preg_split('/\r\n|\r|\n/', $sql) ?: [];
@@ -394,6 +951,219 @@ class SqlFilesManager extends Page
         }
 
         return implode("\n", $newLines);
+    }
+
+    /**
+     * @param array<int, array<string, string>> $rows
+     */
+    protected function buildSqlContentFromRows(array $rows, int $bookId, string $deleteStatement = ''): string
+    {
+        $insertColumns = $this->contentColumns !== [] ? $this->contentColumns : ['chapters_id', 'kotob_id', 'text', 'text_fa', 'text_turkmen'];
+        $deleteLine = $this->resolveDeleteStatementForBuild($rows, $bookId, $deleteStatement);
+
+        $lines = [
+            'BEGIN TRANSACTION;',
+            $deleteLine,
+            '',
+        ];
+
+        foreach ($rows as $row) {
+            $values = [];
+            foreach ($insertColumns as $column) {
+                $value = (string) ($row[$column] ?? '');
+
+                if ($column === 'kotob_id' && $bookId !== 0) {
+                    $value = (string) $bookId;
+                }
+
+                $values[] = $this->formatSqlValueForColumn($column, $value);
+            }
+
+            $lines[] = sprintf(
+                'INSERT INTO content (%s) VALUES (%s);',
+                implode(', ', array_map(fn (string $column): string => $this->quoteIdentifier($column), $insertColumns)),
+                implode(', ', $values)
+            );
+        }
+
+        $lines[] = '';
+        $lines[] = 'COMMIT;';
+
+        return implode("\n", $lines);
+    }
+
+    protected function quoteSqlString(string $value): string
+    {
+        return "'" . str_replace("'", "''", $value) . "'";
+    }
+
+    /**
+     * @param array<int, array<string, string>> $rows
+     */
+    protected function resolveDeleteStatementForBuild(array $rows, int $bookId, string $detectedDeleteStatement): string
+    {
+        $manualBookId = trim($this->editBookId);
+        if ($manualBookId !== '' && is_numeric($manualBookId)) {
+            return 'DELETE FROM content WHERE kotob_id = ' . (int) $manualBookId . ';';
+        }
+
+        if ($bookId !== 0) {
+            return 'DELETE FROM content WHERE kotob_id = ' . $bookId . ';';
+        }
+
+        $trimmedDelete = trim($detectedDeleteStatement);
+        if ($trimmedDelete !== '') {
+            if (! str_ends_with($trimmedDelete, ';')) {
+                $trimmedDelete .= ';';
+            }
+
+            return $trimmedDelete;
+        }
+
+        $chapterIds = [];
+        foreach ($rows as $row) {
+            $candidate = trim((string) ($row['chapters_id'] ?? ''));
+            if ($candidate === '' || ! is_numeric($candidate)) {
+                continue;
+            }
+
+            $chapterIds[] = (int) $candidate;
+        }
+
+        $chapterIds = array_values(array_unique($chapterIds));
+
+        if ($chapterIds !== []) {
+            return 'DELETE FROM content WHERE chapters_id IN (' . implode(', ', $chapterIds) . ');';
+        }
+
+        return 'DELETE FROM content WHERE 1 = 0;';
+    }
+
+    protected function formatSqlValueForColumn(string $column, string $value): string
+    {
+        $trimmed = trim($value);
+        if ($trimmed === '') {
+            return 'NULL';
+        }
+
+        if ($this->isNumericColumn($column) && is_numeric($trimmed)) {
+            return str_contains($trimmed, '.') ? (string) ((float) $trimmed) : (string) ((int) $trimmed);
+        }
+
+        return $this->quoteSqlString($value);
+    }
+
+    /**
+     * @param array<int, array<string, string>> $rows
+     */
+    protected function resolveBookIdFromRows(array $rows): int
+    {
+        $manual = trim($this->editBookId);
+        if ($manual !== '' && is_numeric($manual)) {
+            return (int) $manual;
+        }
+
+        foreach ($rows as $row) {
+            $candidate = trim((string) ($row['kotob_id'] ?? ''));
+            if ($candidate !== '' && is_numeric($candidate)) {
+                return (int) $candidate;
+            }
+        }
+
+        $sqlSource = trim($this->sqlContent) !== '' ? $this->sqlContent : $this->readCurrentSqlFromDisk();
+        $fromSqlDelete = $this->detectDeleteBookId($sqlSource);
+        if ($fromSqlDelete !== '' && is_numeric($fromSqlDelete)) {
+            return (int) $fromSqlDelete;
+        }
+
+        return 0;
+    }
+
+    protected function resolveSqlContentForSave(): string
+    {
+        $rawSql = trim($this->sqlContent);
+
+        if ($rawSql !== '' && ($this->showRawSqlEditor || $this->contentRows === [])) {
+            return $rawSql;
+        }
+
+        if ($this->contentRows !== []) {
+            $bookId = $this->resolveBookIdFromRows($this->contentRows);
+
+            return trim($this->buildSqlContentFromRows($this->contentRows, $bookId, $this->detectedDeleteStatement));
+        }
+
+        if ($rawSql !== '') {
+            return $rawSql;
+        }
+
+        return trim($this->readCurrentSqlFromDisk());
+    }
+
+    protected function resolveSqlContentForRawEditor(): string
+    {
+        if ($this->contentRows !== []) {
+            $bookId = $this->resolveBookIdFromRows($this->contentRows);
+
+            return $this->buildSqlContentFromRows($this->contentRows, $bookId, $this->detectedDeleteStatement);
+        }
+
+        return $this->readCurrentSqlFromDisk();
+    }
+
+    protected function readCurrentSqlFromDisk(): string
+    {
+        if ($this->editingRelativePath === null) {
+            return '';
+        }
+
+        $path = KdiniMetadataRepository::safePath($this->normalizeRelativePath($this->editingRelativePath));
+        if (! File::exists($path)) {
+            return '';
+        }
+
+        return (string) File::get($path);
+    }
+
+    protected function getPreferredTextField(array $row): string
+    {
+        foreach ($this->getAllowedTextFields() as $field) {
+            if (trim((string) ($row[$field] ?? '')) !== '') {
+                return $field;
+            }
+        }
+
+        return $this->getAllowedTextFields()[0] ?? 'text_fa';
+    }
+
+    protected function normalizeTextField(string $field): string
+    {
+        if (in_array($field, $this->getAllowedTextFields(), true)) {
+            return $field;
+        }
+
+        return $this->getAllowedTextFields()[0] ?? 'text_fa';
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    protected function getAllowedTextFields(): array
+    {
+        return $this->contentTextFields !== [] ? $this->contentTextFields : ['text', 'text_fa', 'text_turkmen'];
+    }
+
+    public function labelForTextField(string $field): string
+    {
+        return match ($field) {
+            'text' => 'متن عربی',
+            'text_fa' => 'ترجمه فارسی',
+            'text_turkmen' => 'متن ترکمنی',
+            'text_en' => 'متن انگلیسی',
+            'text_tr' => 'متن ترکی',
+            'text_ru' => 'متن روسی',
+            default => $field,
+        };
     }
 
     protected function normalizeRelativePath(string $relativePath): string

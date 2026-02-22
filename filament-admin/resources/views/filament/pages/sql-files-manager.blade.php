@@ -100,33 +100,106 @@
                     تعداد INSERT INTO content در فایل: <span class="font-bold text-white">{{ $detectedInsertCount }}</span>
                 </div>
 
-                @if(count($previewRows) > 0)
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <x-filament::button size="sm" color="gray" :disabled="!$showRawSqlEditor" wire:click="reloadTableFromSqlContent">
+                        بازخوانی جدول از SQL خام
+                    </x-filament::button>
+                    <x-filament::button size="sm" color="gray" wire:click="toggleRawSqlEditor">
+                        {{ $showRawSqlEditor ? 'بستن حالت کد خام SQL' : 'نمایش حالت کد خام SQL' }}
+                    </x-filament::button>
+                </div>
+
+                @if($sqlRowsError !== '')
+                    <div class="mt-4 rounded-xl border border-amber-200/35 bg-amber-500/10 px-3 py-2 text-xs text-amber-100">
+                        {{ $sqlRowsError }}
+                    </div>
+                @endif
+
+                @if(count($contentRows) > 0)
                     <div class="kd-table-wrap mt-4 overflow-x-auto">
                         <table class="kd-table min-w-full text-right text-xs">
                             <thead class="kd-table-head">
                                 <tr>
                                     <th class="px-3 py-2 font-bold">#</th>
                                     <th class="px-3 py-2 font-bold">chapter_id</th>
-                                    <th class="px-3 py-2 font-bold">پیش‌نمایش SQL</th>
+                                    <th class="px-3 py-2 font-bold">book_id</th>
+                                    @foreach($contentTextFields as $field)
+                                        <th class="px-3 py-2 font-bold">{{ $this->labelForTextField($field) }}</th>
+                                    @endforeach
+                                    <th class="px-3 py-2 font-bold">عملیات</th>
                                 </tr>
                             </thead>
                             <tbody class="kd-table-body">
-                                @foreach($previewRows as $row)
+                                @foreach($contentRows as $row)
+                                    @php($isActive = $selectedRowIndex === $loop->index)
                                     <tr class="kd-row-hover">
                                         <td class="px-3 py-2">{{ $loop->iteration }}</td>
-                                        <td class="px-3 py-2">{{ $row['chapter_id'] !== '' ? $row['chapter_id'] : '—' }}</td>
-                                        <td class="px-3 py-2" dir="ltr">{{ $row['preview'] }}</td>
+                                        <td class="px-3 py-2">{{ ($row['chapters_id'] ?? '') !== '' ? $row['chapters_id'] : '—' }}</td>
+                                        <td class="px-3 py-2">{{ ($row['kotob_id'] ?? '') !== '' ? $row['kotob_id'] : '—' }}</td>
+                                        @foreach($contentTextFields as $field)
+                                            <td class="px-3 py-2">
+                                                @php($fieldText = (string)($row[$field] ?? ''))
+                                                <div class="kd-line-preview">{{ $fieldText !== '' ? \Illuminate\Support\Str::limit($fieldText, 180) : '—' }}</div>
+                                            </td>
+                                        @endforeach
+                                        <td class="px-3 py-2">
+                                            <div class="flex flex-wrap gap-1">
+                                                @foreach($contentTextFields as $field)
+                                                    <x-filament::button size="xs" :color="$isActive && $selectedRowField === $field ? 'primary' : 'gray'" wire:click="selectContentRow({{ $loop->index }}, '{{ $field }}')">
+                                                        {{ $this->labelForTextField($field) }}
+                                                    </x-filament::button>
+                                                @endforeach
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+                @else
+                    <div class="mt-4 rounded-xl border border-white/10 bg-white/5 px-3 py-4 text-xs kd-muted">
+                        برای این فایل ردیف قابل‌نمایش پیدا نشد. اگر فایل ساختار متفاوت دارد، «حالت کد خام SQL» را باز کن.
+                    </div>
                 @endif
 
-                <div class="mt-4 space-y-1">
-                    <label class="kd-field-label">متن کامل فایل SQL</label>
-                    <textarea wire:model="sqlContent" rows="16" class="kd-textarea" dir="ltr" placeholder="BEGIN TRANSACTION; ..."></textarea>
-                </div>
+                @if($selectedRowIndex !== null && isset($contentRows[$selectedRowIndex]))
+                    @php($activeRow = $contentRows[$selectedRowIndex])
+
+                    <section class="mt-4 rounded-xl border border-white/10 bg-slate-900/25 p-4">
+                        <div class="grid gap-2 text-xs lg:grid-cols-4">
+                            <div><span class="kd-muted">ردیف:</span> <span class="font-bold text-white">{{ $selectedRowIndex + 1 }}</span></div>
+                            <div><span class="kd-muted">chapter_id:</span> <span class="font-bold text-white">{{ ($activeRow['chapters_id'] ?? '') !== '' ? $activeRow['chapters_id'] : '—' }}</span></div>
+                            <div><span class="kd-muted">book_id:</span> <span class="font-bold text-white">{{ ($activeRow['kotob_id'] ?? '') !== '' ? $activeRow['kotob_id'] : '—' }}</span></div>
+                            <div><span class="kd-muted">فیلد فعال:</span> <span class="font-bold text-white">{{ $this->labelForTextField($selectedRowField) }} ({{ $selectedRowField }})</span></div>
+                        </div>
+
+                        <div class="mt-4 grid gap-3 lg:grid-cols-[240px_1fr]">
+                            <div class="space-y-1">
+                                <label class="kd-field-label">فیلدی که می‌خواهی ویرایش کنی</label>
+                                <select class="kd-select" wire:model="selectedRowField" wire:change="changeSelectedRowField($event.target.value)">
+                                    @foreach($contentTextFields as $field)
+                                        <option value="{{ $field }}">{{ $this->labelForTextField($field) }} ({{ $field }})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="kd-field-label">متن ردیف انتخاب‌شده (راست‌چین)</label>
+                                <textarea wire:model="selectedRowText" rows="12" class="kd-textarea kd-textarea-rtl" dir="rtl" placeholder="متن این ردیف را اینجا ویرایش کن..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 flex flex-wrap gap-2">
+                            <x-filament::button color="primary" wire:click="saveSelectedRowText">ثبت متن ردیف در SQL</x-filament::button>
+                        </div>
+                    </section>
+                @endif
+
+                @if($showRawSqlEditor)
+                    <div class="mt-4 space-y-1">
+                        <label class="kd-field-label">کد خام SQL (حالت پیشرفته)</label>
+                        <textarea wire:model="sqlContent" rows="16" class="kd-textarea" dir="ltr" placeholder="BEGIN TRANSACTION; ..."></textarea>
+                    </div>
+                @endif
 
                 <div class="mt-4 flex flex-wrap gap-2">
                     <x-filament::button color="primary" wire:click="saveSqlFile">ذخیره فایل SQL</x-filament::button>

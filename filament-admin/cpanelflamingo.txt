@@ -1,0 +1,11 @@
+cd /Users/kerim/Documents/kdini_manage_clone
+./tools/start_filament_panel.sh
+
+
+آدرس:
+
+http://127.0.0.1:8890/admin/login
+ورود پیش‌فرض:
+
+Email: www.kerim317gh@gmail.com
+Password: Kerim@2026!

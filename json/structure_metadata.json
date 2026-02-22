@@ -6,13 +6,13 @@
             "id": 4,
             "title": "قرآن \/تفسیر",
             "sort_order": 1,
-            "icon": "assets\/icons\/knowledge.png"
+            "icon": "assets\/icons\/quran.png"
         },
         {
             "id": 6,
             "title": "حدیث",
             "sort_order": 2,
-            "icon": "assets\/icons\/knowledge.png"
+            "icon": "assets\/icons\/hadis.png"
         }
     ],
     "chapters": [

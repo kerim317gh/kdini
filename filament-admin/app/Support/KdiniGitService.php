@@ -48,7 +48,7 @@ class KdiniGitService
         $branchResult = self::run(['git', 'branch', '--show-current']);
         $branch = trim($branchResult['output']) ?: 'main';
 
-        return self::run(['git', 'pull', '--rebase', 'origin', $branch]);
+        return self::run(['git', 'pull', '--rebase', '--autostash', 'origin', $branch]);
     }
 
     /**

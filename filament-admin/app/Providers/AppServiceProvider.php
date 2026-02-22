@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $memoryLimit = trim((string) env('KDINI_PHP_MEMORY_LIMIT', '512M'));
+
+        if ($memoryLimit !== '') {
+            @ini_set('memory_limit', $memoryLimit);
+        }
     }
 }

@@ -30,6 +30,9 @@
                 <a href="{{ \App\Filament\Pages\SqlFilesManager::getUrl() }}" class="kd-quick-link">مدیریت فایل‌های SQL</a>
                 <a href="{{ \App\Filament\Pages\AudioManager::getUrl() }}" class="kd-quick-link">مدیریت صوت‌ها</a>
                 <a href="{{ \App\Filament\Pages\StructureManager::getUrl() }}" class="kd-quick-link">مدیریت ساختار</a>
+                <a href="{{ \App\Filament\Pages\BaseStructureManager::getUrl() }}" class="kd-quick-link">ویرایش base_structure</a>
+                <a href="{{ \App\Filament\Pages\SystemBooksManager::getUrl() }}" class="kd-quick-link">ویرایش system_books</a>
+                <a href="{{ \App\Filament\Pages\JsonFilesManager::getUrl() }}" class="kd-quick-link">مدیریت فایل‌های JSON</a>
                 <a href="{{ \App\Filament\Pages\AppUpdateManager::getUrl() }}" class="kd-quick-link">مدیریت آپدیت برنامه</a>
                 <a href="{{ \App\Filament\Pages\GitOpsManager::getUrl() }}" class="kd-quick-link">کنسول Git</a>
                 <button type="button" wire:click="refreshData" class="kd-quick-button">بروزرسانی اطلاعات</button>
