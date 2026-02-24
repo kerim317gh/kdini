@@ -288,6 +288,137 @@ class BooksManager extends Page
             ->send();
     }
 
+    public function deleteBookFile(int $index): void
+    {
+        if (! isset($this->books[$index]) || ! is_array($this->books[$index])) {
+            return;
+        }
+
+        $row = $this->books[$index];
+        $relativePath = $this->extractBookLocalRelativePath($row);
+
+        if ($relativePath === null) {
+            Notification::make()
+                ->title('برای این ردیف فایل محلی قابل حذف پیدا نشد')
+                ->body('فقط مسیرهای داخل پوشه kotob قابل حذف هستند.')
+                ->warning()
+                ->send();
+
+            return;
+        }
+
+        $path = KdiniMetadataRepository::safePath($relativePath);
+
+        if (! File::exists($path)) {
+            Notification::make()
+                ->title('فایل روی دیسک پیدا نشد')
+                ->body($relativePath)
+                ->warning()
+                ->send();
+
+            return;
+        }
+
+        try {
+            File::delete($path);
+
+            foreach (['sql_download_url', 'download_url', 'url'] as $key) {
+                if ($this->valuePointsToRelativePath($row[$key] ?? null, $relativePath)) {
+                    $this->books[$index][$key] = null;
+                }
+            }
+
+            KdiniMetadataRepository::writeBooks($this->books);
+            $this->loadBooks();
+
+            if (! $this->isCreating && $this->editingIndex === $index) {
+                foreach (['sql_download_url', 'download_url', 'url'] as $key) {
+                    if ($this->valuePointsToRelativePath($this->edit[$key] ?? null, $relativePath)) {
+                        $this->edit[$key] = '';
+                    }
+                }
+            }
+
+            Notification::make()
+                ->title('فایل کتاب حذف شد')
+                ->body($relativePath)
+                ->success()
+                ->send();
+        } catch (\Throwable $exception) {
+            Notification::make()
+                ->title('حذف فایل ناموفق بود')
+                ->body($exception->getMessage())
+                ->danger()
+                ->send();
+        }
+    }
+
+    public function localBookFilePath(array $row): ?string
+    {
+        return $this->extractBookLocalRelativePath($row);
+    }
+
+    /**
+     * @param array<string, mixed> $row
+     */
+    protected function extractBookLocalRelativePath(array $row): ?string
+    {
+        foreach (['sql_download_url', 'download_url', 'url'] as $key) {
+            $resolved = $this->normalizeBookFileReferenceToRelativePath((string) ($row[$key] ?? ''));
+            if ($resolved !== null) {
+                return $resolved;
+            }
+        }
+
+        return null;
+    }
+
+    protected function valuePointsToRelativePath(mixed $value, string $relativePath): bool
+    {
+        if (! is_string($value)) {
+            return false;
+        }
+
+        return $this->normalizeBookFileReferenceToRelativePath($value) === $relativePath;
+    }
+
+    protected function normalizeBookFileReferenceToRelativePath(string $value): ?string
+    {
+        $trimmed = trim(str_replace('\\', '/', $value));
+        if ($trimmed === '') {
+            return null;
+        }
+
+        if (preg_match('/^https?:\/\//i', $trimmed) === 1) {
+            $path = (string) parse_url($trimmed, PHP_URL_PATH);
+            $path = str_replace('\\', '/', $path);
+            $position = mb_stripos($path, '/kotob/');
+
+            if ($position === false) {
+                return null;
+            }
+
+            $trimmed = ltrim(substr($path, $position), '/');
+        }
+
+        return $this->normalizeKotobRelativePath($trimmed);
+    }
+
+    protected function normalizeKotobRelativePath(string $path): ?string
+    {
+        $normalized = ltrim(str_replace('\\', '/', trim($path)), '/');
+        if ($normalized === '' || ! str_starts_with(mb_strtolower($normalized), 'kotob/')) {
+            return null;
+        }
+
+        $baseName = basename($normalized);
+        if ($baseName === '' || $baseName === '.' || $baseName === '..') {
+            return null;
+        }
+
+        return 'kotob/' . $baseName;
+    }
+
     protected function isAllowedSqlFileName(string $name): bool
     {
         $lower = mb_strtolower(trim($name));

@@ -326,6 +326,45 @@ class SqlFilesManager extends Page
             ->send();
     }
 
+    public function deleteSqlFile(string $relativePath): void
+    {
+        $relativePath = $this->normalizeRelativePath($relativePath);
+        $path = KdiniMetadataRepository::safePath($relativePath);
+
+        if (! File::exists($path)) {
+            Notification::make()
+                ->title('فایل پیدا نشد')
+                ->body($relativePath)
+                ->warning()
+                ->send();
+
+            $this->loadFiles();
+
+            return;
+        }
+
+        try {
+            if ($this->editingRelativePath !== null && $this->normalizeRelativePath($this->editingRelativePath) === $relativePath) {
+                $this->cancelEditFile();
+            }
+
+            File::delete($path);
+            $this->loadFiles();
+
+            Notification::make()
+                ->title('فایل SQL حذف شد')
+                ->body($relativePath)
+                ->success()
+                ->send();
+        } catch (Throwable $exception) {
+            Notification::make()
+                ->title('حذف فایل ناموفق بود')
+                ->body($exception->getMessage())
+                ->danger()
+                ->send();
+        }
+    }
+
     public function selectContentRow(int $rowIndex, string $field = ''): void
     {
         if (! isset($this->contentRows[$rowIndex])) {

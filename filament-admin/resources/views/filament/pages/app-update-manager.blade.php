@@ -1,5 +1,5 @@
 <x-filament-panels::page>
-    <div class="space-y-6" dir="rtl">
+    <div class="kd-page-stack" dir="rtl">
         <section class="kd-card">
             <h3 class="text-sm font-bold">تنظیمات آپدیت برنامه</h3>
             <p class="mt-1 text-xs kd-muted">این بخش روی فایل `update/update.json` اعمال می‌شود.</p>

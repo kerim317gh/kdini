@@ -1,17 +1,17 @@
 <x-filament-panels::page>
-    <div class="space-y-6" dir="rtl">
+    <div class="kd-page-stack" dir="rtl">
         <section class="kd-card">
             <h3 class="text-sm font-bold">عملیات Git</h3>
             <p class="mt-1 text-xs kd-muted">برای اعمال نهایی روی GitHub، بعد از ویرایش‌ها گزینه «ثبت و ارسال تغییرات» را بزنید.</p>
 
-            <div class="mt-4 flex flex-wrap items-center gap-2">
+            <div class="mt-4 kd-toolbar-actions">
                 <x-filament::button color="gray" wire:click="refreshOverview">بروزرسانی وضعیت</x-filament::button>
                 <x-filament::button color="gray" wire:click="pullRebase">دریافت تغییرات (Pull با Rebase)</x-filament::button>
                 <x-filament::button color="success" wire:click="reorganizeAssets">مرتب‌سازی فایل‌های مخزن</x-filament::button>
             </div>
 
-            <div class="mt-4 flex flex-wrap items-center gap-2">
-                <x-filament::input.wrapper class="min-w-96">
+            <div class="mt-4 kd-toolbar-actions">
+                <x-filament::input.wrapper class="kd-grow-input">
                     <x-filament::input wire:model="commitMessage" type="text" placeholder="پیام کامیت" />
                 </x-filament::input.wrapper>
                 <x-filament::button color="primary" wire:click="commitAndPush">ثبت و ارسال تغییرات (Commit + Push)</x-filament::button>

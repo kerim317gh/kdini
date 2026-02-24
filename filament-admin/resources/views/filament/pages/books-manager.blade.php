@@ -1,71 +1,5 @@
 <x-filament-panels::page>
-    <div class="space-y-6" dir="rtl">
-        <section class="kd-card">
-            <div class="flex flex-wrap items-center justify-between gap-3">
-                <h3 class="text-sm font-bold">کتاب‌ها ({{ count($books) }})</h3>
-                <div class="flex flex-wrap items-center gap-2">
-                    <x-filament::input.wrapper class="min-w-64">
-                        <x-filament::input wire:model.live.debounce.300ms="search" type="text" placeholder="جستجو در عنوان، نسخه، لینک..." />
-                    </x-filament::input.wrapper>
-                    <x-filament::button color="gray" wire:click="loadBooks">بارگذاری مجدد</x-filament::button>
-                    <x-filament::button color="primary" wire:click="startCreate">افزودن کتاب جدید</x-filament::button>
-                </div>
-            </div>
-
-            <div class="kd-table-wrap mt-4 overflow-x-auto">
-                <table class="kd-table min-w-full text-right text-xs">
-                    <thead class="kd-table-head">
-                        <tr>
-                            <th class="px-3 py-3 font-bold">#</th>
-                            <th class="px-3 py-3 font-bold">ID</th>
-                            <th class="px-3 py-3 font-bold">عنوان</th>
-                            <th class="px-3 py-3 font-bold">نسخه</th>
-                            <th class="px-3 py-3 font-bold">وضعیت</th>
-                            <th class="px-3 py-3 font-bold">لینک</th>
-                            <th class="px-3 py-3 font-bold">عملیات</th>
-                        </tr>
-                    </thead>
-                    <tbody class="kd-table-body">
-                        @forelse($this->filteredRows as $row)
-                            @php
-                                $rowIndex = $row['__index'];
-                                $url = null;
-                                foreach (['sql_download_url', 'download_url', 'url'] as $urlKey) {
-                                    if (!empty($row[$urlKey])) {
-                                        $url = (string) $row[$urlKey];
-                                        break;
-                                    }
-                                }
-                            @endphp
-                            <tr class="kd-row-hover">
-                                <td class="px-3 py-3">{{ $loop->iteration }}</td>
-                                <td class="px-3 py-3">{{ $row['id'] ?? '' }}</td>
-                                <td class="px-3 py-3 font-semibold">{{ $row['title'] ?? '' }}</td>
-                                <td class="px-3 py-3">{{ $row['version'] ?? '' }}</td>
-                                <td class="px-3 py-3">{{ $row['status'] ?? '' }}</td>
-                                <td class="px-3 py-3" dir="ltr">
-                                    @if($url)
-                                        <a class="kd-link" href="{{ $url }}" target="_blank" rel="noreferrer">
-                                            {{ \Illuminate\Support\Str::limit($url, 56) }}
-                                        </a>
-                                    @else
-                                        <span class="kd-muted">—</span>
-                                    @endif
-                                </td>
-                                <td class="px-3 py-3">
-                                    <x-filament::button size="xs" color="gray" wire:click="startEdit({{ $rowIndex }})">ویرایش</x-filament::button>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="px-3 py-8 text-center text-sm kd-muted">داده‌ای پیدا نشد.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
+    <div class="kd-page-stack" dir="rtl">
         @if($editingIndex !== null || $isCreating)
             <section class="kd-card kd-edit-card">
                 <h3 class="text-sm font-bold">{{ $isCreating ? 'افزودن کتاب جدید' : 'ویرایش ردیف '.($editingIndex + 1) }}</h3>
@@ -172,5 +106,85 @@
                 </div>
             </section>
         @endif
+
+        <section class="kd-card">
+            <div class="kd-toolbar">
+                <h3 class="text-sm font-bold">کتاب‌ها ({{ count($books) }})</h3>
+                <div class="kd-toolbar-actions">
+                    <x-filament::input.wrapper class="kd-search-wrap">
+                        <x-filament::input wire:model.live.debounce.300ms="search" type="text" placeholder="جستجو در عنوان، نسخه، لینک..." />
+                    </x-filament::input.wrapper>
+                    <x-filament::button color="gray" wire:click="loadBooks">بارگذاری مجدد</x-filament::button>
+                    <x-filament::button color="primary" wire:click="startCreate">افزودن کتاب جدید</x-filament::button>
+                </div>
+            </div>
+
+            <div class="kd-table-wrap mt-4 overflow-x-auto">
+                <table class="kd-table kd-table-compact min-w-full text-right text-xs">
+                    <thead class="kd-table-head">
+                        <tr>
+                            <th class="px-3 py-3 font-bold">#</th>
+                            <th class="px-3 py-3 font-bold">ID</th>
+                            <th class="px-3 py-3 font-bold">عنوان</th>
+                            <th class="px-3 py-3 font-bold">نسخه</th>
+                            <th class="px-3 py-3 font-bold">وضعیت</th>
+                            <th class="px-3 py-3 font-bold">لینک</th>
+                            <th class="px-3 py-3 font-bold">عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody class="kd-table-body">
+                        @forelse($this->filteredRows as $row)
+                            @php
+                                $rowIndex = $row['__index'];
+                                $url = null;
+                                $localBookFile = $this->localBookFilePath($row);
+                                foreach (['sql_download_url', 'download_url', 'url'] as $urlKey) {
+                                    if (!empty($row[$urlKey])) {
+                                        $url = (string) $row[$urlKey];
+                                        break;
+                                    }
+                                }
+                            @endphp
+                            <tr class="kd-row-hover">
+                                <td class="px-3 py-3">{{ $loop->iteration }}</td>
+                                <td class="px-3 py-3">{{ $row['id'] ?? '' }}</td>
+                                <td class="px-3 py-3 font-semibold">{{ $row['title'] ?? '' }}</td>
+                                <td class="px-3 py-3">{{ $row['version'] ?? '' }}</td>
+                                <td class="px-3 py-3">{{ $row['status'] ?? '' }}</td>
+                                <td class="px-3 py-3" dir="ltr">
+                                    @if($url)
+                                        <a class="kd-link" href="{{ $url }}" target="_blank" rel="noreferrer">
+                                            {{ \Illuminate\Support\Str::limit($url, 56) }}
+                                        </a>
+                                    @else
+                                        <span class="kd-muted">—</span>
+                                    @endif
+                                </td>
+                                <td class="px-3 py-3">
+                                    <div class="flex flex-wrap gap-1">
+                                        <x-filament::button size="xs" color="gray" wire:click="startEdit({{ $rowIndex }})">ویرایش</x-filament::button>
+                                        @if($localBookFile !== null)
+                                            <x-filament::button
+                                                size="xs"
+                                                color="danger"
+                                                wire:click="deleteBookFile({{ $rowIndex }})"
+                                                x-on:click="if (!confirm('این فایل از پوشه kotob حذف شود؟')) { $event.preventDefault(); $event.stopImmediatePropagation(); }"
+                                            >
+                                                حذف فایل
+                                            </x-filament::button>
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="px-3 py-8 text-center text-sm kd-muted">داده‌ای پیدا نشد.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
     </div>
 </x-filament-panels::page>

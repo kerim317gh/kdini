@@ -1,5 +1,5 @@
 <x-filament-panels::page>
-    <div class="space-y-6" dir="rtl">
+    <div class="kd-page-stack" dir="rtl">
         <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
             <div class="kd-stat-card">
                 <p class="text-xs kd-muted">کتاب‌ها</p>
@@ -31,6 +31,7 @@
                 <a href="{{ \App\Filament\Pages\AudioManager::getUrl() }}" class="kd-quick-link">مدیریت صوت‌ها</a>
                 <a href="{{ \App\Filament\Pages\StructureManager::getUrl() }}" class="kd-quick-link">مدیریت ساختار</a>
                 <a href="{{ \App\Filament\Pages\BaseStructureManager::getUrl() }}" class="kd-quick-link">ویرایش base_structure</a>
+                <a href="{{ \App\Filament\Pages\StructureHierarchyManager::getUrl() }}" class="kd-quick-link">مرورگر یکپارچه ساختار</a>
                 <a href="{{ \App\Filament\Pages\SystemBooksManager::getUrl() }}" class="kd-quick-link">ویرایش system_books</a>
                 <a href="{{ \App\Filament\Pages\JsonFilesManager::getUrl() }}" class="kd-quick-link">مدیریت فایل‌های JSON</a>
                 <a href="{{ \App\Filament\Pages\AppUpdateManager::getUrl() }}" class="kd-quick-link">مدیریت آپدیت برنامه</a>

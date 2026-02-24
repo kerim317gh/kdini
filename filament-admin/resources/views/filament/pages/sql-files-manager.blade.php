@@ -1,82 +1,7 @@
 <x-filament-panels::page>
-    <div class="space-y-6" dir="rtl">
-        <section class="kd-card p-5">
-            <div class="flex flex-wrap items-center justify-between gap-3">
-                <h3 class="text-sm font-bold">مدیریت فایل‌های SQL (پوشه kotob)</h3>
-                <div class="flex flex-wrap items-center gap-2">
-                    <x-filament::input.wrapper class="min-w-64">
-                        <x-filament::input wire:model.live.debounce.300ms="search" type="text" placeholder="جستجو در نام فایل، book_id ..." />
-                    </x-filament::input.wrapper>
-                    <x-filament::button color="gray" wire:click="loadFiles">بارگذاری مجدد</x-filament::button>
-                </div>
-            </div>
-
-            <div class="mt-4 grid gap-3 lg:grid-cols-[1fr_auto]">
-                <div class="space-y-1">
-                    <label class="kd-field-label">آپلود فایل SQL از مک</label>
-                    <input
-                        type="file"
-                        wire:model="uploadedSqlFile"
-                        class="kd-file-input"
-                        accept=".sql,.sql.gz,.db,.gz"
-                    />
-                </div>
-                <div class="flex items-end gap-2">
-                    <x-filament::button color="primary" wire:click="uploadNewSqlFile">آپلود فایل در kotob</x-filament::button>
-                    <span wire:loading wire:target="uploadedSqlFile,uploadNewSqlFile" class="text-xs kd-muted">در حال بارگذاری...</span>
-                </div>
-            </div>
-
-            <p class="mt-3 text-xs kd-muted">
-                نکته: بعد از آپلود/ویرایش فایل SQL، برای انتشار روی GitHub دکمه «ثبت و ارسال تغییرات» را از بخش Git بزن.
-            </p>
-
-            <div class="kd-table-wrap mt-4 overflow-x-auto">
-                <table class="kd-table min-w-full text-right text-xs">
-                    <thead class="kd-table-head">
-                        <tr>
-                            <th class="px-3 py-3 font-bold">#</th>
-                            <th class="px-3 py-3 font-bold">نام فایل</th>
-                            <th class="px-3 py-3 font-bold">نوع</th>
-                            <th class="px-3 py-3 font-bold">Book ID هدف</th>
-                            <th class="px-3 py-3 font-bold">تعداد INSERT</th>
-                            <th class="px-3 py-3 font-bold">حجم</th>
-                            <th class="px-3 py-3 font-bold">آخرین تغییر</th>
-                            <th class="px-3 py-3 font-bold">عملیات</th>
-                        </tr>
-                    </thead>
-                    <tbody class="kd-table-body">
-                        @forelse($this->filteredFiles as $file)
-                            <tr class="kd-row-hover">
-                                <td class="px-3 py-3">{{ $loop->iteration }}</td>
-                                <td class="px-3 py-3 font-semibold" dir="ltr">{{ $file['name'] }}</td>
-                                <td class="px-3 py-3">{{ $file['type'] }}</td>
-                                <td class="px-3 py-3">{{ $file['book_id'] !== '' ? $file['book_id'] : '—' }}</td>
-                                <td class="px-3 py-3">{{ $file['insert_count'] }}</td>
-                                <td class="px-3 py-3">{{ $file['size_human'] }}</td>
-                                <td class="px-3 py-3" dir="ltr">{{ $file['modified'] }}</td>
-                                <td class="px-3 py-3">
-                                    @if($file['editable'])
-                                        <x-filament::button size="xs" color="gray" wire:click="startEditFile('{{ $file['relative'] }}')">
-                                            ویرایش فایل
-                                        </x-filament::button>
-                                    @else
-                                        <span class="kd-muted">فقط مشاهده/آپلود</span>
-                                    @endif
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="8" class="px-3 py-8 text-center text-sm kd-muted">فایل SQL در پوشه `kotob` پیدا نشد.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
+    <div class="kd-page-stack" dir="rtl">
         @if($editingRelativePath !== null)
-            <section class="kd-card kd-edit-card p-5">
+            <section class="kd-card kd-edit-card">
                 <h3 class="text-sm font-bold">ویرایش فایل SQL</h3>
                 <p class="mt-1 text-xs kd-muted" dir="ltr">{{ $editingRelativePath }}</p>
 
@@ -117,7 +42,7 @@
 
                 @if(count($contentRows) > 0)
                     <div class="kd-table-wrap mt-4 overflow-x-auto">
-                        <table class="kd-table min-w-full text-right text-xs">
+                        <table class="kd-table kd-table-compact kd-sql-content-table min-w-full text-right text-xs">
                             <thead class="kd-table-head">
                                 <tr>
                                     <th class="px-3 py-2 font-bold">#</th>
@@ -131,14 +56,18 @@
                             </thead>
                             <tbody class="kd-table-body">
                                 @foreach($contentRows as $row)
-                                    @php($isActive = $selectedRowIndex === $loop->index)
+                                    @php
+                                        $isActive = $selectedRowIndex === $loop->index;
+                                    @endphp
                                     <tr class="kd-row-hover">
                                         <td class="px-3 py-2">{{ $loop->iteration }}</td>
                                         <td class="px-3 py-2">{{ ($row['chapters_id'] ?? '') !== '' ? $row['chapters_id'] : '—' }}</td>
                                         <td class="px-3 py-2">{{ ($row['kotob_id'] ?? '') !== '' ? $row['kotob_id'] : '—' }}</td>
                                         @foreach($contentTextFields as $field)
                                             <td class="px-3 py-2">
-                                                @php($fieldText = (string)($row[$field] ?? ''))
+                                                @php
+                                                    $fieldText = (string) ($row[$field] ?? '');
+                                                @endphp
                                                 <div class="kd-line-preview">{{ $fieldText !== '' ? \Illuminate\Support\Str::limit($fieldText, 180) : '—' }}</div>
                                             </td>
                                         @endforeach
@@ -163,7 +92,9 @@
                 @endif
 
                 @if($selectedRowIndex !== null && isset($contentRows[$selectedRowIndex]))
-                    @php($activeRow = $contentRows[$selectedRowIndex])
+                    @php
+                        $activeRow = $contentRows[$selectedRowIndex];
+                    @endphp
 
                     <section class="mt-4 rounded-xl border border-white/10 bg-slate-900/25 p-4">
                         <div class="grid gap-2 text-xs lg:grid-cols-4">
@@ -184,7 +115,7 @@
                             </div>
                             <div class="space-y-1">
                                 <label class="kd-field-label">متن ردیف انتخاب‌شده (راست‌چین)</label>
-                                <textarea wire:model="selectedRowText" rows="12" class="kd-textarea kd-textarea-rtl" dir="rtl" placeholder="متن این ردیف را اینجا ویرایش کن..."></textarea>
+                                <textarea wire:model="selectedRowText" rows="8" class="kd-textarea kd-textarea-rtl" dir="rtl" placeholder="متن این ردیف را اینجا ویرایش کن..."></textarea>
                             </div>
                         </div>
 
@@ -197,7 +128,7 @@
                 @if($showRawSqlEditor)
                     <div class="mt-4 space-y-1">
                         <label class="kd-field-label">کد خام SQL (حالت پیشرفته)</label>
-                        <textarea wire:model="sqlContent" rows="16" class="kd-textarea" dir="ltr" placeholder="BEGIN TRANSACTION; ..."></textarea>
+                        <textarea wire:model="sqlContent" rows="12" class="kd-textarea kd-textarea--code" dir="ltr" placeholder="BEGIN TRANSACTION; ..."></textarea>
                     </div>
                 @endif
 
@@ -207,5 +138,90 @@
                 </div>
             </section>
         @endif
+
+        <section class="kd-card">
+            <div class="kd-toolbar">
+                <h3 class="text-sm font-bold">مدیریت فایل‌های SQL (پوشه kotob)</h3>
+                <div class="kd-toolbar-actions">
+                    <x-filament::input.wrapper class="kd-search-wrap">
+                        <x-filament::input wire:model.live.debounce.300ms="search" type="text" placeholder="جستجو در نام فایل، book_id ..." />
+                    </x-filament::input.wrapper>
+                    <x-filament::button color="gray" wire:click="loadFiles">بارگذاری مجدد</x-filament::button>
+                </div>
+            </div>
+
+            <div class="mt-4 grid gap-3 lg:grid-cols-[1fr_auto]">
+                <div class="space-y-1">
+                    <label class="kd-field-label">آپلود فایل SQL از مک</label>
+                    <input
+                        type="file"
+                        wire:model="uploadedSqlFile"
+                        class="kd-file-input"
+                        accept=".sql,.sql.gz,.db,.gz"
+                    />
+                </div>
+                <div class="flex items-end gap-2">
+                    <x-filament::button color="primary" wire:click="uploadNewSqlFile">آپلود فایل در kotob</x-filament::button>
+                    <span wire:loading wire:target="uploadedSqlFile,uploadNewSqlFile" class="text-xs kd-muted">در حال بارگذاری...</span>
+                </div>
+            </div>
+
+            <p class="mt-3 text-xs kd-muted">
+                نکته: بعد از آپلود/ویرایش فایل SQL، برای انتشار روی GitHub دکمه «ثبت و ارسال تغییرات» را از بخش Git بزن.
+            </p>
+
+            <div class="kd-table-wrap mt-4 overflow-x-auto">
+                <table class="kd-table kd-table-compact kd-sql-files-table min-w-full text-right text-xs">
+                    <thead class="kd-table-head">
+                        <tr>
+                            <th class="px-3 py-3 font-bold">#</th>
+                            <th class="px-3 py-3 font-bold">نام فایل</th>
+                            <th class="px-3 py-3 font-bold">نوع</th>
+                            <th class="px-3 py-3 font-bold">Book ID هدف</th>
+                            <th class="px-3 py-3 font-bold">تعداد INSERT</th>
+                            <th class="px-3 py-3 font-bold">حجم</th>
+                            <th class="px-3 py-3 font-bold">آخرین تغییر</th>
+                            <th class="px-3 py-3 font-bold">عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody class="kd-table-body">
+                        @forelse($this->filteredFiles as $file)
+                            <tr class="kd-row-hover">
+                                <td class="px-3 py-3">{{ $loop->iteration }}</td>
+                                <td class="px-3 py-3 font-semibold" dir="ltr"><div class="kd-cell-preview">{{ $file['name'] }}</div></td>
+                                <td class="px-3 py-3">{{ $file['type'] }}</td>
+                                <td class="px-3 py-3">{{ $file['book_id'] !== '' ? $file['book_id'] : '—' }}</td>
+                                <td class="px-3 py-3">{{ $file['insert_count'] }}</td>
+                                <td class="px-3 py-3">{{ $file['size_human'] }}</td>
+                                <td class="px-3 py-3" dir="ltr">{{ $file['modified'] }}</td>
+                                <td class="px-3 py-3">
+                                    <div class="flex flex-wrap gap-1">
+                                        @if($file['editable'])
+                                            <x-filament::button size="xs" color="gray" wire:click="startEditFile({{ \Illuminate\Support\Js::from($file['relative']) }})">
+                                                ویرایش فایل
+                                            </x-filament::button>
+                                        @endif
+
+                                        <x-filament::button
+                                            size="xs"
+                                            color="danger"
+                                            wire:click="deleteSqlFile({{ \Illuminate\Support\Js::from($file['relative']) }})"
+                                            x-on:click="if (!confirm('این فایل از پوشه kotob حذف شود؟')) { $event.preventDefault(); $event.stopImmediatePropagation(); }"
+                                        >
+                                            حذف فایل
+                                        </x-filament::button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="8" class="px-3 py-8 text-center text-sm kd-muted">فایل SQL در پوشه `kotob` پیدا نشد.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
     </div>
 </x-filament-panels::page>
