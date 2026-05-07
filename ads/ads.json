@@ -1,0 +1,14 @@
+[
+  {
+    "id": "eid_ad",
+    "image_url": "https://raw.githubusercontent.com/your-username/your-repo/main/ads/images/eid_banner.gif",
+    "link_url": "https://your-site.com/eid",
+    "end_time": "2026-05-10T20:30:00Z"
+  },
+  {
+    "id": "permanent",
+    "image_url": "https://raw.githubusercontent.com/your-username/your-repo/main/ads/images/default.jpg",
+    "link_url": "https://your-site.com",
+    "end_time": ""
+  }
+]
