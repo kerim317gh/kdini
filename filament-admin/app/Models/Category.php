@@ -10,14 +10,22 @@ class Category extends Model
     use HasFactory;
 
     protected $table = 'categories';
-
-    // The primary key is 'id', which is the default, so no need to specify.
-    // Timestamps (created_at, updated_at) are not in your schema, so we disable them.
     public $timestamps = false;
 
     protected $fillable = [
+        'id',
         'title',
         'sort_order',
         'icon',
     ];
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class, 'book_categories');
+    }
+
+    public function chapters()
+    {
+        return $this->hasMany(Chapter::class);
+    }
 }

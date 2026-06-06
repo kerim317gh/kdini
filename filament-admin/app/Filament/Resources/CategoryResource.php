@@ -3,34 +3,29 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
+use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Resources\Form;
 use Filament\Resources\Resource;
+use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Table;
 
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $navigationLabel = 'مدیریت دسته‌بندی‌ها';
-    protected static ?string $pluralModelLabel = 'دسته‌بندی‌ها';
+    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationLabel = 'دسته‌بندی‌ها';
+    protected static ?string $pluralLabel = 'دسته‌بندی‌ها';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->label('عنوان دسته‌بندی')
-                    ->required(),
-                Forms\Components\TextInput::make('icon')
-                    ->label('آیکن'),
-                Forms\Components\TextInput::make('sort_order')
-                    ->label('ترتیب نمایش')
-                    ->numeric()
-                    ->default(0),
+                Forms\Components\TextInput::make('title')->label('عنوان')->required(),
+                Forms\Components\TextInput::make('icon')->label('آیکون'),
+                Forms\Components\TextInput::make('sort_order')->label('ترتیب نمایش')->numeric(),
             ]);
     }
 
@@ -38,23 +33,26 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable(),
+                Tables\Columns\TextColumn::make('id')->label('شناسه')->sortable(),
                 Tables\Columns\TextColumn::make('title')->label('عنوان')->searchable(),
-                Tables\Columns\TextColumn::make('sort_order')->label('ترتیب نمایش')->sortable(),
+                Tables\Columns\TextColumn::make('sort_order')->label('ترتیب'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::class,
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ])
-            ->reorderable('sort_order'); // Enable drag-and-drop reordering
+                Tables\Actions\DeleteBulkAction::class,
+            ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array

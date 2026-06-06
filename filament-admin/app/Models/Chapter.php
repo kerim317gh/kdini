@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Chapter extends Model
 {
@@ -15,6 +13,7 @@ class Chapter extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'id',
         'title',
         'parent_id',
         'category_id',
@@ -26,27 +25,23 @@ class Chapter extends Model
         'title_tk',
     ];
 
-    /**
-     * Get the parent chapter.
-     */
-    public function parent(): BelongsTo
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function parent()
     {
         return $this->belongsTo(Chapter::class, 'parent_id');
     }
 
-    /**
-     * Get the child chapters.
-     */
-    public function children(): HasMany
+    public function children()
     {
         return $this->hasMany(Chapter::class, 'parent_id');
     }
 
-    /**
-     * Get the category that owns the chapter.
-     */
-    public function category(): BelongsTo
+    public function content()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->hasMany(Content::class, 'chapters_id');
     }
 }

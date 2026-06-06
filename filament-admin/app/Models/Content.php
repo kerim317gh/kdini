@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Content extends Model
 {
@@ -14,15 +13,23 @@ class Content extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'chapter_id',
+        'chapters_id',
         'text',
+        'text_fa',
+        'text_turkmen',
+        'kotob_id',
+        'text_en',
+        'text_tr',
+        'text_ru',
     ];
 
-    /**
-     * Get the chapter that the content belongs to.
-     */
-    public function chapter(): BelongsTo
+    public function chapter()
     {
-        return $this->belongsTo(Chapter::class, 'chapter_id');
+        return $this->belongsTo(Chapter::class, 'chapters_id');
+    }
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class, 'kotob_id');
     }
 }
