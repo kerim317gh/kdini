@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "lesson_id": 1,
+    "reciter": "رضا قره باش",
+    "type": "ترکمنی",
+    "url": "http://kdini.ir/kdini-main/maktab/sound/1-1.mp3",
+    "selected": 1,
+    "timings": [
+      {"step": 1, "start": 0.0,  "end": 4.5},
+      {"step": 2, "start": 4.5,  "end": 9.2},
+      {"step": 3, "start": 9.2,  "end": 14.0},
+      {"step": 4, "start": 14.0, "end": 18.5},
+      {"step": 5, "start": 18.5, "end": 23.0},
+      {"step": 6, "start": 23.0, "end": 28.1},
+      {"step": 7, "start": 28.1, "end": 32.5},
+      {"step": 8, "start": 32.5, "end": 37.0},
+      {"step": 9, "start": 37.0, "end": 42.0}
+    ]
+  }
+]

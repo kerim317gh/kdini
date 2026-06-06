@@ -1,0 +1,314 @@
+[
+   {"surah_id": 1, "type": "الفاتحة", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_1.mp3", "timings": [{"ayah": 1, "start": "0:00", "end": "0:00"}, {"ayah": 2, "start": "0:17", "end": "0:27"}, {"ayah": 3, "start": "0:27", "end": "0:34"}, {"ayah": 4, "start": "0:34", "end": "0:40"}, {"ayah": 5, "start": "0:40", "end": "0:50"}, {"ayah": 6, "start": "0:50", "end": "0:58"}, {"ayah": 7, "start": "0:58", "end": "1:24"}]},
+  {"surah_id": 78, "type": "النبأ", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_78.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:20"}, {"ayah": 2, "start": "0:20", "end": "0:27"}, {"ayah": 3, "start": "0:27", "end": "0:37"}, {"ayah": 4, "start": "0:37", "end": "0:44"}, {"ayah": 5, "start": "0:44", "end": "0:53"}, {"ayah": 6, "start": "0:53", "end": "1:02"}, {"ayah": 7, "start": "1:02", "end": "1:10"}, {"ayah": 8, "start": "1:10", "end": "1:18"}, {"ayah": 9, "start": "1:18", "end": "1:28"}, {"ayah": 10, "start": "1:28", "end": "1:37"}, {"ayah": 11, "start": "1:37", "end": "1:47"}, {"ayah": 12, "start": "1:47", "end": "2:00"}, {"ayah": 13, "start": "2:00", "end": "2:11"}, {"ayah": 14, "start": "2:11", "end": "2:30"}, {"ayah": 15, "start": "2:30", "end": "2:43"}, {"ayah": 16, "start": "2:43", "end": "2:52"}, {"ayah": 17, "start": "2:52", "end": "3:04"}, {"ayah": 18, "start": "3:04", "end": "3:19"}, {"ayah": 19, "start": "3:19", "end": "3:34"}, {"ayah": 20, "start": "3:34", "end": "3:47"}, {"ayah": 21, "start": "3:47", "end": "4:00"}, {"ayah": 22, "start": "4:00", "end": "4:07"}, {"ayah": 23, "start": "4:07", "end": "4:19"}, {"ayah": 24, "start": "4:19", "end": "4:35"}, {"ayah": 25, "start": "4:35", "end": "4:45"}, {"ayah": 26, "start": "4:45", "end": "4:55"}, {"ayah": 27, "start": "4:55", "end": "5:09"}, {"ayah": 28, "start": "5:09", "end": "5:22"}, {"ayah": 29, "start": "5:22", "end": "5:34"}, {"ayah": 30, "start": "5:34", "end": "5:49"}, {"ayah": 31, "start": "5:49", "end": "6:00"}, {"ayah": 32, "start": "6:00", "end": "6:09"}, {"ayah": 33, "start": "6:09", "end": "6:16"}, {"ayah": 34, "start": "6:16", "end": "6:24"}, {"ayah": 35, "start": "6:24", "end": "6:41"}, {"ayah": 36, "start": "6:41", "end": "6:59"}, {"ayah": 37, "start": "6:59", "end": "7:25"}, {"ayah": 38, "start": "7:25", "end": "8:07"}, {"ayah": 39, "start": "8:07", "end": "8:32"}, {"ayah": 40, "start": "8:32", "end": "9:34"}]},
+  {"surah_id": 79, "type": "النازعات", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_79.mp3", "timings": [{"ayah": 1, "start": "0:08", "end": "0:16"}, {"ayah": 2, "start": "0:16", "end": "0:24"}, {"ayah": 3, "start": "0:24", "end": "0:32"}, {"ayah": 4, "start": "0:32", "end": "0:39"}, {"ayah": 5, "start": "0:39", "end": "0:47"}, {"ayah": 6, "start": "0:47", "end": "0:55"}, {"ayah": 7, "start": "0:55", "end": "1:01"}, {"ayah": 8, "start": "1:01", "end": "1:12"}, {"ayah": 9, "start": "1:12", "end": "1:20"}, {"ayah": 10, "start": "1:20", "end": "1:36"}, {"ayah": 11, "start": "1:36", "end": "1:47"}, {"ayah": 12, "start": "1:47", "end": "2:00"}, {"ayah": 13, "start": "2:00", "end": "2:12"}, {"ayah": 14, "start": "2:12", "end": "2:21"}, {"ayah": 15, "start": "2:21", "end": "2:30"}, {"ayah": 16, "start": "2:30", "end": "2:45"}, {"ayah": 17, "start": "2:45", "end": "2:58"}, {"ayah": 18, "start": "2:58", "end": "3:11"}, {"ayah": 19, "start": "3:11", "end": "3:22"}, {"ayah": 20, "start": "3:22", "end": "3:31"}, {"ayah": 21, "start": "3:31", "end": "3:37"}, {"ayah": 22, "start": "3:37", "end": "3:44"}, {"ayah": 23, "start": "3:44", "end": "3:50"}, {"ayah": 24, "start": "3:50", "end": "4:00"}, {"ayah": 25, "start": "4:00", "end": "4:15"}, {"ayah": 26, "start": "4:15", "end": "4:31"}, {"ayah": 27, "start": "4:31", "end": "4:50"}, {"ayah": 28, "start": "4:50", "end": "4:59"}, {"ayah": 29, "start": "4:59", "end": "5:11"}, {"ayah": 30, "start": "5:11", "end": "5:21"}, {"ayah": 31, "start": "5:21", "end": "5:35"}, {"ayah": 32, "start": "5:35", "end": "5:43"}, {"ayah": 33, "start": "5:43", "end": "5:53"}, {"ayah": 34, "start": "5:53", "end": "6:10"}, {"ayah": 35, "start": "6:10", "end": "6:24"}, {"ayah": 36, "start": "6:24", "end": "6:34"}, {"ayah": 37, "start": "6:34", "end": "6:43"}, {"ayah": 38, "start": "6:43", "end": "6:52"}, {"ayah": 39, "start": "6:52", "end": "7:03"}, {"ayah": 40, "start": "7:03", "end": "7:24"}, {"ayah": 41, "start": "7:24", "end": "7:35"}, {"ayah": 42, "start": "7:35", "end": "7:50"}, {"ayah": 43, "start": "7:50", "end": "8:01"}, {"ayah": 44, "start": "8:01", "end": "8:10"}, {"ayah": 45, "start": "8:10", "end": "8:29"}, {"ayah": 46, "start": "8:29", "end": "8:55"}]},
+  {"surah_id": 80, "type": "عبس", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_80.mp3", "timings": [{"ayah": 1, "start": "0:08", "end": "0:14"}, {"ayah": 2, "start": "0:14", "end": "0:24"}, {"ayah": 3, "start": "0:24", "end": "0:35"}, {"ayah": 4, "start": "0:35", "end": "0:47"}, {"ayah": 5, "start": "0:47", "end": "0:55"}, {"ayah": 6, "start": "0:55", "end": "1:04"}, {"ayah": 7, "start": "1:04", "end": "1:14"}, {"ayah": 8, "start": "1:14", "end": "1:27"}, {"ayah": 9, "start": "1:27", "end": "1:32"}, {"ayah": 10, "start": "1:32", "end": "1:40"}, {"ayah": 11, "start": "1:40", "end": "1:52"}, {"ayah": 12, "start": "1:52", "end": "2:01"}, {"ayah": 13, "start": "2:01", "end": "2:08"}, {"ayah": 14, "start": "2:08", "end": "2:17"}, {"ayah": 15, "start": "2:17", "end": "2:22"}, {"ayah": 16, "start": "2:22", "end": "2:28"}, {"ayah": 17, "start": "2:28", "end": "2:40"}, {"ayah": 18, "start": "2:40", "end": "2:47"}, {"ayah": 19, "start": "2:47", "end": "2:59"}, {"ayah": 20, "start": "2:59", "end": "3:07"}, {"ayah": 21, "start": "3:07", "end": "3:17"}, {"ayah": 22, "start": "3:17", "end": "3:30"}, {"ayah": 23, "start": "3:30", "end": "3:41"}, {"ayah": 24, "start": "3:41", "end": "3:55"}, {"ayah": 25, "start": "3:55", "end": "4:07"}, {"ayah": 26, "start": "4:07", "end": "4:17"}, {"ayah": 27, "start": "4:17", "end": "4:27"}, {"ayah": 28, "start": "4:27", "end": "4:34"}, {"ayah": 29, "start": "4:34", "end": "4:43"}, {"ayah": 30, "start": "4:43", "end": "4:51"}, {"ayah": 31, "start": "4:51", "end": "5:00"}, {"ayah": 32, "start": "5:00", "end": "5:10"}, {"ayah": 33, "start": "5:10", "end": "5:24"}, {"ayah": 34, "start": "5:24", "end": "5:33"}, {"ayah": 35, "start": "5:33", "end": "5:41"}, {"ayah": 36, "start": "5:41", "end": "5:48"}, {"ayah": 37, "start": "5:48", "end": "6:07"}, {"ayah": 38, "start": "6:07", "end": "6:18"}, {"ayah": 39, "start": "6:18", "end": "6:27"}, {"ayah": 40, "start": "6:27", "end": "6:40"}, {"ayah": 41, "start": "6:40", "end": "6:46"}, {"ayah": 42, "start": "6:46", "end": "6:58"}]},
+  {"surah_id": 81, "type": "التكوير", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_81.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:15"}, {"ayah": 2, "start": "0:15", "end": "0:24"}, {"ayah": 3, "start": "0:24", "end": "0:31"}, {"ayah": 4, "start": "0:31", "end": "0:38"}, {"ayah": 5, "start": "0:38", "end": "0:46"}, {"ayah": 6, "start": "0:46", "end": "0:53"}, {"ayah": 7, "start": "0:53", "end": "1:02"}, {"ayah": 8, "start": "1:02", "end": "1:09"}, {"ayah": 9, "start": "1:09", "end": "1:18"}, {"ayah": 10, "start": "1:18", "end": "1:24"}, {"ayah": 11, "start": "1:24", "end": "1:34"}, {"ayah": 12, "start": "1:34", "end": "1:42"}, {"ayah": 13, "start": "1:42", "end": "1:50"}, {"ayah": 14, "start": "1:50", "end": "2:02"}, {"ayah": 15, "start": "2:02", "end": "2:13"}, {"ayah": 16, "start": "2:13", "end": "2:21"}, {"ayah": 17, "start": "2:21", "end": "2:28"}, {"ayah": 18, "start": "2:28", "end": "2:36"}, {"ayah": 19, "start": "2:36", "end": "2:48"}, {"ayah": 20, "start": "2:48", "end": "3:01"}, {"ayah": 21, "start": "3:01", "end": "3:11"}, {"ayah": 22, "start": "3:11", "end": "3:21"}, {"ayah": 23, "start": "3:21", "end": "3:32"}, {"ayah": 24, "start": "3:32", "end": "3:42"}, {"ayah": 25, "start": "3:42", "end": "3:54"}, {"ayah": 26, "start": "3:54", "end": "4:00"}, {"ayah": 27, "start": "4:00", "end": "4:11"}, {"ayah": 28, "start": "4:11", "end": "4:28"}, {"ayah": 29, "start": "4:28", "end": "4:54"}]},
+  {"surah_id": 82, "type": "الإنفطار", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_82.mp3", "timings": [{"ayah": 1, "start": "0:08", "end": "0:18"}, {"ayah": 2, "start": "0:18", "end": "0:26"}, {"ayah": 3, "start": "0:26", "end": "0:33"}, {"ayah": 4, "start": "0:33", "end": "0:41"}, {"ayah": 5, "start": "0:41", "end": "0:53"}, {"ayah": 6, "start": "0:53", "end": "1:13"}, {"ayah": 7, "start": "1:13", "end": "1:24"}, {"ayah": 8, "start": "1:24", "end": "1:42"}, {"ayah": 9, "start": "1:42", "end": "1:52"}, {"ayah": 10, "start": "1:52", "end": "2:02"}, {"ayah": 11, "start": "2:02", "end": "2:10"}, {"ayah": 12, "start": "2:10", "end": "2:18"}, {"ayah": 13, "start": "2:18", "end": "2:28"}, {"ayah": 14, "start": "2:28", "end": "2:39"}, {"ayah": 15, "start": "2:39", "end": "2:48"}, {"ayah": 16, "start": "2:48", "end": "3:00"}, {"ayah": 17, "start": "3:00", "end": "3:13"}, {"ayah": 18, "start": "3:13", "end": "3:28"}, {"ayah": 19, "start": "3:28", "end": "3:50"}]},
+  {"surah_id": 83, "type": "المطففين", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_83.mp3", "timings": [{"ayah": 1, "start": "0:08", "end": "0:15"}, {"ayah": 2, "start": "0:15", "end": "0:30"}, {"ayah": 3, "start": "0:30", "end": "0:42"}, {"ayah": 4, "start": "0:42", "end": "1:01"}, {"ayah": 5, "start": "1:01", "end": "1:07"}, {"ayah": 6, "start": "1:07", "end": "1:20"}, {"ayah": 7, "start": "1:20", "end": "1:38"}, {"ayah": 8, "start": "1:38", "end": "1:50"}, {"ayah": 9, "start": "1:50", "end": "1:56"}, {"ayah": 10, "start": "1:56", "end": "2:08"}, {"ayah": 11, "start": "2:08", "end": "2:19"}, {"ayah": 12, "start": "2:19", "end": "2:37"}, {"ayah": 13, "start": "2:37", "end": "2:57"}, {"ayah": 14, "start": "2:57", "end": "3:15"}, {"ayah": 15, "start": "3:15", "end": "3:36"}, {"ayah": 16, "start": "3:36", "end": "3:48"}, {"ayah": 17, "start": "3:48", "end": "4:07"}, {"ayah": 18, "start": "4:07", "end": "4:26"}, {"ayah": 19, "start": "4:26", "end": "4:38"}, {"ayah": 20, "start": "4:38", "end": "4:45"}, {"ayah": 21, "start": "4:45", "end": "4:53"}, {"ayah": 22, "start": "4:53", "end": "5:04"}, {"ayah": 23, "start": "5:04", "end": "5:15"}, {"ayah": 24, "start": "5:15", "end": "5:28"}, {"ayah": 25, "start": "5:28", "end": "5:40"}, {"ayah": 26, "start": "5:40", "end": "5:59"}, {"ayah": 27, "start": "5:59", "end": "6:08"}, {"ayah": 28, "start": "6:08", "end": "6:20"}, {"ayah": 29, "start": "6:20", "end": "6:41"}, {"ayah": 30, "start": "6:41", "end": "6:52"}, {"ayah": 31, "start": "6:52", "end": "7:14"}, {"ayah": 32, "start": "7:14", "end": "7:42"}, {"ayah": 33, "start": "7:42", "end": "7:55"}, {"ayah": 34, "start": "7:55", "end": "8:12"}, {"ayah": 35, "start": "8:12", "end": "8:24"}, {"ayah": 36, "start": "8:24", "end": "8:39"}]},
+  {"surah_id": 84, "type": "الإنشقاق", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_84.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:20"}, {"ayah": 2, "start": "0:20", "end": "0:29"}, {"ayah": 3, "start": "0:29", "end": "0:35"}, {"ayah": 4, "start": "0:35", "end": "0:46"}, {"ayah": 5, "start": "0:46", "end": "0:55"}, {"ayah": 6, "start": "0:55", "end": "1:25"}, {"ayah": 7, "start": "1:25", "end": "1:40"}, {"ayah": 8, "start": "1:40", "end": "1:53"}, {"ayah": 9, "start": "1:53", "end": "2:08"}, {"ayah": 10, "start": "2:08", "end": "2:26"}, {"ayah": 11, "start": "2:26", "end": "2:34"}, {"ayah": 12, "start": "2:34", "end": "2:41"}, {"ayah": 13, "start": "2:41", "end": "2:57"}, {"ayah": 14, "start": "2:57", "end": "3:10"}, {"ayah": 15, "start": "3:10", "end": "3:27"}, {"ayah": 16, "start": "3:27", "end": "3:36"}, {"ayah": 17, "start": "3:36", "end": "3:43"}, {"ayah": 18, "start": "3:43", "end": "3:50"}, {"ayah": 19, "start": "3:50", "end": "4:01"}, {"ayah": 20, "start": "4:02", "end": "4:10"}, {"ayah": 21, "start": "4:10", "end": "4:26"}, {"ayah": 22, "start": "4:26", "end": "4:37"}, {"ayah": 23, "start": "4:37", "end": "4:48"}, {"ayah": 24, "start": "4:48", "end": "4:59"}, {"ayah": 25, "start": "4:59", "end": "5:23"}]},
+  {"surah_id": 85, "type": "البروج", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_85.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:21"}, {"ayah": 2, "start": "0:21", "end": "0:28"}, {"ayah": 3, "start": "0:28", "end": "0:36"}, {"ayah": 4, "start": "0:36", "end": "0:45"}, {"ayah": 5, "start": "0:45", "end": "0:55"}, {"ayah": 6, "start": "0:55", "end": "1:03"}, {"ayah": 7, "start": "1:03", "end": "1:19"}, {"ayah": 8, "start": "1:19", "end": "1:45"}, {"ayah": 9, "start": "1:45", "end": "2:12"}, {"ayah": 10, "start": "2:12", "end": "3:02"}, {"ayah": 11, "start": "3:02", "end": "3:43"}, {"ayah": 12, "start": "3:43", "end": "3:53"}, {"ayah": 13, "start": "3:53", "end": "4:04"}, {"ayah": 14, "start": "4:04", "end": "4:13"}, {"ayah": 15, "start": "4:13", "end": "4:19"}, {"ayah": 16, "start": "4:19", "end": "4:27"}, {"ayah": 17, "start": "4:27", "end": "4:36"}, {"ayah": 18, "start": "4:36", "end": "4:43"}, {"ayah": 19, "start": "4:43", "end": "4:54"}, {"ayah": 20, "start": "4:54", "end": "5:09"}, {"ayah": 21, "start": "5:09", "end": "5:18"}, {"ayah": 22, "start": "5:18", "end": "5:27"}]},
+  {"surah_id": 86, "type": "الطارق", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_86.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:19"}, {"ayah": 2, "start": "0:19", "end": "0:30"}, {"ayah": 3, "start": "0:30", "end": "0:38"}, {"ayah": 4, "start": "0:38", "end": "0:53"}, {"ayah": 5, "start": "0:53", "end": "1:07"}, {"ayah": 6, "start": "1:07", "end": "1:19"}, {"ayah": 7, "start": "1:19", "end": "1:34"}, {"ayah": 8, "start": "1:34", "end": "1:46"}, {"ayah": 9, "start": "1:46", "end": "1:55"}, {"ayah": 10, "start": "1:55", "end": "2:09"}, {"ayah": 11, "start": "2:09", "end": "2:18"}, {"ayah": 12, "start": "2:18", "end": "2:25"}, {"ayah": 13, "start": "2:25", "end": "2:34"}, {"ayah": 14, "start": "2:34", "end": "2:40"}, {"ayah": 15, "start": "2:40", "end": "2:51"}, {"ayah": 16, "start": "2:51", "end": "2:57"}, {"ayah": 17, "start": "2:57", "end": "3:10"}]},
+  {"surah_id": 87, "type": "الأعلى", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_87.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:16"}, {"ayah": 2, "start": "0:16", "end": "0:24"}, {"ayah": 3, "start": "0:24", "end": "0:32"}, {"ayah": 4, "start": "0:32", "end": "0:42"}, {"ayah": 5, "start": "0:42", "end": "0:53"}, {"ayah": 6, "start": "0:53", "end": "1:02"}, {"ayah": 7, "start": "1:02", "end": "1:26"}, {"ayah": 8, "start": "1:26", "end": "1:34"}, {"ayah": 9, "start": "1:34", "end": "1:45"}, {"ayah": 10, "start": "1:45", "end": "1:55"}, {"ayah": 11, "start": "1:55", "end": "2:04"}, {"ayah": 12, "start": "2:04", "end": "2:14"}, {"ayah": 13, "start": "2:14", "end": "2:28"}, {"ayah": 14, "start": "2:28", "end": "2:37"}, {"ayah": 15, "start": "2:37", "end": "2:47"}, {"ayah": 16, "start": "2:47", "end": "2:59"}, {"ayah": 17, "start": "2:59", "end": "3:10"}, {"ayah": 18, "start": "3:10", "end": "3:22"}, {"ayah": 19, "start": "3:22", "end": "3:31"}]},
+  {"surah_id": 88, "type": "الغاشية", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_88.mp3", "timings": [{"ayah": 1, "start": "0:08", "end": "0:17"}, {"ayah": 2, "start": "0:17", "end": "0:27"}, {"ayah": 3, "start": "0:27", "end": "0:34"}, {"ayah": 4, "start": "0:34", "end": "0:42"}, {"ayah": 5, "start": "0:42", "end": "0:51"}, {"ayah": 6, "start": "0:51", "end": "1:05"}, {"ayah": 7, "start": "1:05", "end": "1:17"}, {"ayah": 8, "start": "1:17", "end": "1:28"}, {"ayah": 9, "start": "1:28", "end": "1:35"}, {"ayah": 10, "start": "1:35", "end": "1:43"}, {"ayah": 11, "start": "1:43", "end": "1:53"}, {"ayah": 12, "start": "1:53", "end": "2:01"}, {"ayah": 13, "start": "2:01", "end": "2:11"}, {"ayah": 14, "start": "2:11", "end": "2:19"}, {"ayah": 15, "start": "2:19", "end": "2:27"}, {"ayah": 16, "start": "2:27", "end": "2:35"}, {"ayah": 17, "start": "2:35", "end": "2:50"}, {"ayah": 18, "start": "2:50", "end": "3:01"}, {"ayah": 19, "start": "3:01", "end": "3:10"}, {"ayah": 20, "start": "3:10", "end": "3:18"}, {"ayah": 21, "start": "3:18", "end": "3:34"}, {"ayah": 22, "start": "3:34", "end": "3:43"}, {"ayah": 23, "start": "3:43", "end": "3:53"}, {"ayah": 24, "start": "3:53", "end": "4:05"}, {"ayah": 25, "start": "4:05", "end": "4:17"}, {"ayah": 26, "start": "4:17", "end": "4:29"}]},
+  {"surah_id": 89, "type": "الفجر", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_89.mp3", "timings": [{"ayah": 1, "start": "0:10", "end": "0:13"}, {"ayah": 2, "start": "0:13", "end": "0:18"}, {"ayah": 3, "start": "0:18", "end": "0:23"}, {"ayah": 4, "start": "0:23", "end": "0:29"}, {"ayah": 5, "start": "0:29", "end": "0:40"}, {"ayah": 6, "start": "0:40", "end": "0:51"}, {"ayah": 7, "start": "0:51", "end": "0:58"}, {"ayah": 8, "start": "0:58", "end": "1:11"}, {"ayah": 9, "start": "1:11", "end": "1:24"}, {"ayah": 10, "start": "1:24", "end": "1:32"}, {"ayah": 11, "start": "1:32", "end": "1:42"}, {"ayah": 12, "start": "1:42", "end": "1:50"}, {"ayah": 13, "start": "1:50", "end": "2:03"}, {"ayah": 14, "start": "2:03", "end": "2:13"}, {"ayah": 15, "start": "2:13", "end": "2:47"}, {"ayah": 16, "start": "2:47", "end": "3:18"}, {"ayah": 17, "start": "3:18", "end": "3:30"}, {"ayah": 18, "start": "3:30", "end": "3:47"}, {"ayah": 19, "start": "3:47", "end": "4:01"}, {"ayah": 20, "start": "4:01", "end": "4:15"}, {"ayah": 21, "start": "4:15", "end": "4:30"}, {"ayah": 22, "start": "4:30", "end": "4:47"}, {"ayah": 23, "start": "4:47", "end": "5:21"}, {"ayah": 24, "start": "5:21", "end": "5:34"}, {"ayah": 25, "start": "5:34", "end": "5:50"}, {"ayah": 26, "start": "5:50", "end": "6:03"}, {"ayah": 27, "start": "6:03", "end": "6:18"}, {"ayah": 28, "start": "6:18", "end": "6:37"}, {"ayah": 29, "start": "6:37", "end": "6:44"}, {"ayah": 30, "start": "6:44", "end": "6:52"}]},
+  {"surah_id": 90, "type": "البلد", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_90.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:21"}, {"ayah": 2, "start": "0:21", "end": "0:33"}, {"ayah": 3, "start": "0:33", "end": "0:41"}, {"ayah": 4, "start": "0:41", "end": "0:53"}, {"ayah": 5, "start": "0:53", "end": "1:06"}, {"ayah": 6, "start": "1:06", "end": "1:17"}, {"ayah": 7, "start": "1:17", "end": "1:28"}, {"ayah": 8, "start": "1:28", "end": "1:37"}, {"ayah": 9, "start": "1:37", "end": "1:46"}, {"ayah": 10, "start": "1:46", "end": "1:55"}, {"ayah": 11, "start": "1:55", "end": "2:02"}, {"ayah": 12, "start": "2:02", "end": "2:13"}, {"ayah": 13, "start": "2:13", "end": "2:17"}, {"ayah": 14, "start": "2:17", "end": "2:32"}, {"ayah": 15, "start": "2:32", "end": "2:40"}, {"ayah": 16, "start": "2:40", "end": "2:51"}, {"ayah": 17, "start": "2:51", "end": "3:18"}, {"ayah": 18, "start": "3:18", "end": "3:30"}, {"ayah": 19, "start": "3:30", "end": "3:49"}, {"ayah": 20, "start": "3:49", "end": "3:59"}]},
+  {"surah_id": 91, "type": "الشمس", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_91.mp3", "timings": [{"ayah": 1, "start": "0:10", "end": "0:17"}, {"ayah": 2, "start": "0:17", "end": "0:25"}, {"ayah": 3, "start": "0:25", "end": "0:36"}, {"ayah": 4, "start": "0:36", "end": "0:45"}, {"ayah": 5, "start": "0:45", "end": "0:57"}, {"ayah": 6, "start": "0:57", "end": "1:05"}, {"ayah": 7, "start": "1:05", "end": "1:15"}, {"ayah": 8, "start": "1:15", "end": "1:28"}, {"ayah": 9, "start": "1:28", "end": "1:38"}, {"ayah": 10, "start": "1:38", "end": "1:47"}, {"ayah": 11, "start": "1:47", "end": "1:58"}, {"ayah": 12, "start": "1:58", "end": "2:07"}, {"ayah": 13, "start": "2:07", "end": "2:26"}, {"ayah": 14, "start": "2:26", "end": "2:54"}, {"ayah": 15, "start": "2:54", "end": "3:03"}]},
+  {"surah_id": 92, "type": "الليل", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_92.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:17"}, {"ayah": 2, "start": "0:17", "end": "0:27"}, {"ayah": 3, "start": "0:27", "end": "0:38"}, {"ayah": 4, "start": "0:38", "end": "0:48"}, {"ayah": 5, "start": "0:48", "end": "0:59"}, {"ayah": 6, "start": "0:59", "end": "1:06"}, {"ayah": 7, "start": "1:06", "end": "1:15"}, {"ayah": 8, "start": "1:15", "end": "1:27"}, {"ayah": 9, "start": "1:27", "end": "1:34"}, {"ayah": 10, "start": "1:34", "end": "1:43"}, {"ayah": 11, "start": "1:43", "end": "2:00"}, {"ayah": 12, "start": "2:00", "end": "2:09"}, {"ayah": 13, "start": "2:09", "end": "2:22"}, {"ayah": 14, "start": "2:22", "end": "2:35"}, {"ayah": 15, "start": "2:35", "end": "2:47"}, {"ayah": 16, "start": "2:47", "end": "2:57"}, {"ayah": 17, "start": "2:57", "end": "3:06"}, {"ayah": 18, "start": "3:06", "end": "3:19"}, {"ayah": 19, "start": "3:19", "end": "3:37"}, {"ayah": 20, "start": "3:37", "end": "3:58"}, {"ayah": 21, "start": "3:37", "end": "3:58"}]},
+  {"surah_id": 93, "type": "الضحى", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_93.mp3", "timings": [{"ayah": 1, "start": "0:10", "end": "0:13"}, {"ayah": 2, "start": "0:13", "end": "0:19"}, {"ayah": 3, "start": "0:19", "end": "0:30"}, {"ayah": 4, "start": "0:30", "end": "0:43"}, {"ayah": 5, "start": "0:43", "end": "0:55"}, {"ayah": 6, "start": "0:55", "end": "1:06"}, {"ayah": 7, "start": "1:06", "end": "1:20"}, {"ayah": 8, "start": "1:20", "end": "1:32"}, {"ayah": 9, "start": "1:32", "end": "1:43"}, {"ayah": 10, "start": "1:43", "end": "1:55"}, {"ayah": 11, "start": "1:55", "end": "2:08"}]},
+  {"surah_id": 94, "type": "الشرح", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_94.mp3", "timings": [{"ayah": 1, "start": "0:10", "end": "0:18"}, {"ayah": 2, "start": "0:18", "end": "0:26"}, {"ayah": 3, "start": "0:26", "end": "0:38"}, {"ayah": 4, "start": "0:38", "end": "0:45"}, {"ayah": 5, "start": "0:45", "end": "0:54"}, {"ayah": 6, "start": "0:54", "end": "1:04"}, {"ayah": 7, "start": "1:04", "end": "1:12"}, {"ayah": 8, "start": "1:12", "end": "1:19"}]},
+  {"surah_id": 95, "type": "التين", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_95.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:16"}, {"ayah": 2, "start": "0:16", "end": "0:21"}, {"ayah": 3, "start": "0:21", "end": "0:29"}, {"ayah": 4, "start": "0:29", "end": "0:46"}, {"ayah": 5, "start": "0:46", "end": "0:58"}, {"ayah": 6, "start": "0:58", "end": "1:22"}, {"ayah": 7, "start": "1:22", "end": "1:32"}, {"ayah": 8, "start": "1:32", "end": "1:44"}]},
+  {"surah_id": 96, "type": "العلق", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_96.mp3", "timings": [{"ayah": 1, "start": "0:10", "end": "0:20"}, {"ayah": 2, "start": "0:20", "end": "0:30"}, {"ayah": 3, "start": "0:30", "end": "0:39"}, {"ayah": 4, "start": "0:39", "end": "0:47"}, {"ayah": 5, "start": "0:47", "end": "0:59"}, {"ayah": 6, "start": "0:59", "end": "1:15"}, {"ayah": 7, "start": "1:15", "end": "1:22"}, {"ayah": 8, "start": "1:22", "end": "1:33"}, {"ayah": 9, "start": "1:33", "end": "1:41"}, {"ayah": 10, "start": "1:41", "end": "1:48"}, {"ayah": 11, "start": "1:48", "end": "1:59"}, {"ayah": 12, "start": "1:59", "end": "2:06"}, {"ayah": 13, "start": "2:06", "end": "2:17"}, {"ayah": 14, "start": "2:17", "end": "2:30"}, {"ayah": 15, "start": "2:30", "end": "2:49"}, {"ayah": 16, "start": "2:49", "end": "3:01"}, {"ayah": 17, "start": "3:01", "end": "3:07"}, {"ayah": 18, "start": "3:07", "end": "3:14"}, {"ayah": 19, "start": "3:14", "end": "3:26"}]},
+  {"surah_id": 97, "type": "القدر", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_97.mp3", "timings": [{"ayah": 1, "start": "0:10", "end": "0:27"}, {"ayah": 2, "start": "0:27", "end": "0:40"}, {"ayah": 3, "start": "0:40", "end": "0:52"}, {"ayah": 4, "start": "0:52", "end": "1:18"}, {"ayah": 5, "start": "1:18", "end": "1:29"}]},
+  {"surah_id": 98, "type": "البينة", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_98.mp3", "timings": [{"ayah": 1, "start": "0:08", "end": "0:37"}, {"ayah": 2, "start": "0:37", "end": "0:54"}, {"ayah": 3, "start": "0:54", "end": "1:03"}, {"ayah": 4, "start": "1:03", "end": "1:32"}, {"ayah": 5, "start": "1:32", "end": "2:26"}, {"ayah": 6, "start": "2:26", "end": "3:09"}, {"ayah": 7, "start": "3:09", "end": "3:36"}, {"ayah": 8, "start": "3:36", "end": "4:41"}]},
+  {"surah_id": 99, "type": "الزلزلة", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_99.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:19"}, {"ayah": 2, "start": "0:19", "end": "0:29"}, {"ayah": 3, "start": "0:29", "end": "0:39"}, {"ayah": 4, "start": "0:39", "end": "0:51"}, {"ayah": 5, "start": "0:51", "end": "1:01"}, {"ayah": 6, "start": "1:01", "end": "1:21"}, {"ayah": 7, "start": "1:21", "end": "1:37"}, {"ayah": 8, "start": "1:37", "end": "1:54"}]},
+  {"surah_id": 100, "type": "العاديات", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_100.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:16"}, {"ayah": 2, "start": "0:16", "end": "0:24"}, {"ayah": 3, "start": "0:24", "end": "0:31"}, {"ayah": 4, "start": "0:31", "end": "0:38"}, {"ayah": 5, "start": "0:38", "end": "0:46"}, {"ayah": 6, "start": "0:46", "end": "1:00"}, {"ayah": 7, "start": "1:00", "end": "1:12"}, {"ayah": 8, "start": "1:12", "end": "1:24"}, {"ayah": 9, "start": "1:24", "end": "1:38"}, {"ayah": 10, "start": "1:38", "end": "1:46"}, {"ayah": 11, "start": "1:46", "end": "2:01"}]},
+  {"surah_id": 101, "type": "القارعة", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_101.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:13"}, {"ayah": 2, "start": "0:13", "end": "0:17"}, {"ayah": 3, "start": "0:17", "end": "0:29"}, {"ayah": 4, "start": "0:29", "end": "0:43"}, {"ayah": 5, "start": "0:43", "end": "0:58"}, {"ayah": 6, "start": "0:58", "end": "1:10"}, {"ayah": 7, "start": "1:10", "end": "1:19"}, {"ayah": 8, "start": "1:19", "end": "1:30"}, {"ayah": 9, "start": "1:30", "end": "1:38"}, {"ayah": 10, "start": "1:38", "end": "1:48"}, {"ayah": 11, "start": "1:48", "end": "1:54"}]},
+  {"surah_id": 102, "type": "التكاثر", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_102.mp3", "timings": [{"ayah": 1, "start": "0:10", "end": "0:16"}, {"ayah": 2, "start": "0:16", "end": "0:24"}, {"ayah": 3, "start": "0:24", "end": "0:32"}, {"ayah": 4, "start": "0:32", "end": "0:42"}, {"ayah": 5, "start": "0:42", "end": "0:53"}, {"ayah": 6, "start": "0:53", "end": "1:01"}, {"ayah": 7, "start": "1:01", "end": "1:13"}, {"ayah": 8, "start": "1:13", "end": "1:30"}]},
+  {"surah_id": 103, "type": "العصر", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_103.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:12"}, {"ayah": 2, "start": "0:12", "end": "0:22"}, {"ayah": 3, "start": "0:22", "end": "0:49"}]},
+  {"surah_id": 104, "type": "الهمزة", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_104.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:18"}, {"ayah": 2, "start": "0:18", "end": "0:29"}, {"ayah": 3, "start": "0:29", "end": "0:41"}, {"ayah": 4, "start": "0:41", "end": "0:53"}, {"ayah": 5, "start": "0:53", "end": "1:03"}, {"ayah": 6, "start": "1:03", "end": "1:10"}, {"ayah": 7, "start": "1:10", "end": "1:21"}, {"ayah": 8, "start": "1:21", "end": "1:32"}, {"ayah": 9, "start": "1:32", "end": "1:40"}]},
+  {"surah_id": 105, "type": "الفيل", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_105.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:22"}, {"ayah": 2, "start": "0:22", "end": "0:33"}, {"ayah": 3, "start": "0:33", "end": "0:44"}, {"ayah": 4, "start": "0:44", "end": "0:58"}, {"ayah": 5, "start": "0:58", "end": "1:08"}]},
+  {"surah_id": 106, "type": "قريش", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_106.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:15"}, {"ayah": 2, "start": "0:15", "end": "0:29"}, {"ayah": 3, "start": "0:29", "end": "0:39"}, {"ayah": 4, "start": "0:39", "end": "1:02"}]},
+  {"surah_id": 107, "type": "الماعون", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_107.mp3", "timings": [{"ayah": 1, "start": "0:08", "end": "0:18"}, {"ayah": 2, "start": "0:18", "end": "0:28"}, {"ayah": 3, "start": "0:28", "end": "0:38"}, {"ayah": 4, "start": "0:38", "end": "0:46"}, {"ayah": 5, "start": "0:46", "end": "0:58"}, {"ayah": 6, "start": "0:58", "end": "1:09"}, {"ayah": 7, "start": "1:09", "end": "1:16"}]},
+  {"surah_id": 108, "type": "الكوثر", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_108.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:22"}, {"ayah": 2, "start": "0:22", "end": "0:29"}, {"ayah": 3, "start": "0:29", "end": "0:38"}]},
+  {"surah_id": 109, "type": "الكافرون", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_109.mp3", "timings": [{"ayah": 1, "start": "0:08", "end": "0:20"}, {"ayah": 2, "start": "0:20", "end": "0:30"}, {"ayah": 3, "start": "0:30", "end": "0:46"}, {"ayah": 4, "start": "0:46", "end": "0:59"}, {"ayah": 5, "start": "0:59", "end": "1:14"}, {"ayah": 6, "start": "1:14", "end": "1:22"}]},
+  {"surah_id": 110, "type": "النصر", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_110.mp3", "timings": [{"ayah": 1, "start": "0:09", "end": "0:22"}, {"ayah": 2, "start": "0:22", "end": "0:39"}, {"ayah": 3, "start": "0:39", "end": "0:59"}]},
+  {"surah_id": 111, "type": "المسد", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_111.mp3", "timings": [{"ayah": 1, "start": "0:08", "end": "0:22"}, {"ayah": 2, "start": "0:22", "end": "0:35"}, {"ayah": 3, "start": "0:35", "end": "0:44"}, {"ayah": 4, "start": "0:44", "end": "0:54"}, {"ayah": 5, "start": "0:54", "end": "1:04"}]},
+  {"surah_id": 112, "type": "الإخلاص", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_112.mp3", "timings": [{"ayah": 1, "start": "0:08", "end": "0:14"}, {"ayah": 2, "start": "0:14", "end": "0:18"}, {"ayah": 3, "start": "0:18", "end": "0:25"}, {"ayah": 4, "start": "0:25", "end": "0:33"}]},
+  {"surah_id": 113, "type": "الفلق", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_113.mp3", "timings": [{"ayah": 1, "start": "0:08", "end": "0:16"}, {"ayah": 2, "start": "0:16", "end": "0:22"}, {"ayah": 3, "start": "0:22", "end": "0:32"}, {"ayah": 4, "start": "0:32", "end": "0:44"}, {"ayah": 5, "start": "0:44", "end": "0:54"}]},
+  {"surah_id": 114, "type": "الناس", "lang": "ar", "reciter": "استاد منشاوی تکرار", "url": "http://kdini.ir/kdini-main/sound/sound_joze30/manshavi_114.mp3", "timings": [{"ayah": 1, "start": "0:08", "end": "0:16"}, {"ayah": 2, "start": "0:16", "end": "0:22"}, {"ayah": 3, "start": "0:22", "end": "0:27"}, {"ayah": 4, "start": "0:27", "end": "0:38"}, {"ayah": 5, "start": "0:38", "end": "0:49"}, {"ayah": 6, "start": "0:49", "end": "0:58"}]},
+
+  {
+    "surah_id": 97,
+    "type": "القدر",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/97.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:09", "end": "0:22"},
+      {"ayah": 2, "start": "0:22", "end": "0:32"},
+      {"ayah": 3, "start": "0:32", "end": "0:44"},
+      {"ayah": 4, "start": "0:44", "end": "1:14"},
+      {"ayah": 5, "start": "1:14", "end": "1:25"}
+    ]
+  },
+  {
+    "surah_id": 98,
+    "type": "البينة",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/98.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:09", "end": "0:50"},
+      {"ayah": 2, "start": "0:50", "end": "1:04"},
+      {"ayah": 3, "start": "1:04", "end": "1:13"},
+      {"ayah": 4, "start": "1:13", "end": "1:39"},
+      {"ayah": 5, "start": "1:40", "end": "2:35"},
+      {"ayah": 6, "start": "2:36", "end": "3:28"},
+      {"ayah": 7, "start": "3:28", "end": "3:53"},
+      {"ayah": 8, "start": "3:53", "end": "4:54"}
+    ]
+  },
+  {
+    "surah_id": 99,
+    "type": "الزلزلة",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/99.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:09", "end": "0:20"},
+      {"ayah": 2, "start": "0:20", "end": "0:30"},
+      {"ayah": 3, "start": "0:30", "end": "0:40"},
+      {"ayah": 4, "start": "0:40", "end": "0:51"},
+      {"ayah": 5, "start": "0:51", "end": "1:00"},
+      {"ayah": 6, "start": "1:00", "end": "1:19"},
+      {"ayah": 7, "start": "1:19", "end": "1:35"},
+      {"ayah": 8, "start": "1:35", "end": "1:51"}
+    ]
+  },
+  {
+    "surah_id": 100,
+    "type": "العاديات",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/100.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:10", "end": "0:16"},
+      {"ayah": 2, "start": "0:16", "end": "0:23"},
+      {"ayah": 3, "start": "0:23", "end": "0:30"},
+      {"ayah": 4, "start": "0:30", "end": "0:37"},
+      {"ayah": 5, "start": "0:37", "end": "0:44"},
+      {"ayah": 6, "start": "0:44", "end": "0:58"},
+      {"ayah": 7, "start": "0:58", "end": "1:09"},
+      {"ayah": 8, "start": "1:09", "end": "1:20"},
+      {"ayah": 9, "start": "1:20", "end": "1:34"},
+      {"ayah": 10, "start": "1:34", "end": "1:42"},
+      {"ayah": 11, "start": "1:42", "end": "1:56"}
+    ]
+  },
+  {
+    "surah_id": 101,
+    "type": "القارعة",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/101.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:09", "end": "0:13"},
+      {"ayah": 2, "start": "0:13", "end": "0:18"},
+      {"ayah": 3, "start": "0:18", "end": "0:26"},
+      {"ayah": 4, "start": "0:26", "end": "0:40"},
+      {"ayah": 5, "start": "0:41", "end": "0:54"},
+      {"ayah": 6, "start": "0:54", "end": "1:06"},
+      {"ayah": 7, "start": "1:06", "end": "1:16"},
+      {"ayah": 8, "start": "1:16", "end": "1:28"},
+      {"ayah": 9, "start": "1:28", "end": "1:35"},
+      {"ayah": 10, "start": "1:35", "end": "1:43"},
+      {"ayah": 11, "start": "1:43", "end": "1:48"}
+    ]
+  },
+  {
+    "surah_id": 102,
+    "type": "التكاثر",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/102.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:09", "end": "0:15"},
+      {"ayah": 2, "start": "0:15", "end": "0:23"},
+      {"ayah": 3, "start": "0:23", "end": "0:29"},
+      {"ayah": 4, "start": "0:29", "end": "0:38"},
+      {"ayah": 5, "start": "0:38", "end": "0:48"},
+      {"ayah": 6, "start": "0:48", "end": "0:54"},
+      {"ayah": 7, "start": "0:54", "end": "1:06"},
+      {"ayah": 8, "start": "1:06", "end": "1:22"}
+    ]
+  },
+  {
+    "surah_id": 103,
+    "type": "العصر",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/103.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:08", "end": "0:11"},
+      {"ayah": 2, "start": "0:11", "end": "0:21"},
+      {"ayah": 3, "start": "0:21", "end": "0:50"}
+    ]
+  },
+  {
+    "surah_id": 104,
+    "type": "الهمزة",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/104.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:08", "end": "0:17"},
+      {"ayah": 2, "start": "0:17", "end": "0:27"},
+      {"ayah": 3, "start": "0:27", "end": "0:37"},
+      {"ayah": 4, "start": "0:37", "end": "0:48"},
+      {"ayah": 5, "start": "0:48", "end": "0:56"},
+      {"ayah": 6, "start": "0:56", "end": "1:02"},
+      {"ayah": 7, "start": "1:02", "end": "1:12"},
+      {"ayah": 8, "start": "1:12", "end": "1:21"},
+      {"ayah": 9, "start": "1:21", "end": "1:28"}
+    ]
+  },
+  {
+    "surah_id": 105,
+    "type": "الفيل",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/105.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:08", "end": "0:20"},
+      {"ayah": 2, "start": "0:20", "end": "0:30"},
+      {"ayah": 3, "start": "0:30", "end": "0:40"},
+      {"ayah": 4, "start": "0:40", "end": "0:53"},
+      {"ayah": 5, "start": "0:54", "end": "1:03"}
+    ]
+  },
+  {
+    "surah_id": 106,
+    "type": "قريش",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/106.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:08", "end": "0:14"},
+      {"ayah": 2, "start": "0:14", "end": "0:27"},
+      {"ayah": 3, "start": "0:27", "end": "0:36"},
+      {"ayah": 4, "start": "0:36", "end": "0:55"}
+    ]
+  },
+  {
+    "surah_id": 107,
+    "type": "الماعون",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/107.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:08", "end": "0:17"},
+      {"ayah": 2, "start": "0:18", "end": "0:26"},
+      {"ayah": 3, "start": "0:26", "end": "0:36"},
+      {"ayah": 4, "start": "0:36", "end": "0:42"},
+      {"ayah": 5, "start": "0:42", "end": "0:54"},
+      {"ayah": 6, "start": "0:54", "end": "1:05"},
+      {"ayah": 7, "start": "1:05", "end": "1:12"}
+    ]
+  },
+  {
+    "surah_id": 108,
+    "type": "الكوثر",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/108.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:08", "end": "0:17"},
+      {"ayah": 2, "start": "0:17", "end": "0:24"},
+      {"ayah": 3, "start": "0:24", "end": "0:32"}
+    ]
+  },
+  {
+    "surah_id": 109,
+    "type": "الكافرون",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/109.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:08", "end": "0:16"},
+      {"ayah": 2, "start": "0:16", "end": "0:23"},
+      {"ayah": 3, "start": "0:23", "end": "0:34"},
+      {"ayah": 4, "start": "0:34", "end": "0:44"},
+      {"ayah": 5, "start": "0:44", "end": "0:55"},
+      {"ayah": 6, "start": "0:55", "end": "1:02"}
+    ]
+  },
+  {
+    "surah_id": 110,
+    "type": "النصر",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/110.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:09", "end": "0:19"},
+      {"ayah": 2, "start": "0:20", "end": "0:35"},
+      {"ayah": 3, "start": "0:35", "end": "0:53"}
+    ]
+  },
+  {
+    "surah_id": 111,
+    "type": "المسد",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/111.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:09", "end": "0:20"},
+      {"ayah": 2, "start": "0:20", "end": "0:31"},
+      {"ayah": 3, "start": "0:31", "end": "0:41"},
+      {"ayah": 4, "start": "0:41", "end": "0:51"},
+      {"ayah": 5, "start": "0:51", "end": "1:03"}
+    ]
+  },
+  {
+    "surah_id": 112,
+    "type": "الإخلاص",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/112.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:09", "end": "0:15"},
+      {"ayah": 2, "start": "0:15", "end": "0:20"},
+      {"ayah": 3, "start": "0:20", "end": "0:27"},
+      {"ayah": 4, "start": "0:27", "end": "0:36"}
+    ]
+  },
+  {
+    "surah_id": 113,
+    "type": "الفلق",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/113.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:08", "end": "0:16"},
+      {"ayah": 2, "start": "0:16", "end": "0:22"},
+      {"ayah": 3, "start": "0:22", "end": "0:32"},
+      {"ayah": 4, "start": "0:32", "end": "0:44"},
+      {"ayah": 5, "start": "0:44", "end": "0:54"}
+    ]
+  },
+  {
+    "surah_id": 114,
+    "type": "الناس",
+    "lang": "ar",
+    "reciter": "قاری تکرار",
+    "url": "http://kdini.ir/kdini-main/sound/sound_joze30/114.mp3",
+    "timings": [
+      {"ayah": 1, "start": "0:09", "end": "0:17"},
+      {"ayah": 2, "start": "0:17", "end": "0:22"},
+      {"ayah": 3, "start": "0:22", "end": "0:27"},
+      {"ayah": 4, "start": "0:27", "end": "0:37"},
+      {"ayah": 5, "start": "0:37", "end": "0:49"},
+      {"ayah": 6, "start": "0:49", "end": "0:57"}
+    ]
+  }
+]
